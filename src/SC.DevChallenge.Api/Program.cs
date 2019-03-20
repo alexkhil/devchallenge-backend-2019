@@ -4,8 +4,10 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SC.DevChallenge.DataAccess.EF;
 using SC.DevChallenge.DataAccess.EF.Seeder.Abstractions;
 using Serilog;
+using Z.EntityFramework.Extensions;
 
 namespace SC.DevChallenge.Api
 {
@@ -28,14 +30,13 @@ namespace SC.DevChallenge.Api
             {
                 Log.Information("Starting web host");
                 var host = CreateWebHostBuilder(args).Build();
-
                 using (var scope = host.Services.CreateScope())
                 {
+                    EntityFrameworkManager.ContextFactory = context => scope.ServiceProvider.GetRequiredService<AppDbContext>();
                     var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-                    var inputDataPath = Path.Combine(AppContext.BaseDirectory, "Input/data.csv");
+                    var inputDataPath = Path.Combine(AppContext.BaseDirectory, @"Input\data.csv");
                     dbInitializer.InitializeAsync(inputDataPath).GetAwaiter().GetResult();
                 }
-
                 host.Run();
                 return 0;
             }

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SC.DevChallenge.DataAccess.Abstractions.Domain;
+using SC.DevChallenge.DataAccess.Abstractions.Entities;
 
 namespace SC.DevChallenge.DataAccess.EF
 {

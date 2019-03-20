@@ -1,4 +1,4 @@
-﻿namespace SC.DevChallenge.DataAccess.Abstractions.Domain
+namespace SC.DevChallenge.DataAccess.Abstractions.Entities
 {
     public interface IEntity<out TKey>
     {
