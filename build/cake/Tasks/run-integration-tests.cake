@@ -1,4 +1,4 @@
-Task("Run-Unit-Tests")
+Task("Run-Integration-Tests")
     .Does(() =>
     {
         var dotNetCoreTestSettings = new DotNetCoreTestSettings

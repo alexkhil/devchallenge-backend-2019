@@ -69,20 +69,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cake", "cake", "{ED4F9A26-9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tasks", "Tasks", "{C8885D30-6BCF-49BD-A1E5-DC4D83417BDE}"
 	ProjectSection(SolutionItems) = preProject
-		build\cake\Tasks\build.cake = build\cake\Tasks\build.cake
-		build\cake\Tasks\clean.cake = build\cake\Tasks\clean.cake
-		build\cake\Tasks\create-nuget-package.cake = build\cake\Tasks\create-nuget-package.cake
 		build\cake\Tasks\default.cake = build\cake\Tasks\default.cake
-		build\cake\Tasks\prepare-unit-tests.cake = build\cake\Tasks\prepare-unit-tests.cake
-		build\cake\Tasks\publish-coverage.cake = build\cake\Tasks\publish-coverage.cake
-		build\cake\Tasks\publish-nuget-package.cake = build\cake\Tasks\publish-nuget-package.cake
-		build\cake\Tasks\restore-nuget-packages.cake = build\cake\Tasks\restore-nuget-packages.cake
+		build\cake\Tasks\run-integration-tests.cake = build\cake\Tasks\run-integration-tests.cake
 		build\cake\Tasks\run-unit-tests.cake = build\cake\Tasks\run-unit-tests.cake
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{1699E034-CA16-4EA2-931D-5969F44D326E}"
 	ProjectSection(SolutionItems) = preProject
 		build\cake\Utils\paths.cake = build\cake\Utils\paths.cake
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D2A8DB24-F5A8-454B-8B31-02E02FAA5B1B}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		ruleset = ruleset
 	EndProjectSection
 EndProject
 Global

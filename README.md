@@ -1,24 +1,76 @@
-# Photostudios
+# DevChallenge 2019
 
-## Publish to heroku
+C# task(Online round) - Financial calculations
 
-Build image
-docker build -t photostudios-web -f src/Photostudios.Web/Dockerfile .
+## Table of Content
 
-Publish to heroku
+- [Run](#run)
+- [Usage](#usage)
+  - [Unit tests](#unit-tests)
+  - [Integration tests](#integration-tests)
+- [Improvements](#improvemetns)
 
-docker login --username= --password=$(heroku auth:token) registry.heroku.com
+## Run
 
-docker login --username=alex.khil.dev@gmail.com --password=d4f24ccf-f1c1-4f5b-9769-65f557d0b6db registry.heroku.com
+```bash
+# Go into the folder with solution and run:
+docker-compose up
+```
 
-
-
-docker tag photostudios-web registry.heroku.com/photostudios-web/web
-
-docker push registry.heroku.com/photostudios-web/web
-
-heroku container:release web -a photostudios-web
+Service will be available on port 8080.
 
 
+## Usage
 
-"ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=Photostudios;Trusted_Connection=True;MultipleActiveResultSets=true"
+When docker runs open http://localhost:8080 on your browser to see swagger docs and try api.
+
+### Unit Tests
+
+Use 'Run-Unit-Tests' cake task fro running unit tests.
+
+For **Windows**
+```bash
+# Open PowerShell
+
+# Go into the folder with solution and run:
+./build/cake/build.ps1 -Script build/cake/build.cake -Target Run-Unit-Tests
+```
+
+For **Unix**:
+```bash
+# Go into the folder with solution and run:
+$ ./build/cake/build.sh -s build/cake/build.cake --target=Run-Unit-Tests
+```
+
+### Integration Tests
+
+Use 'Run-Integration-Tests' cake task fro running unit tests.
+
+For **Windows**
+```bash
+# Open PowerShell
+
+# Go into the folder with solution and run:
+./build/cake/build.ps1 -Script build/cake/build.cake -Target Run-Integration-Tests
+```
+
+For **Unix**:
+```bash
+# Go into the folder with solution and run:
+$ ./build/cake/build.sh -s build/cake/build.cake --target=Run-Integration-Tests
+```
+
+### Improvements
+
+There are a lot points to improve:
+- DataAccess
+  - Simplify db seed(DbInitializer class)
+  - Don't use AppDbContext directly. Use repository instead.
+  - Use base repository class for all repositories
+  - Implement two types of repository: readonly and read/write repository
+  - Use base specification class fro all specifications
+- MediatR
+  - Add behavior to handle exceptions
+- Unit tests
+  - Simplify unit tests(e.g. GetAveragePriceQueryHandlerTests can be much smaller)
+  - Cover more classes/cases with tests
