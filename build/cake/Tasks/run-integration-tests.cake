@@ -8,7 +8,7 @@ Task("Run-Integration-Tests")
             NoBuild = false
         };
 
-        var projectFiles = GetFiles(Paths.UnitTests);
+        var projectFiles = GetFiles(Paths.IntegrationTests);
         foreach(var file in projectFiles)
         {
             DotNetCoreTest(file.FullPath, dotNetCoreTestSettings);

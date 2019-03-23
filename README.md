@@ -74,3 +74,6 @@ There are a lot points to improve:
 - Unit tests
   - Simplify unit tests(e.g. GetAveragePriceQueryHandlerTests can be much smaller)
   - Cover more classes/cases with tests
+- Integration tests
+  - Add integration tests for endpoints(not only db)
+  - Can be simplified
