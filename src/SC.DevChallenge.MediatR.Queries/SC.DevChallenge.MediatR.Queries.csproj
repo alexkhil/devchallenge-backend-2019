@@ -6,16 +6,32 @@
     <CodeAnalysisRuleSet>..\..\ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>SC.DevChallenge.MediatR.Queries.xml</DocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="MediatR" Version="6.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="NSpecifications" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SC.DevChallenge.DataAccess.Abstractions\SC.DevChallenge.DataAccess.Abstractions.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.DataAccess.EF\SC.DevChallenge.DataAccess.EF.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Dto\SC.DevChallenge.Dto.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.MediatR.Core\SC.DevChallenge.MediatR.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SC.DevChallenge.MediatR.Queries.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

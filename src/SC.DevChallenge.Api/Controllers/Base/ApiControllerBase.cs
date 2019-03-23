@@ -1,6 +1,8 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SC.DevChallenge.Mapping.Abstractions;
+using SC.DevChallenge.MediatR.Core.HandlerResults;
+using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
 
 namespace SC.DevChallenge.Api.Controllers.Base
 {
@@ -17,5 +19,23 @@ namespace SC.DevChallenge.Api.Controllers.Base
         public IMapper Mapper { get; }
 
         public IMediator Mediator { get; }
+
+        protected IActionResult Send<T>(IHandlerResult<T> result)
+            where T : class
+        {
+            return RemapInternal(result);
+        }
+
+        private IActionResult RemapInternal<T>(IHandlerResult<T> result)
+            where T : class
+        {
+            switch (result)
+            {
+                case DataHandlerResult<T> dhr:
+                    return Ok(dhr.Data);
+                default:
+                    return NotFound();
+            }
+        }
     }
 }

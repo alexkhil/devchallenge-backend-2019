@@ -7,6 +7,9 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
+using SC.DevChallenge.Domain.Date.DateTimeConverter;
+using SC.DevChallenge.ExceptionHandler;
+using SC.DevChallenge.ExceptionHandler.ExceptionHandlers;
 using SC.DevChallenge.Mapping;
 using SC.DevChallenge.Mapping.Abstractions;
 using Serilog;
@@ -34,24 +37,11 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
             builder.RegisterAssemblyModules(moduleAssemblies);
 
             builder.RegisterExceptionHandlers();
-            builder.RegisterMediatR();
             builder.RegisterMapper();
 
+            builder.RegisterType<DateTimeConverter>().AsImplementedInterfaces();
+
             return builder.Build();
-        }
-
-        private static void RegisterMediatR(this ContainerBuilder builder)
-        {
-            builder
-                .RegisterType<Mediator>()
-                .As<IMediator>()
-                .InstancePerLifetimeScope();
-
-            builder.Register<ServiceFactory>(context =>
-            {
-                var c = context.Resolve<IComponentContext>();
-                return t => c.Resolve(t);
-            });
         }
 
         private static void RegisterMapper(this ContainerBuilder builder)
@@ -72,14 +62,14 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
 
         private static void RegisterExceptionHandlers(this ContainerBuilder builder)
         {
-            //builder
-            //    .RegisterType<ExceptionRequestHandler>()
-            //    .As<IExceptionRequestHandler>();
+            builder
+                .RegisterType<ExceptionRequestHandler>()
+                .As<IExceptionRequestHandler>();
 
-            //builder
-            //  .RegisterAssemblyTypes(typeof(DefaultExceptionHandler).Assembly)
-            //  .Where(x => x.Name.EndsWith("ExceptionHandler", StringComparison.InvariantCulture))
-            //  .AsImplementedInterfaces();
+            builder
+              .RegisterAssemblyTypes(typeof(DefaultExceptionHandler).Assembly)
+              .Where(x => x.Name.EndsWith("ExceptionHandler", StringComparison.InvariantCulture))
+              .AsImplementedInterfaces();
         }
     }
 }

@@ -9,6 +9,17 @@ namespace SC.DevChallenge.MediatR.Di
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder
+                .RegisterType<Mediator>()
+                .As<IMediator>()
+                .InstancePerLifetimeScope();
+
+            builder.Register<ServiceFactory>(context =>
+            {
+                var c = context.Resolve<IComponentContext>();
+                return t => c.Resolve(t);
+            });
+
             builder.RegisterGeneric(typeof(LoggingBehavior<,>))
                    .As(typeof(IPipelineBehavior<,>));
 

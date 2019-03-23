@@ -30,4 +30,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\SC.DevChallenge.Mapping\SC.DevChallenge.Mapping.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -3,6 +3,13 @@ version: '3.4'
 services:
   api:
     image: api
+    depends_on:
+      - db
     build:
       context: .
       dockerfile: src/SC.DevChallenge.Api/Dockerfile
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+        SA_PASSWORD: "Your_password123"
+        ACCEPT_EULA: "Y"

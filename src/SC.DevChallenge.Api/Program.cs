@@ -34,7 +34,7 @@ namespace SC.DevChallenge.Api
                 {
                     EntityFrameworkManager.ContextFactory = context => scope.ServiceProvider.GetRequiredService<AppDbContext>();
                     var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-                    var inputDataPath = Path.Combine(AppContext.BaseDirectory, @"Input\data.csv");
+                    var inputDataPath = Path.Combine(AppContext.BaseDirectory, $"Input{Path.DirectorySeparatorChar}data.csv");
                     dbInitializer.InitializeAsync(inputDataPath).GetAwaiter().GetResult();
                 }
                 host.Run();

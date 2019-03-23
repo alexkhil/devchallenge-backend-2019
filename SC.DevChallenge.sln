@@ -13,41 +13,77 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Di", "Di", "{A8C1CF9C-8F35-4A50-A083-CCD0F3F616DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.Api", "src\SC.DevChallenge.Api\SC.DevChallenge.Api.csproj", "{2B3CB263-AC83-4854-B363-F706AF60176A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.Api", "src\SC.DevChallenge.Api\SC.DevChallenge.Api.csproj", "{2B3CB263-AC83-4854-B363-F706AF60176A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.Configuration", "src\SC.DevChallenge.Configuration\SC.DevChallenge.Configuration.csproj", "{DED0EF94-D0F7-4C24-A81B-CC2EA95D4DF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.Configuration", "src\SC.DevChallenge.Configuration\SC.DevChallenge.Configuration.csproj", "{DED0EF94-D0F7-4C24-A81B-CC2EA95D4DF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.Configuration.Abstractions", "src\SC.DevChallenge.Configuration.Abstractions\SC.DevChallenge.Configuration.Abstractions.csproj", "{F5F60E9F-5F63-4634-AD23-B1593A0C7F86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.Configuration.Abstractions", "src\SC.DevChallenge.Configuration.Abstractions\SC.DevChallenge.Configuration.Abstractions.csproj", "{F5F60E9F-5F63-4634-AD23-B1593A0C7F86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.MediatR.Behaviors", "src\SC.DevChallenge.MediatR.Behaviors\SC.DevChallenge.MediatR.Behaviors.csproj", "{3B651B5E-810D-4B9E-94A5-015146CE5BEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.MediatR.Behaviors", "src\SC.DevChallenge.MediatR.Behaviors\SC.DevChallenge.MediatR.Behaviors.csproj", "{3B651B5E-810D-4B9E-94A5-015146CE5BEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.MediatR.Queries", "src\SC.DevChallenge.MediatR.Queries\SC.DevChallenge.MediatR.Queries.csproj", "{B85F82FF-34F5-4F56-B45F-1BDF93ACFF67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.MediatR.Queries", "src\SC.DevChallenge.MediatR.Queries\SC.DevChallenge.MediatR.Queries.csproj", "{B85F82FF-34F5-4F56-B45F-1BDF93ACFF67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.DataAccess.Abstractions", "src\SC.DevChallenge.DataAccess.Abstractions\SC.DevChallenge.DataAccess.Abstractions.csproj", "{6CA3DAD0-864D-4DBA-BDFB-426427863BF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.DataAccess.Abstractions", "src\SC.DevChallenge.DataAccess.Abstractions\SC.DevChallenge.DataAccess.Abstractions.csproj", "{6CA3DAD0-864D-4DBA-BDFB-426427863BF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.DataAccess.EF", "src\SC.DevChallenge.DataAccess.EF\SC.DevChallenge.DataAccess.EF.csproj", "{5CD693AF-A19B-4F5A-96DF-DE1260B24358}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.DataAccess.EF", "src\SC.DevChallenge.DataAccess.EF\SC.DevChallenge.DataAccess.EF.csproj", "{5CD693AF-A19B-4F5A-96DF-DE1260B24358}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.Dto", "src\SC.DevChallenge.Dto\SC.DevChallenge.Dto.csproj", "{EAA2708D-CA6B-42DE-8884-E11DBB03DA5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.Dto", "src\SC.DevChallenge.Dto\SC.DevChallenge.Dto.csproj", "{EAA2708D-CA6B-42DE-8884-E11DBB03DA5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.Mapping", "src\SC.DevChallenge.Mapping\SC.DevChallenge.Mapping.csproj", "{3EB26EAB-599C-4362-83C2-DF7FEF4B2867}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.Mapping", "src\SC.DevChallenge.Mapping\SC.DevChallenge.Mapping.csproj", "{3EB26EAB-599C-4362-83C2-DF7FEF4B2867}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.Mapping.Abstractions", "src\SC.DevChallenge.Mapping.Abstractions\SC.DevChallenge.Mapping.Abstractions.csproj", "{A0607454-CAE9-4AF2-9CB8-FF7AEEB33624}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.Mapping.Abstractions", "src\SC.DevChallenge.Mapping.Abstractions\SC.DevChallenge.Mapping.Abstractions.csproj", "{A0607454-CAE9-4AF2-9CB8-FF7AEEB33624}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.Api.Tests", "test\Unit\SC.DevChallenge.Api.Tests\SC.DevChallenge.Api.Tests.csproj", "{76D0E81D-20BD-4FE8-BB6F-A6A2FA430E76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.Api.Tests", "test\Unit\SC.DevChallenge.Api.Tests\SC.DevChallenge.Api.Tests.csproj", "{76D0E81D-20BD-4FE8-BB6F-A6A2FA430E76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.Mapping.Tests", "test\Unit\SC.DevChallenge.Mapping.Tests\SC.DevChallenge.Mapping.Tests.csproj", "{2263EDFF-D96D-4B70-B9BA-37E47EA059E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.Mapping.Tests", "test\Unit\SC.DevChallenge.Mapping.Tests\SC.DevChallenge.Mapping.Tests.csproj", "{2263EDFF-D96D-4B70-B9BA-37E47EA059E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.MediatR.Behaviors.Tests", "test\Unit\SC.DevChallenge.MediatR.Behaviors.Tests\SC.DevChallenge.MediatR.Behaviors.Tests.csproj", "{F9CC5F40-9099-4CAA-91F4-CABA86626DCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.MediatR.Queries.Tests", "test\Unit\SC.DevChallenge.MediatR.Queries.Tests\SC.DevChallenge.MediatR.Queries.Tests.csproj", "{C8097EA6-8B3A-455C-BA50-FCB15B5F4260}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.MediatR.Queries.Tests", "test\Unit\SC.DevChallenge.MediatR.Queries.Tests\SC.DevChallenge.MediatR.Queries.Tests.csproj", "{C8097EA6-8B3A-455C-BA50-FCB15B5F4260}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.MediatR.Di", "src\Di\SC.DevChallenge.MediatR.Di\SC.DevChallenge.MediatR.Di.csproj", "{1840854E-216A-4AFB-BCB4-8639DCF305B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.MediatR.Di", "src\Di\SC.DevChallenge.MediatR.Di\SC.DevChallenge.MediatR.Di.csproj", "{1840854E-216A-4AFB-BCB4-8639DCF305B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.Configuration.Di", "src\Di\SC.DevChallenge.Configuration.Di\SC.DevChallenge.Configuration.Di.csproj", "{C1A2DB83-A204-41B0-9F67-A02B66E14C9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.Configuration.Di", "src\Di\SC.DevChallenge.Configuration.Di\SC.DevChallenge.Configuration.Di.csproj", "{C1A2DB83-A204-41B0-9F67-A02B66E14C9A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC.DevChallenge.DataAccess.Di", "src\Di\SC.DevChallenge.DataAccess.Di\SC.DevChallenge.DataAccess.Di.csproj", "{45E9B5F5-D868-4920-A0EB-8EDDF2E62517}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.DataAccess.Di", "src\Di\SC.DevChallenge.DataAccess.Di\SC.DevChallenge.DataAccess.Di.csproj", "{45E9B5F5-D868-4920-A0EB-8EDDF2E62517}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7D9C1347-358B-44D1-8F8C-B5E94A4B2B47}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.MediatR.Core", "src\SC.DevChallenge.MediatR.Core\SC.DevChallenge.MediatR.Core.csproj", "{86B02326-14D2-4017-8C5C-6E67017A5E73}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.ExceptionHandler", "src\SC.DevChallenge.ExceptionHandler\SC.DevChallenge.ExceptionHandler.csproj", "{5D8C98CB-C531-4BA3-A8B8-66C98DE6E8FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.Domain", "src\SC.DevChallenge.Domain\SC.DevChallenge.Domain.csproj", "{695C6768-0F2A-4137-A9DB-646B8B776D86}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.ExceptionHandler.Di", "src\Di\SC.DevChallenge.ExceptionHandler.Di\SC.DevChallenge.ExceptionHandler.Di.csproj", "{2901DFA7-1913-4121-8440-8E0F2DC09741}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.DevChallenge.Domain.Tests", "test\Unit\SC.DevChallenge.Domain.Tests\SC.DevChallenge.Domain.Tests.csproj", "{91EC4731-5995-46E6-9364-1CC6DAFC7E87}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{1BEBDAE8-6929-4EE0-B515-6688FDD95431}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cake", "cake", "{ED4F9A26-9E3B-454A-A832-E4EFB4722867}"
+	ProjectSection(SolutionItems) = preProject
+		build\cake\build.cake = build\cake\build.cake
+		build\cake\build.ps1 = build\cake\build.ps1
+		build\cake\build.sh = build\cake\build.sh
+		build\cake\cake.config = build\cake\cake.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tasks", "Tasks", "{C8885D30-6BCF-49BD-A1E5-DC4D83417BDE}"
+	ProjectSection(SolutionItems) = preProject
+		build\cake\Tasks\build.cake = build\cake\Tasks\build.cake
+		build\cake\Tasks\clean.cake = build\cake\Tasks\clean.cake
+		build\cake\Tasks\create-nuget-package.cake = build\cake\Tasks\create-nuget-package.cake
+		build\cake\Tasks\default.cake = build\cake\Tasks\default.cake
+		build\cake\Tasks\prepare-unit-tests.cake = build\cake\Tasks\prepare-unit-tests.cake
+		build\cake\Tasks\publish-coverage.cake = build\cake\Tasks\publish-coverage.cake
+		build\cake\Tasks\publish-nuget-package.cake = build\cake\Tasks\publish-nuget-package.cake
+		build\cake\Tasks\restore-nuget-packages.cake = build\cake\Tasks\restore-nuget-packages.cake
+		build\cake\Tasks\run-unit-tests.cake = build\cake\Tasks\run-unit-tests.cake
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{1699E034-CA16-4EA2-931D-5969F44D326E}"
+	ProjectSection(SolutionItems) = preProject
+		build\cake\Utils\paths.cake = build\cake\Utils\paths.cake
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,10 +139,6 @@ Global
 		{2263EDFF-D96D-4B70-B9BA-37E47EA059E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2263EDFF-D96D-4B70-B9BA-37E47EA059E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2263EDFF-D96D-4B70-B9BA-37E47EA059E1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9CC5F40-9099-4CAA-91F4-CABA86626DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9CC5F40-9099-4CAA-91F4-CABA86626DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9CC5F40-9099-4CAA-91F4-CABA86626DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9CC5F40-9099-4CAA-91F4-CABA86626DCA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C8097EA6-8B3A-455C-BA50-FCB15B5F4260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C8097EA6-8B3A-455C-BA50-FCB15B5F4260}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8097EA6-8B3A-455C-BA50-FCB15B5F4260}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -127,6 +159,26 @@ Global
 		{7D9C1347-358B-44D1-8F8C-B5E94A4B2B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D9C1347-358B-44D1-8F8C-B5E94A4B2B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D9C1347-358B-44D1-8F8C-B5E94A4B2B47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86B02326-14D2-4017-8C5C-6E67017A5E73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86B02326-14D2-4017-8C5C-6E67017A5E73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86B02326-14D2-4017-8C5C-6E67017A5E73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86B02326-14D2-4017-8C5C-6E67017A5E73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D8C98CB-C531-4BA3-A8B8-66C98DE6E8FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D8C98CB-C531-4BA3-A8B8-66C98DE6E8FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D8C98CB-C531-4BA3-A8B8-66C98DE6E8FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D8C98CB-C531-4BA3-A8B8-66C98DE6E8FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{695C6768-0F2A-4137-A9DB-646B8B776D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{695C6768-0F2A-4137-A9DB-646B8B776D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{695C6768-0F2A-4137-A9DB-646B8B776D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{695C6768-0F2A-4137-A9DB-646B8B776D86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2901DFA7-1913-4121-8440-8E0F2DC09741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2901DFA7-1913-4121-8440-8E0F2DC09741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2901DFA7-1913-4121-8440-8E0F2DC09741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2901DFA7-1913-4121-8440-8E0F2DC09741}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91EC4731-5995-46E6-9364-1CC6DAFC7E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91EC4731-5995-46E6-9364-1CC6DAFC7E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91EC4731-5995-46E6-9364-1CC6DAFC7E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91EC4731-5995-46E6-9364-1CC6DAFC7E87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -147,11 +199,18 @@ Global
 		{A0607454-CAE9-4AF2-9CB8-FF7AEEB33624} = {F61461B4-9F9F-4770-9306-EF1F1D5F0F36}
 		{76D0E81D-20BD-4FE8-BB6F-A6A2FA430E76} = {D4F386EC-0662-455B-B321-750DB10C2050}
 		{2263EDFF-D96D-4B70-B9BA-37E47EA059E1} = {D4F386EC-0662-455B-B321-750DB10C2050}
-		{F9CC5F40-9099-4CAA-91F4-CABA86626DCA} = {D4F386EC-0662-455B-B321-750DB10C2050}
 		{C8097EA6-8B3A-455C-BA50-FCB15B5F4260} = {D4F386EC-0662-455B-B321-750DB10C2050}
 		{1840854E-216A-4AFB-BCB4-8639DCF305B0} = {A8C1CF9C-8F35-4A50-A083-CCD0F3F616DA}
 		{C1A2DB83-A204-41B0-9F67-A02B66E14C9A} = {A8C1CF9C-8F35-4A50-A083-CCD0F3F616DA}
 		{45E9B5F5-D868-4920-A0EB-8EDDF2E62517} = {A8C1CF9C-8F35-4A50-A083-CCD0F3F616DA}
+		{86B02326-14D2-4017-8C5C-6E67017A5E73} = {F61461B4-9F9F-4770-9306-EF1F1D5F0F36}
+		{5D8C98CB-C531-4BA3-A8B8-66C98DE6E8FC} = {F61461B4-9F9F-4770-9306-EF1F1D5F0F36}
+		{695C6768-0F2A-4137-A9DB-646B8B776D86} = {F61461B4-9F9F-4770-9306-EF1F1D5F0F36}
+		{2901DFA7-1913-4121-8440-8E0F2DC09741} = {A8C1CF9C-8F35-4A50-A083-CCD0F3F616DA}
+		{91EC4731-5995-46E6-9364-1CC6DAFC7E87} = {D4F386EC-0662-455B-B321-750DB10C2050}
+		{ED4F9A26-9E3B-454A-A832-E4EFB4722867} = {1BEBDAE8-6929-4EE0-B515-6688FDD95431}
+		{C8885D30-6BCF-49BD-A1E5-DC4D83417BDE} = {ED4F9A26-9E3B-454A-A832-E4EFB4722867}
+		{1699E034-CA16-4EA2-931D-5969F44D326E} = {ED4F9A26-9E3B-454A-A832-E4EFB4722867}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {82E258BD-5EDF-49CB-B366-21EC140D1C18}

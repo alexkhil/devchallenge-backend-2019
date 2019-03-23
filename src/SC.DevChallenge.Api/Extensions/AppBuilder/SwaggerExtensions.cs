@@ -5,18 +5,20 @@ namespace SC.DevChallenge.Api.Extensions.AppBuilder
 {
     public static class SwaggerExtensions
     {
+        private const string SwaggerEndpoint = "/swagger/v1/swagger.json";
+
         public static IApplicationBuilder SetupSwagger(this IApplicationBuilder app)
         {
-            app.UseSwagger();
-            app.UseSwaggerUI(SetSwaggerOptions);
+            app.UseSwagger()
+               .UseSwaggerUI(SetSwaggerOptions);
 
             return app;
         }
 
         private static void SetSwaggerOptions(SwaggerUIOptions options)
         {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "C# DevChallenge API");
-            options.RoutePrefix = "api/docs";
+            options.SwaggerEndpoint(SwaggerEndpoint, "C# DevChallenge API");
+            options.RoutePrefix = string.Empty;
         }
     }
 }

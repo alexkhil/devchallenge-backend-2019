@@ -23,6 +23,7 @@
     <ProjectReference Include="..\SC.DevChallenge.Configuration.Abstractions\SC.DevChallenge.Configuration.Abstractions.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Configuration\SC.DevChallenge.Configuration.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.DataAccess.Abstractions\SC.DevChallenge.DataAccess.Abstractions.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.Domain\SC.DevChallenge.Domain.csproj" />
   </ItemGroup>
 
 </Project>

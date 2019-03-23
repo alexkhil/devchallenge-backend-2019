@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyModel;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -13,13 +16,16 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
             this IServiceCollection services)
         {
             services.AddSwaggerGen(GetSwaggerGenOptions);
+
             return services;
         }
 
-        private static string GetXmlPath()
+        private static IEnumerable<string> GetXmlPaths()
         {
-            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            return Path.Combine(AppContext.BaseDirectory, xmlFile);
+            return DependencyContext.Default.GetDefaultAssemblyNames()
+                .Where(assembly => assembly.FullName.StartsWith("SC.DevChallenge", StringComparison.InvariantCulture))
+                .Select(p => Path.Combine(AppContext.BaseDirectory, $"{p.Name}.xml"))
+                .Where(p => File.Exists(p));
         }
 
         private static void GetSwaggerGenOptions(SwaggerGenOptions options)
@@ -30,7 +36,10 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
                 Title = "C# DevChallenge API"
             });
 
-            options.IncludeXmlComments(GetXmlPath());
+            foreach (var path in GetXmlPaths())
+            {
+                options.IncludeXmlComments(path);
+            }
         }
     }
 }

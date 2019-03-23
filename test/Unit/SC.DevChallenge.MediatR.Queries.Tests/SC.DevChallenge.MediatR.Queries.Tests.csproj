@@ -30,4 +30,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\SC.DevChallenge.MediatR.Queries\SC.DevChallenge.MediatR.Queries.csproj" />
+  </ItemGroup>
+
 </Project>

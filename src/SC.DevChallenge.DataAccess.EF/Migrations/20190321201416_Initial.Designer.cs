@@ -10,7 +10,7 @@ using SC.DevChallenge.DataAccess.EF;
 namespace SC.DevChallenge.DataAccess.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190319234643_Initial")]
+    [Migration("20190321201416_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,7 +108,9 @@ namespace SC.DevChallenge.DataAccess.EF.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<float>("Value");
+                    b.Property<int>("Timeslot");
+
+                    b.Property<double>("Value");
 
                     b.HasKey("PortfolioId", "OwnerId", "InstrumentId", "Date");
 

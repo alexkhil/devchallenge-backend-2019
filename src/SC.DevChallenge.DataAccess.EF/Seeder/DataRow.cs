@@ -1,8 +1,6 @@
-using System;
-
 namespace SC.DevChallenge.DataAccess.EF.Seeder
 {
-    internal class DataRow
+    public class DataRow
     {
         public string Portfolio { get; set; }
 
@@ -12,6 +10,6 @@ namespace SC.DevChallenge.DataAccess.EF.Seeder
 
         public string Date { get; set; }
 
-        public float Price { get; set; }
+        public double Price { get; set; }
     }
 }

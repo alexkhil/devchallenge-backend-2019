@@ -19,7 +19,7 @@ namespace SC.DevChallenge.MediatR.Behaviors
             CancellationToken cancellationToken,
             RequestHandlerDelegate<TResponse> next)
         {
-            using (_logger.BeginScope("Handling {@Request} request.", request))
+            using (_logger.BeginScope("Handling {Request} request.", request))
             {
                 var response = await next();
 

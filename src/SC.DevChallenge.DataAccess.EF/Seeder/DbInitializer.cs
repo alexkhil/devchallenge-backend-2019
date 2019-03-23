@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
 using SC.DevChallenge.DataAccess.EF.Seeder.Abstractions;
-using Z.EntityFramework.Extensions;
+using SC.DevChallenge.Domain.Date;
+using SC.DevChallenge.Domain.Date.DateTimeConverter;
 
 namespace SC.DevChallenge.DataAccess.EF.Seeder
 {
@@ -16,18 +18,25 @@ namespace SC.DevChallenge.DataAccess.EF.Seeder
     {
         private readonly ILogger<DbInitializer> logger;
         private readonly AppDbContext dbContext;
+        private readonly IDateTimeConverter dateTimeConverter;
 
-        public DbInitializer(ILogger<DbInitializer> logger, AppDbContext dbContext)
+        public DbInitializer(
+            ILogger<DbInitializer> logger,
+            AppDbContext dbContext,
+            IDateTimeConverter dateTimeConverter)
         {
             this.logger = logger;
             this.dbContext = dbContext;
+            this.dateTimeConverter = dateTimeConverter;
         }
 
         public Task InitializeAsync(string filePath)
         {
             dbContext.Database.EnsureDeleted();
             logger.LogInformation("Creating Db...");
-            dbContext.Database.EnsureCreated();
+            dbContext.Database.Migrate();
+
+            logger.LogInformation("Seeding from {file}", filePath);
 
             if (!File.Exists(filePath))
             {
@@ -44,8 +53,6 @@ namespace SC.DevChallenge.DataAccess.EF.Seeder
                 using (var csv = new CsvReader(reader))
                 {
                     var rows = csv.GetRecords<DataRow>().ToList();
-
-                    logger.LogInformation("Seeding from {file}", filePath);
 
                     var portfolios = rows.Select(r => r.Portfolio).Distinct().Select(p => new Portfolio { Name = p }).ToList();
                     await dbContext.BulkInsertAsync(portfolios);
@@ -83,12 +90,15 @@ namespace SC.DevChallenge.DataAccess.EF.Seeder
                             InstrumentId = instrumentsMap[r.Instrument]
                         });
 
+                        var date = DateTime.ParseExact(r.Date, DateTimeFormat.Default, CultureInfo.InvariantCulture);
+
                         instrumentPrices.Add(new Price
                         {
                             PortfolioId = portfoliosMap[r.Portfolio],
                             OwnerId = ownersMap[r.Owner],
                             InstrumentId = instrumentsMap[r.Instrument],
-                            Date = DateTime.Parse(r.Date),
+                            Date = date,
+                            Timeslot = dateTimeConverter.DateTimeToTimeSlot(date),
                             Value = r.Price
                         });
                     }

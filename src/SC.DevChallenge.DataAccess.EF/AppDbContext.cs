@@ -20,7 +20,6 @@ namespace SC.DevChallenge.DataAccess.EF
             }
 
             optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
-
             optionsBuilder.UseSqlServer(configuration.ConnectionString);
         }
 

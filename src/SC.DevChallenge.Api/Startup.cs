@@ -55,9 +55,6 @@ namespace SC.DevChallenge.Api
 
             app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
-            app.UseHsts();
-            app.UseHttpsRedirection();
-
             app.UseStaticFiles();
 
             app.SetupSwagger();

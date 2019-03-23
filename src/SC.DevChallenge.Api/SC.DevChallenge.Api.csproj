@@ -12,27 +12,23 @@
 
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>SC.DevChallenge.Api.xml</DocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Remove="appsettings.Production.json" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="MediatR" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
     <PackageReference Include="Serilog" Version="2.8.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
-    <PackageReference Include="Serilog.Extensions.Autofac.DependencyInjection" Version="1.0.0" />
+    <PackageReference Include="Serilog.Extensions.Autofac.DependencyInjection" Version="1.1.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
@@ -41,9 +37,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Di\SC.DevChallenge.Configuration.Di\SC.DevChallenge.Configuration.Di.csproj" />
     <ProjectReference Include="..\Di\SC.DevChallenge.DataAccess.Di\SC.DevChallenge.DataAccess.Di.csproj" />
+    <ProjectReference Include="..\Di\SC.DevChallenge.ExceptionHandler.Di\SC.DevChallenge.ExceptionHandler.Di.csproj" />
     <ProjectReference Include="..\Di\SC.DevChallenge.MediatR.Di\SC.DevChallenge.MediatR.Di.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Configuration\SC.DevChallenge.Configuration.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Dto\SC.DevChallenge.Dto.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.ExceptionHandler\SC.DevChallenge.ExceptionHandler.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Mapping\SC.DevChallenge.Mapping.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.MediatR.Queries\SC.DevChallenge.MediatR.Queries.csproj" />
   </ItemGroup>
@@ -58,6 +56,9 @@
 
   <ItemGroup>
     <None Update="Input\data.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SC.DevChallenge.Api.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

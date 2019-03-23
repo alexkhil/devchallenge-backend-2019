@@ -106,7 +106,9 @@ namespace SC.DevChallenge.DataAccess.EF.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<float>("Value");
+                    b.Property<int>("Timeslot");
+
+                    b.Property<double>("Value");
 
                     b.HasKey("PortfolioId", "OwnerId", "InstrumentId", "Date");
 

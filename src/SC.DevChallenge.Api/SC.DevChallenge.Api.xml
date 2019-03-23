@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SC.DevChallenge.Api</name>
+    </assembly>
+    <members>
+        <member name="M:SC.DevChallenge.Api.Controllers.PricesController.GetAveragePrice(SC.DevChallenge.Dto.GetAveragePriceDto)">
+            <summary>
+            Get Average Price fro specified PIIT
+            </summary>
+            <response code="200">Average price returned successfully</response>
+            <response code="404">Specified PIIT not found</response>
+        </member>
+    </members>
+</doc>

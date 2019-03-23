@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace SC.DevChallenge.DataAccess.Abstractions.Entities
 {
@@ -19,6 +18,8 @@ namespace SC.DevChallenge.DataAccess.Abstractions.Entities
 
         public DateTime Date { get; set; }
 
-        public float Value { get; set; }
+        public int Timeslot { get; set; }
+
+        public double Value { get; set; }
     }
 }

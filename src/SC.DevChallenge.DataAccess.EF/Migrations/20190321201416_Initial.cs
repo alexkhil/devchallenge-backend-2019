@@ -116,7 +116,8 @@ namespace SC.DevChallenge.DataAccess.EF.Migrations
                     OwnerId = table.Column<int>(nullable: false),
                     InstrumentId = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
-                    Value = table.Column<float>(nullable: false)
+                    Timeslot = table.Column<int>(nullable: false),
+                    Value = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

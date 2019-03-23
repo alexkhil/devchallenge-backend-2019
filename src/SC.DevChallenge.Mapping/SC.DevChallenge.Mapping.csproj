@@ -15,11 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SC.DevChallenge.Dto\SC.DevChallenge.Dto.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Mapping.Abstractions\SC.DevChallenge.Mapping.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="MappingProfiles\" />
+    <ProjectReference Include="..\SC.DevChallenge.MediatR.Queries\SC.DevChallenge.MediatR.Queries.csproj" />
   </ItemGroup>
 
 </Project>

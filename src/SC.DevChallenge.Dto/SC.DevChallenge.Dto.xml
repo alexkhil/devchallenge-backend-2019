@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SC.DevChallenge.Dto</name>
+    </assembly>
+    <members>
+        <member name="P:SC.DevChallenge.Dto.AveragePriceDto.Date">
+            <summary>
+            The timeslot start date
+            </summary>
+            <example>01/01/2018 12:15:30</example>
+        </member>
+        <member name="P:SC.DevChallenge.Dto.AveragePriceDto.Price">
+            <summary>
+            The average price
+            </summary>
+            <example>4.00</example>
+        </member>
+        <member name="T:SC.DevChallenge.Dto.GetAveragePriceDto">
+            <summary>
+            Response of GetAveragePrice
+            </summary>
+        </member>
+        <member name="P:SC.DevChallenge.Dto.GetAveragePriceDto.Portfolio">
+            <summary>
+            The name of Portfolio
+            </summary>
+            <example>Fannie Mae</example>
+        </member>
+        <member name="P:SC.DevChallenge.Dto.GetAveragePriceDto.Owner">
+            <summary>
+            The name of Owner
+            </summary>
+            <example>SimCorp</example>
+        </member>
+        <member name="P:SC.DevChallenge.Dto.GetAveragePriceDto.Instrument">
+            <summary>
+            The name of Instrument
+            </summary>
+            <example>Equity</example>
+        </member>
+        <member name="P:SC.DevChallenge.Dto.GetAveragePriceDto.Date">
+            <summary>
+            The date of timeslot
+            </summary>
+            <example>15/03/2018 17:26:40</example>
+        </member>
+    </members>
+</doc>
