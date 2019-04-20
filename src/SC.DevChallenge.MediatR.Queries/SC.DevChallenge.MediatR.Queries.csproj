@@ -26,6 +26,8 @@
     <ProjectReference Include="..\SC.DevChallenge.DataAccess.EF\SC.DevChallenge.DataAccess.EF.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Dto\SC.DevChallenge.Dto.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.MediatR.Core\SC.DevChallenge.MediatR.Core.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.Specification.Abstractions\SC.DevChallenge.Specification.Abstractions.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.Specification\SC.DevChallenge.Specification.csproj" />
   </ItemGroup>
 
   <ItemGroup>

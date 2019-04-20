@@ -1,12 +1,11 @@
-﻿using System;
-using System.Linq.Expressions;
-using SC.DevChallenge.DataAccess.Abstractions.Entities;
+﻿using SC.DevChallenge.DataAccess.Abstractions.Entities;
+using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
+using SC.DevChallenge.Specification.Abstractions;
 
 namespace SC.DevChallenge.MediatR.Queries.Prices.GetAveragePrice.Specifications
 {
-    public interface IGetAveragePriceSpecification
+    public interface IGetAveragePriceSpecification :
+        ISpecification<Price, GetAveragePriceQuery>
     {
-        bool IsSatisfiedBy(Price price, string portfolio, string owner, string instrument, int timeslot);
-        Expression<Func<Price, bool>> ToExpression(string portfolio, string owner, string instrument, int timeslot);
     }
 }

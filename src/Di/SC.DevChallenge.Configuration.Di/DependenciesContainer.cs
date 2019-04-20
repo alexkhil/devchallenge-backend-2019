@@ -10,8 +10,7 @@ namespace SC.DevChallenge.Configuration.Di
         protected override void Load(ContainerBuilder builder)
         {
             builder
-                .Register(c => c.Resolve<IOptionsSnapshot<DbConfiguration>>().Value)
-                .As<IDbConfiguration>()
+                .Register<IDbConfiguration>(c => c.Resolve<DbConfiguration>())
                 .SingleInstance();
 
             base.Load(builder);

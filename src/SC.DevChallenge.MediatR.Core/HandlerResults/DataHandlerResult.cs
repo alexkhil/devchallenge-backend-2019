@@ -4,7 +4,6 @@ using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
 namespace SC.DevChallenge.MediatR.Core.HandlerResults
 {
     public class DataHandlerResult<T> : IHandlerResult<T>
-        where T : class
     {
         public DataHandlerResult(T data)
         {

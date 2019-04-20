@@ -23,6 +23,8 @@ COPY ["src/SC.DevChallenge.Mapping.Abstractions/SC.DevChallenge.Mapping.Abstract
 COPY ["src/SC.DevChallenge.MediatR.Behaviors/SC.DevChallenge.MediatR.Behaviors.csproj", "src/SC.DevChallenge.MediatR.Behaviors/"]
 COPY ["src/SC.DevChallenge.MediatR.Core/SC.DevChallenge.MediatR.Core.csproj", "src/SC.DevChallenge.MediatR.Core/"]
 COPY ["src/SC.DevChallenge.MediatR.Queries/SC.DevChallenge.MediatR.Queries.csproj", "src/SC.DevChallenge.MediatR.Queries/"]
+COPY ["src/SC.DevChallenge.Specification.Abstractions/SC.DevChallenge.Specification.Abstractions.csproj", "src/SC.DevChallenge.Specification.Abstractions/"]
+COPY ["src/SC.DevChallenge.Specification/SC.DevChallenge.Specification.csproj", "src/SC.DevChallenge.Specification/"]
 
 RUN dotnet restore "src/SC.DevChallenge.Api/SC.DevChallenge.Api.csproj"
 COPY . .

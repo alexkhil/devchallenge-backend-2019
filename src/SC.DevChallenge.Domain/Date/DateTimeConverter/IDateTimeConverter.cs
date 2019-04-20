@@ -7,5 +7,7 @@ namespace SC.DevChallenge.Domain.Date.DateTimeConverter
         int DateTimeToTimeSlot(DateTime dateTime);
 
         DateTime GetTimeSlotStartDate(int timeslot);
+
+        DateTime GetTimeSlotStartDate(DateTime dateTime);
     }
 }

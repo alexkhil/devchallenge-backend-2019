@@ -13,31 +13,24 @@ namespace SC.DevChallenge.Api
 {
     public static class Program
     {
-        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
-            .AddEnvironmentVariables()
-            .Build();
+        public static int Main(string[] args) =>
+            LoadAndRun(CreateWebHostBuilder(args).Build());
 
-        public static int Main(string[] args)
+        public static int LoadAndRun(IWebHost webHost)
         {
-            Log.Logger = new LoggerConfiguration()
-               .ReadFrom.Configuration(Configuration)
-               .CreateLogger();
+            Log.Logger = BuildLogger(webHost);
 
             try
             {
                 Log.Information("Starting web host");
-                var host = CreateWebHostBuilder(args).Build();
-                using (var scope = host.Services.CreateScope())
+                using (var scope = webHost.Services.CreateScope())
                 {
                     EntityFrameworkManager.ContextFactory = context => scope.ServiceProvider.GetRequiredService<AppDbContext>();
                     var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
                     var inputDataPath = Path.Combine(AppContext.BaseDirectory, $"Input{Path.DirectorySeparatorChar}data.csv");
                     dbInitializer.InitializeAsync(inputDataPath).GetAwaiter().GetResult();
                 }
-                host.Run();
+                webHost.Run();
                 return 0;
             }
             catch (Exception ex)
@@ -51,10 +44,13 @@ namespace SC.DevChallenge.Api
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                          .UseStartup<Startup>();
-        }
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                   .UseStartup<Startup>();
+
+        private static ILogger BuildLogger(IWebHost webHost) =>
+            new LoggerConfiguration()
+                .ReadFrom.Configuration(webHost.Services.GetRequiredService<IConfiguration>())
+                .CreateLogger();
     }
 }

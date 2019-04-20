@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using SC.DevChallenge.DataAccess.Abstractions.Entities;
 using SC.DevChallenge.DataAccess.Abstractions.Repositories;
 using SC.DevChallenge.Domain.Date.DateTimeConverter;
 using SC.DevChallenge.Dto;
@@ -13,7 +10,7 @@ using SC.DevChallenge.MediatR.Queries.Prices.GetAveragePrice.Specifications;
 
 namespace SC.DevChallenge.MediatR.Queries.Prices.GetAveragePrice
 {
-    public class GetAveragePriceQueryHandler : RequestHandlerBase<GetAveragePriceQuery, AveragePriceDto>
+    public class GetAveragePriceQueryHandler : QueryHandlerBase<GetAveragePriceQuery, AveragePriceDto>
     {
         private readonly IPriceRepository priceRepository;
         private readonly IGetAveragePriceSpecification getAveragePriceSpecification;
@@ -33,10 +30,8 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetAveragePrice
             GetAveragePriceQuery request,
             CancellationToken cancellationToken)
         {
-            var timeslot = dateTimeConverter.DateTimeToTimeSlot(request.Date);
-            var startDate = dateTimeConverter.GetTimeSlotStartDate(timeslot);
-
-            var filter = getAveragePriceSpecification.ToExpression(request.Portfolio, request.Owner, request.Instrument, timeslot);
+            var startDate = dateTimeConverter.GetTimeSlotStartDate(request.Date);
+            var filter = getAveragePriceSpecification.ToExpression(request);
 
             var prices = await priceRepository.GetAllAsync(filter, p => p.Value);
 

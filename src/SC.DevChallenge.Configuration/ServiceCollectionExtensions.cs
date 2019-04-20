@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using SC.DevChallenge.Configuration.DataAccess;
 
 namespace SC.DevChallenge.Configuration
@@ -18,9 +19,16 @@ namespace SC.DevChallenge.Configuration
 
             services
                 .AddOptions()
-                .Configure<DbConfiguration>(config.GetSection(ConfigurationPaths.DbMain));
+                .ConfigureExplicit<DbConfiguration>(config.GetSection(ConfigurationPaths.DbMain));
 
             return services;
         }
+        private static IServiceCollection ConfigureExplicit<TOption>(
+            this IServiceCollection services,
+            IConfigurationSection section)
+            where TOption : class, new() =>
+            services
+                .Configure<TOption>(section)
+                .AddTransient(x => x.GetService<IOptionsSnapshot<TOption>>().Value);
     }
 }

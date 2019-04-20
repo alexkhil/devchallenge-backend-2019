@@ -14,9 +14,10 @@ namespace SC.DevChallenge.Domain.Date.DateTimeConverter
             return Convert.ToInt32(Math.Floor(dateTimeSpan.Subtract(startDateTimeSpan).TotalSeconds / TimeslotSize));
         }
 
-        public DateTime GetTimeSlotStartDate(int timeslot)
-        {
-            return startDate.AddSeconds(timeslot * TimeslotSize);
-        }
+        public DateTime GetTimeSlotStartDate(int timeslot) =>
+            startDate.AddSeconds(timeslot * TimeslotSize);
+
+        public DateTime GetTimeSlotStartDate(DateTime dateTime)=>
+            GetTimeSlotStartDate(DateTimeToTimeSlot(dateTime));
     }
 }

@@ -8,7 +8,6 @@ namespace SC.DevChallenge.MediatR.Queries
 {
     public abstract class RequestHandlerBase<TRequest, TResponse> : IRequestHandler<TRequest, IHandlerResult<TResponse>>
         where TRequest : IRequest<IHandlerResult<TResponse>>
-        where TResponse : class
     {
         public abstract Task<IHandlerResult<TResponse>> Handle(TRequest request, CancellationToken cancellationToken);
 
