@@ -63,12 +63,6 @@
             </summary>
             <example>01/01/2018 12:15:30</example>
         </member>
-        <member name="P:SC.DevChallenge.Dto.Prices.GetBenchmarkPrice.GetBenchmarkPriceDto.Price">
-            <summary>
-            Benchmark price
-            </summary>
-            <example>4.00</example>
-        </member>
         <member name="P:SC.DevChallenge.Dto.BenchmarkPriceDto.Date">
             <summary>
             The timeslot start date

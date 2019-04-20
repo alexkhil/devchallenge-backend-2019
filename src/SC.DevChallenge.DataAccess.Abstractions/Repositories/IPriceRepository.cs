@@ -8,6 +8,13 @@ namespace SC.DevChallenge.DataAccess.Abstractions.Repositories
 {
     public interface IPriceRepository
     {
+        Task<List<double>> GetPiceAveragePricesAsync();
+
+        Task<int> GetPricesCount(int timeslot);
+
+        Task<List<Price>> GetAllAsync(
+            Expression<Func<Price, bool>> wherePredicate);
+
         Task<IEnumerable<T>> GetAllAsync<T>(
             Expression<Func<Price, bool>> wherePredicate,
             Expression<Func<Price, T>> projection);

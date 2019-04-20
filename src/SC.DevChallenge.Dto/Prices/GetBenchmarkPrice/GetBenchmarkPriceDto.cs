@@ -11,11 +11,7 @@ namespace SC.DevChallenge.Dto.Prices.GetBenchmarkPrice
         [Required]
         public string Date { get; set; }
 
-        /// <summary>
-        /// Benchmark price
-        /// </summary>
-        /// <example>4.00</example>
         [Required]
-        public double Price { get; set; }
+        public string Portfolio { get; set; }
     }
 }
