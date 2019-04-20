@@ -6,4 +6,8 @@
     <CodeAnalysisRuleSet>..\..\ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.2" />
+  </ItemGroup>
+
 </Project>

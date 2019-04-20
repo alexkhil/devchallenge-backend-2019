@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Globalization;
 
-namespace SC.DevChallenge.Dto
+namespace SC.DevChallenge.Dto.Prices.GetAveragePrice
 {
     public class AveragePriceDto
     {

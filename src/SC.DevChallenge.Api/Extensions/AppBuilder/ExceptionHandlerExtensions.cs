@@ -6,7 +6,7 @@ namespace SC.DevChallenge.Api.Extensions.AppBuilder
 {
     public static class ExceptionHandlerExtensions
     {
-        public static void UseExceptionHandler(
+        public static IApplicationBuilder UseExceptionHandler(
             this IApplicationBuilder app,
             IHostingEnvironment env)
         {
@@ -19,6 +19,8 @@ namespace SC.DevChallenge.Api.Extensions.AppBuilder
             {
                 app.UseMiddleware<ExceptionHandlerMiddleware>();
             }
+
+            return app;
         }
     }
 }

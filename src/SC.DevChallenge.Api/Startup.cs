@@ -28,16 +28,13 @@ namespace SC.DevChallenge.Api
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddConfiguration(Config);
-            services.AddResponceCompression();
-            services.AddCors();
-            services.AddRouteOptions();
-
-            services.AddCustomizedMvc();
-
-            services.AddAutoMapper(typeof(Mapping.Mapper).Assembly);
-
-            services.AddCustomizedSwagger();
+            services.AddConfiguration(Config)
+                    .AddResponceCompression()
+                    .AddCors()
+                    .AddRouteOptions()
+                    .AddCustomizedMvc()
+                    .AddAutoMapper(typeof(Mapping.Mapper).Assembly)
+                    .AddCustomizedSwagger();
 
             ApplicationContainer = services.AddAutofacAfter(Config);
             var provider = new AutofacServiceProvider(ApplicationContainer);
@@ -45,25 +42,13 @@ namespace SC.DevChallenge.Api
             return provider;
         }
 
-        public void Configure(
-            IApplicationBuilder app,
-            IHostingEnvironment env,
-            IApplicationLifetime appLifetime)
-        {
-            app.UseResponseCompression();
-            app.UseExceptionHandler(env);
-
-            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-
-            app.UseStaticFiles();
-
-            app.SetupSwagger();
-
-            app.UseAuthentication();
-
-            app.UseMvc();
-
-            appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
-        }
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env) => 
+            app.UseResponseCompression()
+               .UseExceptionHandler(env)
+               .UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
+               .UseStaticFiles()
+               .SetupSwagger()
+               .UseAuthentication()
+               .UseMvc();
     }
 }

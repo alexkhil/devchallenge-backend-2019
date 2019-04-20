@@ -9,6 +9,7 @@ using Moq;
 using Photostudios.Tests;
 using SC.DevChallenge.Api.Controllers;
 using SC.DevChallenge.Dto;
+using SC.DevChallenge.Dto.Prices.GetAveragePrice;
 using SC.DevChallenge.Mapping.Abstractions;
 using SC.DevChallenge.MediatR.Core.HandlerResults;
 using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;

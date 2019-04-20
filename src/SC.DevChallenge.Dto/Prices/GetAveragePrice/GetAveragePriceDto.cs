@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace SC.DevChallenge.Dto
+namespace SC.DevChallenge.Dto.Prices.GetAveragePrice
 {
     /// <summary>
     /// Response of GetAveragePrice
