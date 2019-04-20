@@ -7,7 +7,7 @@ namespace SC.DevChallenge.MediatR.Core.HandlerResults
     {
         public DataHandlerResult(T data)
         {
-            Data = data ?? throw new ArgumentNullException(nameof(data));
+            Data = data;
         }
 
         public T Data { get; }

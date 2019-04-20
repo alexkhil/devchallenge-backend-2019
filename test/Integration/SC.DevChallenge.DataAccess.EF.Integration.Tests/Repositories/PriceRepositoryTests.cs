@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AutoFixture.Xunit2;
 using FluentAssertions;
+using Moq;
 using Photostudios.Tests;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
 using SC.DevChallenge.DataAccess.EF.Repositories;
+using SC.DevChallenge.Domain.Date.DateTimeConverter;
+using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
 using SC.DevChallenge.MediatR.Queries.Prices.GetAveragePrice.Specifications;
 using Xunit;
 
@@ -23,10 +27,18 @@ namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
         [Theory]
         [AutoMoqData]
         public async Task GetAllAsync_WhenCalledWithExistingPrice_ShouldReturnOneRecord(
+            [Frozen] Mock<IDateTimeConverter> converterMock,
             GetAveragePriceSpecification specification)
         {
             // Arrange
-            var filter = specification.ToExpression("Portfolio", "Owner", "Instrument", 1);
+            converterMock.Setup(x => x.DateTimeToTimeSlot(It.IsAny<DateTime>())).Returns(1);
+            var request = new GetAveragePriceQuery
+            {
+                Portfolio = "Portfolio",
+                Owner = "Owner",
+                Instrument = "Instrument"
+            };
+            var filter = specification.ToExpression(request);
             var sut = new PriceRepository(dbContext);
 
             // Act
@@ -39,10 +51,18 @@ namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
         [Theory]
         [AutoMoqData]
         public async Task GetAllAsync_WhenCalledWithNotExistingPrice_ShouldReturnEmptyResult(
+            [Frozen] Mock<IDateTimeConverter> converterMock,
             GetAveragePriceSpecification specification)
         {
             // Arrange
-            var filter = specification.ToExpression("Portfolio1", "Owner1", "Instrument1", 2);
+            converterMock.Setup(x => x.DateTimeToTimeSlot(It.IsAny<DateTime>())).Returns(2);
+            var request = new GetAveragePriceQuery
+            {
+                Portfolio = "Portfolio1",
+                Owner = "Owner1",
+                Instrument = "Instrument1"
+            };
+            var filter = specification.ToExpression(request);
             var sut = new PriceRepository(dbContext);
 
             // Act

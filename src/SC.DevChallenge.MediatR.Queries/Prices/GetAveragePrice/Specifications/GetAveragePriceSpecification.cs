@@ -23,6 +23,7 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetAveragePrice.Specifications
             GetAveragePriceQuery request)
         {
             var timeslot = dateTimeConverter.DateTimeToTimeSlot(request.Date);
+
             Expression<Func<Price, bool>> priceFilter = p => p.Portfolio.Name == request.Portfolio
                 && p.Owner.Name == request.Owner
                 && p.Instrument.Name == request.Instrument

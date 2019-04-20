@@ -23,57 +23,23 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
     {
         [Theory]
         [AutoMoqData]
-        public async Task Handle_WhenCalled_ShouldCallDateTimeToTimeSlot(
+        public async Task Handle_WhenCalled_ShouldCallGetTimeSlotStartDate(
             [Frozen] Mock<IPriceRepository> priceRepositoryMock,
-            [Frozen] Mock<IGetAveragePriceSpecification> specificationMock,
             [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
+            [Frozen] Mock<IGetAveragePriceSpecification> specificationMock,
             Expression<Func<Price, bool>> expression)
         {
             // Arrange
             var request = CreateRequest();
-            dateTimeConverterMock
-                .Setup(d => d.DateTimeToTimeSlot(It.IsAny<DateTime>()))
-                .Returns(It.IsAny<int>());
 
             specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()))
+                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
                 .Returns(expression);
 
-            var sut = new GetAveragePriceQueryHandler(
-                priceRepositoryMock.Object,
-                specificationMock.Object,
-                dateTimeConverterMock.Object);
-
-            // Act
-            await sut.Handle(request, default);
-
-            // Assert
-            dateTimeConverterMock.Verify(d => d.DateTimeToTimeSlot(request.Date), Times.Once);
-        }
-
-        [Theory]
-        [AutoMoqData]
-        public async Task Handle_WhenCalled_ShouldCallGetTimeSlotStartDate(
-            [Frozen] Mock<IPriceRepository> priceRepositoryMock,
-            [Frozen] Mock<IGetAveragePriceSpecification> specificationMock,
-            [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
-            Expression<Func<Price, bool>> expression,
-            int timeslot)
-        {
-            // Arrange
-            var request = CreateRequest();
             dateTimeConverterMock
-                .Setup(d => d.DateTimeToTimeSlot(It.IsAny<DateTime>()))
-                .Returns(timeslot);
-
-            dateTimeConverterMock
-                .Setup(d => d.GetTimeSlotStartDate(It.IsAny<int>()))
+                .Setup(d => d.GetTimeSlotStartDate(It.IsAny<DateTime>()))
                 .Returns(It.IsAny<DateTime>());
 
-            specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()))
-                .Returns(expression);
-
             var sut = new GetAveragePriceQueryHandler(
                 priceRepositoryMock.Object,
                 specificationMock.Object,
@@ -83,7 +49,7 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
             await sut.Handle(request, default);
 
             // Assert
-            dateTimeConverterMock.Verify(d => d.GetTimeSlotStartDate(timeslot), Times.Once);
+            dateTimeConverterMock.Verify(d => d.GetTimeSlotStartDate(request.Date), Times.Once);
         }
 
         [Theory]
@@ -103,7 +69,7 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
                 .Returns(timeslot);
 
             specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()))
+                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
                 .Returns(expression);
 
             var sut = new GetAveragePriceQueryHandler(
@@ -115,7 +81,7 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
             await sut.Handle(request, default);
 
             // Assert
-            specificationMock.Verify(s => s.ToExpression(request.Portfolio, request.Owner, request.Instrument, timeslot), Times.Once);
+            specificationMock.Verify(s => s.ToExpression(request), Times.Once);
         }
 
         [Theory]
@@ -130,7 +96,7 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
             var request = CreateRequest();
 
             specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()))
+                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
                 .Returns(expression);
 
             priceRepositoryMock
@@ -161,7 +127,7 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
             var request = CreateRequest();
 
             specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()))
+                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
                 .Returns(expression);
 
             priceRepositoryMock
@@ -192,7 +158,7 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
             var request = CreateRequest();
 
             specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()))
+                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
                 .Returns(expression);
 
             priceRepositoryMock
@@ -227,11 +193,11 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
             var request = CreateRequest();
 
             dateTimeConverterMock
-                .Setup(d => d.GetTimeSlotStartDate(It.IsAny<int>()))
+                .Setup(d => d.GetTimeSlotStartDate(It.IsAny<DateTime>()))
                 .Returns(timeslotDate);
 
             specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()))
+                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
                 .Returns(expression);
 
             priceRepositoryMock
