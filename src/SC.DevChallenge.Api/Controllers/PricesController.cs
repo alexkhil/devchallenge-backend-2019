@@ -42,7 +42,7 @@ namespace SC.DevChallenge.Api.Controllers
         /// Get Benchmark
         /// </summary>
         /// <response code="200"></response>
-        /// <response code="404">Specified PIIT not found</response>
+        /// <response code="404">Specified portfolio not found</response>
         [HttpGet("benchmark", Name = "GetBenchmark")]
         [ProducesResponseType(typeof(BenchmarkPriceDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -53,8 +53,6 @@ namespace SC.DevChallenge.Api.Controllers
             var result = await Mediator.Send(query);
             return Send(result);
         }
-
-        // (Portfolio, StartDateTime, EndDateTime, NumberOfAggregatedPrices)
 
         /// <summary>
         /// Get Benchmark

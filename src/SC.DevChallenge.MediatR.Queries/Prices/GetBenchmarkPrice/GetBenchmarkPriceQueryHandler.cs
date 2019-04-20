@@ -42,6 +42,11 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice
             var filter = specification.ToExpression(request);
             var prices = await priceRepository.GetAllAsync(filter);
 
+            if (!prices.Any())
+            {
+                return NotFound();
+            }
+
             var timeslot = dateTimeConverter.DateTimeToTimeSlot(request.Date);
             var timeslotPricesCount = await priceRepository.GetPricesCount(timeslot);
 
