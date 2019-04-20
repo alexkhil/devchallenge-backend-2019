@@ -23,13 +23,13 @@ namespace SC.DevChallenge.Api
             try
             {
                 Log.Information("Starting web host");
-                //using (var scope = webHost.Services.CreateScope())
-                //{
-                //    EntityFrameworkManager.ContextFactory = context => scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                //    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-                //    var inputDataPath = Path.Combine(AppContext.BaseDirectory, $"Input{Path.DirectorySeparatorChar}data.csv");
-                //    dbInitializer.InitializeAsync(inputDataPath).GetAwaiter().GetResult();
-                //}
+                using (var scope = webHost.Services.CreateScope())
+                {
+                    EntityFrameworkManager.ContextFactory = context => scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                    var inputDataPath = Path.Combine(AppContext.BaseDirectory, $"Input{Path.DirectorySeparatorChar}data.csv");
+                    dbInitializer.InitializeAsync(inputDataPath).GetAwaiter().GetResult();
+                }
                 webHost.Run();
                 return 0;
             }

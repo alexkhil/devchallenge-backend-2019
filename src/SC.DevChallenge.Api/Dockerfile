@@ -7,8 +7,9 @@ WORKDIR /src
 
 COPY ["src/Di/SC.DevChallenge.Configuration.Di/SC.DevChallenge.Configuration.Di.csproj", "src/Di/SC.DevChallenge.Configuration.Di/"]
 COPY ["src/Di/SC.DevChallenge.DataAccess.Di/SC.DevChallenge.DataAccess.Di.csproj", "src/Di/SC.DevChallenge.DataAccess.Di/"]
-COPY ["src/Di/SC.DevChallenge.MediatR.Di/SC.DevChallenge.MediatR.Di.csproj", "src/Di/SC.DevChallenge.MediatR.Di/"]
 COPY ["src/Di/SC.DevChallenge.Domain.Di/SC.DevChallenge.Domain.Di.csproj", "src/Di/SC.DevChallenge.Domain.Di/"]
+COPY ["src/Di/SC.DevChallenge.ExceptionHandler.Di/SC.DevChallenge.ExceptionHandler.Di.csproj", "src/Di/SC.DevChallenge.ExceptionHandler.Di/"]
+COPY ["src/Di/SC.DevChallenge.MediatR.Di/SC.DevChallenge.MediatR.Di.csproj", "src/Di/SC.DevChallenge.MediatR.Di/"]
 
 COPY ["src/SC.DevChallenge.Api/SC.DevChallenge.Api.csproj", "src/SC.DevChallenge.Api/"]
 #COPY ["src/SC.DevChallenge.Api/Input/data.csv", "src/SC.DevChallenge.Api/"]
@@ -24,8 +25,8 @@ COPY ["src/SC.DevChallenge.Mapping.Abstractions/SC.DevChallenge.Mapping.Abstract
 COPY ["src/SC.DevChallenge.MediatR.Behaviors/SC.DevChallenge.MediatR.Behaviors.csproj", "src/SC.DevChallenge.MediatR.Behaviors/"]
 COPY ["src/SC.DevChallenge.MediatR.Core/SC.DevChallenge.MediatR.Core.csproj", "src/SC.DevChallenge.MediatR.Core/"]
 COPY ["src/SC.DevChallenge.MediatR.Queries/SC.DevChallenge.MediatR.Queries.csproj", "src/SC.DevChallenge.MediatR.Queries/"]
-COPY ["src/SC.DevChallenge.Specification.Abstractions/SC.DevChallenge.Specification.Abstractions.csproj", "src/SC.DevChallenge.Specification.Abstractions/"]
 COPY ["src/SC.DevChallenge.Specification/SC.DevChallenge.Specification.csproj", "src/SC.DevChallenge.Specification/"]
+COPY ["src/SC.DevChallenge.Specification.Abstractions/SC.DevChallenge.Specification.Abstractions.csproj", "src/SC.DevChallenge.Specification.Abstractions/"]
 
 RUN dotnet restore "src/SC.DevChallenge.Api/SC.DevChallenge.Api.csproj"
 COPY . .
