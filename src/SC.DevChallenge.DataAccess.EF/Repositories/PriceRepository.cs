@@ -32,7 +32,7 @@ namespace SC.DevChallenge.DataAccess.EF.Repositories
                 .Where(wherePredicate)
                 .ToListAsync();
 
-        public async Task<List<double>> GetPiceAveragePricesAsync() =>
+        public async Task<List<double>> GetAveragePricesAsync() =>
             await dbContext.Prices
                 .GroupBy(p => p.Timeslot)
                 .Select(g => g.Average(p => p.Value))

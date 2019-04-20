@@ -52,7 +52,7 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice
             var firstQuarter = quarterCalculator.GetQuarter(1, timeslotPricesCount);
             var thirdQuarter = quarterCalculator.GetQuarter(3, timeslotPricesCount);
 
-            var pavs = await priceRepository.GetPiceAveragePricesAsync();
+            var pavs = await priceRepository.GetAveragePricesAsync();
             if (!IsQuarterExist(pavs, firstQuarter) ||
                 !IsQuarterExist(pavs, thirdQuarter))
             {

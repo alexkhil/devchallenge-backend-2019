@@ -8,7 +8,7 @@ namespace SC.DevChallenge.DataAccess.Abstractions.Repositories
 {
     public interface IPriceRepository
     {
-        Task<List<double>> GetPiceAveragePricesAsync();
+        Task<List<double>> GetAveragePricesAsync();
 
         Task<int> GetPricesCount(int timeslot);
 

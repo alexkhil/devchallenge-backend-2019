@@ -9,10 +9,10 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetAggregatePrice
     {
         public string Portfolio { get; set; }
 
-        public DateTime StartDateTime { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public DateTime EndDateTime { get; set; }
+        public DateTime EndDate { get; set; }
 
-        public int NumberOfAggregatedPrices { get; set; }
+        public int ResultPoints { get; set; }
     }
 }
