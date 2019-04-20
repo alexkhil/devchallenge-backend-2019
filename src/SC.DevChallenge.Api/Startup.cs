@@ -19,15 +19,12 @@ namespace SC.DevChallenge.Api
     {
         public IConfiguration Config { get; }
 
-        public IContainer ApplicationContainer { get; private set; }
-
         public Startup(IConfiguration configuration)
         {
             Config = configuration;
         }
 
-        public IServiceProvider ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) =>
             services.AddConfiguration(Config)
                     .AddResponceCompression()
                     .AddCors()
@@ -36,11 +33,8 @@ namespace SC.DevChallenge.Api
                     .AddAutoMapper(typeof(Mapping.Mapper).Assembly)
                     .AddCustomizedSwagger();
 
-            ApplicationContainer = services.AddAutofacAfter(Config);
-            var provider = new AutofacServiceProvider(ApplicationContainer);
-
-            return provider;
-        }
+        public static void ConfigureContainer(ContainerBuilder builder) =>
+            builder.RegisterModule(new AutofacModule());
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) => 
             app.UseResponseCompression()
