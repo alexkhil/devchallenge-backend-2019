@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using SC.DevChallenge.DataAccess.Abstractions.Repositories;
@@ -37,8 +38,6 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice
             GetBenchmarkPriceQuery request,
             CancellationToken cancellationToken)
         {
-            var pavs = await priceRepository.GetPiceAveragePricesAsync();
-
             var filter = specification.ToExpression(request);
             var prices = await priceRepository.GetAllAsync(filter);
 
@@ -53,6 +52,13 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice
             var firstQuarter = quarterCalculator.GetQuarter(1, timeslotPricesCount);
             var thirdQuarter = quarterCalculator.GetQuarter(3, timeslotPricesCount);
 
+            var pavs = await priceRepository.GetPiceAveragePricesAsync();
+            if (!IsQuarterExist(pavs, firstQuarter) ||
+                !IsQuarterExist(pavs, thirdQuarter))
+            {
+                return ValidationFailed("Invalid quarter out of range");
+            }
+
             var interQuartileRange = pavs[thirdQuarter] - pavs[firstQuarter];
 
             var lowerBound = timeslotCalculator.GetLowerBound(pavs[firstQuarter], interQuartileRange);
@@ -65,5 +71,8 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice
 
             return Data(benchmarkResult);
         }
+
+        private static bool IsQuarterExist(List<double> list, int quarter) =>
+            quarter >= 0 && quarter < list.Count;
     }
 }

@@ -20,5 +20,10 @@ namespace SC.DevChallenge.MediatR.Queries
         {
             return new DataHandlerResult<TResponse>(data);
         }
+
+        protected IHandlerResult<TResponse> ValidationFailed(string message)
+        {
+            return new ValidationFailedHandlerResult<TResponse>(message);
+        }
     }
 }

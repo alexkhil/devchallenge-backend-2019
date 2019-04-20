@@ -1,6 +1,6 @@
-# DevChallenge 2019
+# DevChallenge 2019 Final
 
-C# task(Online round) - Financial calculations
+C# task - Financial calculations
 
 ## Table of Content
 
@@ -65,12 +65,8 @@ $ ./build/cake/build.sh -s build/cake/build.cake --target=Run-Integration-Tests
 There are a lot points to improve:
 - DataAccess
   - Simplify db seed(DbInitializer class)
-  - Don't use AppDbContext directly. Use repository instead.
   - Use base repository class for all repositories
   - Implement two types of repository: readonly and read/write repository
-  - Use base specification class fro all specifications
-- MediatR
-  - Add behavior to handle exceptions
 - Unit tests
   - Simplify unit tests(e.g. GetAveragePriceQueryHandlerTests can be much smaller)
   - Cover more classes/cases with tests
