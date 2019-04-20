@@ -37,6 +37,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Di\SC.DevChallenge.Configuration.Di\SC.DevChallenge.Configuration.Di.csproj" />
     <ProjectReference Include="..\Di\SC.DevChallenge.DataAccess.Di\SC.DevChallenge.DataAccess.Di.csproj" />
+    <ProjectReference Include="..\Di\SC.DevChallenge.Domain.Di\SC.DevChallenge.Domain.Di.csproj" />
     <ProjectReference Include="..\Di\SC.DevChallenge.ExceptionHandler.Di\SC.DevChallenge.ExceptionHandler.Di.csproj" />
     <ProjectReference Include="..\Di\SC.DevChallenge.MediatR.Di\SC.DevChallenge.MediatR.Di.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Configuration\SC.DevChallenge.Configuration.csproj" />

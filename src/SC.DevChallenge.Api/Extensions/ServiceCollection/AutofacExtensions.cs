@@ -3,13 +3,9 @@ using System.Linq;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
-using SC.DevChallenge.Domain.Date.DateTimeConverter;
-using SC.DevChallenge.ExceptionHandler;
-using SC.DevChallenge.ExceptionHandler.ExceptionHandlers;
 using SC.DevChallenge.Mapping;
 using SC.DevChallenge.Mapping.Abstractions;
 using Serilog;
@@ -35,11 +31,7 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
                 .ToArray();
 
             builder.RegisterAssemblyModules(moduleAssemblies);
-
-            builder.RegisterExceptionHandlers();
             builder.RegisterMapper();
-
-            builder.RegisterType<DateTimeConverter>().AsImplementedInterfaces();
 
             return builder.Build();
         }
@@ -58,18 +50,6 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
                 .ReadFrom
                 .Configuration(configuration);
             builder.RegisterSerilog(loggerConfig);
-        }
-
-        private static void RegisterExceptionHandlers(this ContainerBuilder builder)
-        {
-            builder
-                .RegisterType<ExceptionRequestHandler>()
-                .As<IExceptionRequestHandler>();
-
-            builder
-              .RegisterAssemblyTypes(typeof(DefaultExceptionHandler).Assembly)
-              .Where(x => x.Name.EndsWith("ExceptionHandler", StringComparison.InvariantCulture))
-              .AsImplementedInterfaces();
         }
     }
 }

@@ -8,6 +8,7 @@ WORKDIR /src
 COPY ["src/Di/SC.DevChallenge.Configuration.Di/SC.DevChallenge.Configuration.Di.csproj", "src/Di/SC.DevChallenge.Configuration.Di/"]
 COPY ["src/Di/SC.DevChallenge.DataAccess.Di/SC.DevChallenge.DataAccess.Di.csproj", "src/Di/SC.DevChallenge.DataAccess.Di/"]
 COPY ["src/Di/SC.DevChallenge.MediatR.Di/SC.DevChallenge.MediatR.Di.csproj", "src/Di/SC.DevChallenge.MediatR.Di/"]
+COPY ["src/Di/SC.DevChallenge.Domain.Di/SC.DevChallenge.Domain.Di.csproj", "src/Di/SC.DevChallenge.Domain.Di/"]
 
 COPY ["src/SC.DevChallenge.Api/SC.DevChallenge.Api.csproj", "src/SC.DevChallenge.Api/"]
 #COPY ["src/SC.DevChallenge.Api/Input/data.csv", "src/SC.DevChallenge.Api/"]
