@@ -4,6 +4,18 @@
         <name>SC.DevChallenge.Dto</name>
     </assembly>
     <members>
+        <member name="P:SC.DevChallenge.Dto.Prices.GetAggregatePrice.AggregatePriceDto.Date">
+            <summary>
+            The timeslot start date
+            </summary>
+            <example>01/01/2018 12:15:30</example>
+        </member>
+        <member name="P:SC.DevChallenge.Dto.Prices.GetAggregatePrice.AggregatePriceDto.Price">
+            <summary>
+            The average price
+            </summary>
+            <example>4.00</example>
+        </member>
         <member name="P:SC.DevChallenge.Dto.Prices.GetAveragePrice.AveragePriceDto.Date">
             <summary>
             The timeslot start date

@@ -8,7 +8,9 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice
 {
     public class GetBenchmarkPriceQueryHandler : QueryHandlerBase<GetBenchmarkPriceQuery, BenchmarkPriceDto>
     {
-        public override Task<IHandlerResult<BenchmarkPriceDto>> Handle(GetBenchmarkPriceQuery request, CancellationToken cancellationToken)
+        public override Task<IHandlerResult<BenchmarkPriceDto>> Handle(
+            GetBenchmarkPriceQuery request,
+            CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

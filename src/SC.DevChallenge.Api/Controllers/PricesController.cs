@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SC.DevChallenge.Api.Controllers.Base;
 using SC.DevChallenge.Dto;
+using SC.DevChallenge.Dto.Prices.GetAggregatePrice;
 using SC.DevChallenge.Dto.Prices.GetAveragePrice;
 using SC.DevChallenge.Mapping.Abstractions;
+using SC.DevChallenge.MediatR.Queries.Prices.GetAggregatePrice;
 using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
 using SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice;
 
@@ -47,6 +49,24 @@ namespace SC.DevChallenge.Api.Controllers
             [FromQuery] GetAveragePriceDto data)
         {
             var query = Mapper.Map<GetBenchmarkPriceQuery>(data);
+            var result = await Mediator.Send(query);
+            return Send(result);
+        }
+
+        // (Portfolio, StartDateTime, EndDateTime, NumberOfAggregatedPrices)
+
+        /// <summary>
+        /// Get Benchmark
+        /// </summary>
+        /// <response code="200"></response>
+        /// <response code="404">Specified PIIT not found</response>
+        [HttpGet("benchmark", Name = "GetBenchmark")]
+        [ProducesResponseType(typeof(BenchmarkPriceDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetAggregate(
+            [FromQuery] GetAggregatePriceDto data)
+        {
+            var query = Mapper.Map<GetAggregatePriceQuery>(data);
             var result = await Mediator.Send(query);
             return Send(result);
         }
