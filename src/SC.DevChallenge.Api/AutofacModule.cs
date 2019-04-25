@@ -3,8 +3,6 @@ using System.Linq;
 using System.Reflection;
 using Autofac;
 using Microsoft.Extensions.DependencyModel;
-using SC.DevChallenge.Mapping;
-using SC.DevChallenge.Mapping.Abstractions;
 
 namespace SC.DevChallenge.Api
 {
@@ -20,11 +18,6 @@ namespace SC.DevChallenge.Api
                 .ToArray();
 
             builder.RegisterAssemblyModules(moduleAssemblies);
-
-            builder
-                .RegisterType<Mapper>()
-                .As<IMapper>()
-                .SingleInstance();
 
             base.Load(builder);
         }

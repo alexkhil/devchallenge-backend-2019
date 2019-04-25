@@ -1,5 +1,5 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
-using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace SC.DevChallenge.Api.Extensions.AppBuilder
 {
@@ -7,18 +7,14 @@ namespace SC.DevChallenge.Api.Extensions.AppBuilder
     {
         private const string SwaggerEndpoint = "/swagger/v1/swagger.json";
 
-        public static IApplicationBuilder SetupSwagger(this IApplicationBuilder app)
-        {
-            app.UseSwagger()
-               .UseSwaggerUI(SetSwaggerOptions);
-
-            return app;
-        }
-
-        private static void SetSwaggerOptions(SwaggerUIOptions options)
-        {
-            options.SwaggerEndpoint(SwaggerEndpoint, "C# DevChallenge API");
-            options.RoutePrefix = string.Empty;
-        }
+        public static IApplicationBuilder UseCustomSwaggerUi(this IApplicationBuilder appBuilder) =>
+            appBuilder.UseSwaggerUI(
+                options =>
+                {
+                    options.DisplayRequestDuration();
+                    options.DocumentTitle = typeof(Startup).Assembly.GetCustomAttribute<AssemblyProductAttribute>().Product;
+                    options.SwaggerEndpoint(SwaggerEndpoint, "v1");
+                    options.RoutePrefix = string.Empty;
+                });
     }
 }

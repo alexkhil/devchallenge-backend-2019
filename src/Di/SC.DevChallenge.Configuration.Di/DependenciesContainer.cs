@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Microsoft.Extensions.Options;
 using SC.DevChallenge.Configuration.Abstractions;
 using SC.DevChallenge.Configuration.DataAccess;
 

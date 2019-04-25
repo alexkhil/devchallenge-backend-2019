@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore;
@@ -24,6 +25,8 @@ namespace SC.DevChallenge.Api
             try
             {
                 Log.Information("Starting web host");
+                var timer = new Stopwatch();
+                timer.Start();
                 using (var scope = webHost.Services.CreateScope())
                 {
                     EntityFrameworkManager.ContextFactory = context => scope.ServiceProvider.GetRequiredService<AppDbContext>();
@@ -31,6 +34,8 @@ namespace SC.DevChallenge.Api
                     var inputDataPath = Path.Combine(AppContext.BaseDirectory, $"Input{Path.DirectorySeparatorChar}data.csv");
                     dbInitializer.InitializeAsync(inputDataPath).GetAwaiter().GetResult();
                 }
+                timer.Stop();
+                Log.Information("time spent: {time} ms", timer.ElapsedMilliseconds);
                 webHost.Run();
                 return 0;
             }

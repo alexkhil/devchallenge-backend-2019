@@ -1,6 +1,5 @@
 ﻿using System;
 using MediatR;
-using SC.DevChallenge.Dto;
 using SC.DevChallenge.Dto.Prices.GetAveragePrice;
 using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
 
