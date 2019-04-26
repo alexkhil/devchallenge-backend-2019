@@ -5,6 +5,7 @@ namespace SC.DevChallenge.Api.Extensions.AppBuilder
 {
     public static class SwaggerExtensions
     {
+        private const string RoutePrefix = "api/docs";
         private const string SwaggerEndpoint = "/swagger/v1/swagger.json";
 
         public static IApplicationBuilder UseCustomSwaggerUi(this IApplicationBuilder appBuilder) =>
@@ -14,7 +15,7 @@ namespace SC.DevChallenge.Api.Extensions.AppBuilder
                     options.DisplayRequestDuration();
                     options.DocumentTitle = typeof(Startup).Assembly.GetCustomAttribute<AssemblyProductAttribute>().Product;
                     options.SwaggerEndpoint(SwaggerEndpoint, "v1");
-                    options.RoutePrefix = string.Empty;
+                    options.RoutePrefix = RoutePrefix;
                 });
     }
 }

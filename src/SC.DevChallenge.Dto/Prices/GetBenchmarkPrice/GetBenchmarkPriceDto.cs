@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SC.DevChallenge.Dto.Prices.GetBenchmarkPrice
 {
@@ -9,8 +10,12 @@ namespace SC.DevChallenge.Dto.Prices.GetBenchmarkPrice
         /// </summary>
         /// <example>01/01/2018 12:15:30</example>
         [Required]
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
+        /// <summary>
+        /// The portfolio
+        /// </summary>
+        /// <example>Fannie Mae</example>
         [Required]
         public string Portfolio { get; set; }
     }

@@ -13,7 +13,7 @@ namespace SC.DevChallenge.Dto.Prices.GetAggregatePrice
         /// The timeslot start date
         /// </summary>
         /// <example>01/01/2018 12:15:30</example>
-        public string Date { get; private set; }
+        public DateTime Date { get; private set; }
 
         /// <summary>
         /// The average price
@@ -25,7 +25,7 @@ namespace SC.DevChallenge.Dto.Prices.GetAggregatePrice
         {
             return new AggregatePriceDto
             {
-                Date = startDate.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture),
+                Date = startDate,
                 Price = Math.Round(averagePrice, 2)
             };
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
+using SC.DevChallenge.Domain.Date;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SC.DevChallenge.Api.Extensions.ServiceCollection
@@ -19,6 +20,11 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
                 var assembly = typeof(Startup).Assembly;
                 var assemblyProduct = assembly.GetCustomAttribute<AssemblyProductAttribute>().Product;
                 var assemblyDescription = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
+
+                options.DescribeAllEnumsAsStrings();
+                options.DescribeAllParametersInCamelCase();
+                options.DescribeStringEnumsInCamelCase();
+                options.MapType<DateTime>(() => new Schema { Type = "string", Pattern = DateTimeFormat.Pattern });
 
                 options.SwaggerDoc(Version, new Info
                 {

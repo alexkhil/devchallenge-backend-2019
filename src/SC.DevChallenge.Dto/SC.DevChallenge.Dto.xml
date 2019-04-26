@@ -63,6 +63,12 @@
             </summary>
             <example>01/01/2018 12:15:30</example>
         </member>
+        <member name="P:SC.DevChallenge.Dto.Prices.GetBenchmarkPrice.GetBenchmarkPriceDto.Portfolio">
+            <summary>
+            The portfolio
+            </summary>
+            <example>Fannie Mae</example>
+        </member>
         <member name="P:SC.DevChallenge.Dto.BenchmarkPriceDto.Date">
             <summary>
             The timeslot start date
