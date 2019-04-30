@@ -6,7 +6,7 @@ using SC.DevChallenge.Domain.Date;
 
 namespace SC.DevChallenge.Api.Extensions.ServiceCollection
 {
-    public static class MvcBuilderExtensions
+    public static class AddCustomJsonOptionsExtensions
     {
         public static IMvcBuilder AddCustomJsonOptions(this IMvcBuilder mvcBuilder) =>
             mvcBuilder.AddJsonOptions(options =>

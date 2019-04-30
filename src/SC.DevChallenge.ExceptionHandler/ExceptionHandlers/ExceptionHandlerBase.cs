@@ -7,7 +7,6 @@ namespace SC.DevChallenge.ExceptionHandler.ExceptionHandlers
 {
     public abstract class BaseExceptionHandler : IExceptionHandler
     {
-
         public Task HandleException(Exception exception, HttpContext context)
         {
             var errorResponse = CreateErrorMessage(exception);

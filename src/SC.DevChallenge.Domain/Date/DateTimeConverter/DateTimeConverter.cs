@@ -4,7 +4,7 @@ namespace SC.DevChallenge.Domain.Date.DateTimeConverter
 {
     public class DateTimeConverter : IDateTimeConverter
     {
-        private const int TimeslotSize = 10000;
+        private const int TimeslotSize = 10000; // sec
         private static DateTime startDate = new DateTime(2018, 1, 1);
 
         public int DateTimeToTimeSlot(DateTime dateTime)

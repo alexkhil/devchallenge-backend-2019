@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 
 namespace SC.DevChallenge.Api.Extensions.AppBuilder
 {
-    public static class SwaggerExtensions
+    public static class UseCustomSwaggerUiExtensions
     {
         private const string RoutePrefix = "api/docs";
         private const string SwaggerEndpoint = "/swagger/v1/swagger.json";

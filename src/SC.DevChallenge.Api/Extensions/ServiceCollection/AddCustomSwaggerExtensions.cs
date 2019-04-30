@@ -10,7 +10,7 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace SC.DevChallenge.Api.Extensions.ServiceCollection
 {
-    public static class SwaggerExtensions
+    public static class AddCustomSwaggerExtensions
     {
         private const string Version = "v1";
 

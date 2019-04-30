@@ -14,20 +14,24 @@ namespace SC.DevChallenge.MediatR.Di
                 .As<IMediator>()
                 .InstancePerLifetimeScope();
 
-            builder.Register<ServiceFactory>(context =>
-            {
-                var c = context.Resolve<IComponentContext>();
-                return t => c.Resolve(t);
-            });
+            builder
+                .Register<ServiceFactory>(context =>
+                {
+                    var c = context.Resolve<IComponentContext>();
+                    return t => c.Resolve(t);
+                });
 
-            builder.RegisterGeneric(typeof(LoggingBehavior<,>))
-                   .As(typeof(IPipelineBehavior<,>));
+            builder
+                .RegisterGeneric(typeof(LoggingBehavior<,>))
+                .As(typeof(IPipelineBehavior<,>));
 
-            builder.RegisterGeneric(typeof(PerformanceBehaviour<,>))
-                   .As(typeof(IPipelineBehavior<,>));
+            builder
+                .RegisterGeneric(typeof(PerformanceBehaviour<,>))
+                .As(typeof(IPipelineBehavior<,>));
 
-            builder.RegisterAssemblyTypes(typeof(GetAveragePriceQuery).Assembly)
-                   .AsImplementedInterfaces();
+            builder
+                .RegisterAssemblyTypes(typeof(GetAveragePriceQuery).Assembly)
+                .AsImplementedInterfaces();
 
             base.Load(builder);
         }

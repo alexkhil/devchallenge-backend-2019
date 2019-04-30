@@ -11,9 +11,7 @@
         /// <param name="pav">Price average values of quarter</param>
         /// <param name="interQuartileRange">Interquartile range</param>
         /// <returns>The value of lower bound</returns>
-        public double GetLowerBound(
-            double averagePriceOfQuarter,
-            double interQuartileRange) =>
+        public double GetLowerBound(double averagePriceOfQuarter, double interQuartileRange) =>
             averagePriceOfQuarter - IQRMultiplier * interQuartileRange;
 
         /// <summary>
@@ -22,9 +20,7 @@
         /// <param name="pav">Price average values of quarter</param>
         /// <param name="interQuartileRange">Interquartile range</param>
         /// <returns>The value of higher bound</returns>
-        public double GetHigherBound(
-            double averagePriceOfQuarter,
-            double interQuartileRange) =>
+        public double GetHigherBound(double averagePriceOfQuarter, double interQuartileRange) =>
             averagePriceOfQuarter + IQRMultiplier * interQuartileRange;
     }
 }

@@ -8,10 +8,12 @@ namespace SC.DevChallenge.Mapping.Di
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(Mapper).Assembly)
+            builder
+                .RegisterAssemblyTypes(typeof(Mapper).Assembly)
                 .AsImplementedInterfaces();
 
-            builder.Register(ctx =>
+            builder
+                .Register(ctx =>
                 {
                     var profiles = ctx.Resolve<IEnumerable<Profile>>();
                     return new MapperConfiguration(x => x.AddProfiles(profiles));
@@ -19,7 +21,8 @@ namespace SC.DevChallenge.Mapping.Di
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
-            builder.Register(ctx =>
+            builder
+                .Register(ctx =>
                 {
                     return new AutoMapper.Mapper(
                         ctx.Resolve<IConfigurationProvider>(),

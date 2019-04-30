@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SC.DevChallenge.Api.Extensions.ServiceCollection
 {
-    public static class CompressionExtensions
+    public static class AddResponceCompressionExtensions
     {
         private const CompressionLevel compressionLevel = CompressionLevel.Optimal;
 

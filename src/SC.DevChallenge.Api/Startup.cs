@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -15,17 +14,19 @@ namespace SC.DevChallenge.Api
 {
     public class Startup
     {
-        public IConfiguration Config { get; }
+        private readonly IConfiguration configuration;
+        private readonly IHostingEnvironment environment;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
-            Config = configuration;
+            this.configuration = configuration;
+            this.environment = environment;
         }
 
         public void ConfigureServices(IServiceCollection services) =>
-            services.AddConfiguration(Config)
+            services.AddConfiguration(configuration)
                     .AddResponceCompression()
-                    .AddCors()
+                    .AddCustomCors()
                     .AddRouteOptions()
                     .AddCustomMvc()
                     .AddCustomSwagger();
@@ -33,10 +34,10 @@ namespace SC.DevChallenge.Api
         public static void ConfigureContainer(ContainerBuilder builder) =>
             builder.RegisterModule(new AutofacModule());
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env) =>
+        public void Configure(IApplicationBuilder app) =>
             app.UseResponseCompression()
-               .UseExceptionHandler(env)
-               .UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
+               .UseExceptionHandler(environment)
+               .UseCors(CorsPolicyName.AllowAny)
                .UseStaticFiles()
                .UseSwagger()
                .UseCustomSwaggerUi()

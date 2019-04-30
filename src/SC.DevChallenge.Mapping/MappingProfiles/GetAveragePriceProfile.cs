@@ -2,7 +2,6 @@
 using System.Globalization;
 using AutoMapper;
 using SC.DevChallenge.Domain.Date;
-using SC.DevChallenge.Dto;
 using SC.DevChallenge.Dto.Prices.GetAveragePrice;
 using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
 

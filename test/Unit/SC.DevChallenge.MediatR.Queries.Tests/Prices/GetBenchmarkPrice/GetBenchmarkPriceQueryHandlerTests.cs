@@ -20,11 +20,11 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetBenchmarkPrice
 {
     public class GetBenchmarkPriceQueryHandlerTests
     {
-        private Mock<IGetBenchmarkPriceSpecification> specification;
-        private Mock<IPriceRepository> priceRepository;
-        private Mock<IDateTimeConverter> dateTimeConverter;
-        private Mock<IQuarterCalculator> quarterCalculator;
-        private Mock<ITimeslotCalculator> timeslotCalculator;
+        private readonly Mock<IGetBenchmarkPriceSpecification> specification;
+        private readonly Mock<IPriceRepository> priceRepository;
+        private readonly Mock<IDateTimeConverter> dateTimeConverter;
+        private readonly Mock<IQuarterCalculator> quarterCalculator;
+        private readonly Mock<ITimeslotCalculator> timeslotCalculator;
 
         public GetBenchmarkPriceQueryHandlerTests()
         {
