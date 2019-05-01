@@ -19,6 +19,7 @@ namespace SC.DevChallenge.DataAccess.EF.Seeder
         private readonly ILogger<DbInitializer> logger;
         private readonly AppDbContext dbContext;
         private readonly IDateTimeConverter dateTimeConverter;
+        private readonly string filePath;
 
         public DbInitializer(
             ILogger<DbInitializer> logger,
@@ -28,20 +29,21 @@ namespace SC.DevChallenge.DataAccess.EF.Seeder
             this.logger = logger;
             this.dbContext = dbContext;
             this.dateTimeConverter = dateTimeConverter;
+            filePath = Path.Combine(AppContext.BaseDirectory, $"Input{Path.DirectorySeparatorChar}data.csv");
+
+            if (File.Exists(filePath))
+            {
+                throw new InvalidOperationException("Input data file doesn't exists");
+            }
         }
 
-        public Task InitializeAsync(string filePath)
+        public Task InitializeAsync()
         {
             dbContext.Database.EnsureDeleted();
             logger.LogInformation("Creating Db...");
             dbContext.Database.Migrate();
 
             logger.LogInformation("Seeding from {file}", filePath);
-
-            if (!File.Exists(filePath))
-            {
-                throw new ArgumentException("Input data file doesn't exists", nameof(filePath));
-            }
 
             return InitializeInternalAsync(filePath);
         }

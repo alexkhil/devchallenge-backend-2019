@@ -12,8 +12,19 @@ namespace SC.DevChallenge.DataAccess.Di
         protected override void Load(ContainerBuilder builder)
         {
             builder
+                .Register(ctx =>
+                {
+                    var configuration = ctx.Resolve<IDbConfiguration>();
+                    var optionsBuilder = new DbContextOptionsBuilder();
+                    optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
+                    optionsBuilder.UseSqlServer(configuration.ConnectionString);
+                    return optionsBuilder.Options;
+                })
+                .As<DbContextOptions>()
+                .SingleInstance();
+
+            builder
                 .RegisterType<AppDbContext>()
-                .UsingConstructor(typeof(IDbConfiguration))
                 .As<DbContext>()
                 .AsSelf();
 

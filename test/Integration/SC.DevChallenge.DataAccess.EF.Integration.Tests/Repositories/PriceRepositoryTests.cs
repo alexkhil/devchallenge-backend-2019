@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using Photostudios.Tests;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
@@ -15,12 +16,14 @@ namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
 {
     public class PriceRepositoryTests : IDisposable
     {
-        private readonly LocalDbContext dbContext;
+        private readonly AppDbContext dbContext;
         private bool disposedValue = false;
 
         public PriceRepositoryTests()
         {
-            dbContext = new LocalDbContext();
+            var optionsBuilder = new DbContextOptionsBuilder();
+            optionsBuilder.UseInMemoryDatabase("test");
+            dbContext = new AppDbContext(optionsBuilder.Options);
             SeedDb().GetAwaiter().GetResult();
         }
 

@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SC.DevChallenge.DataAccess.EF;
-using SC.DevChallenge.DataAccess.EF.Seeder.Abstractions;
+using SC.DevChallenge.Api.Extensions.WebHost;
 using Serilog;
-using Z.EntityFramework.Extensions;
 
 namespace SC.DevChallenge.Api
 {
@@ -25,21 +21,10 @@ namespace SC.DevChallenge.Api
 
             try
             {
+                Log.Information("Initing db");
+                await webHost.InitDbAsync();
+
                 Log.Information("Starting web host");
-
-                var timer = new Stopwatch();
-                timer.Start();
-                using (var scope = webHost.Services.CreateScope())
-                {
-                    EntityFrameworkManager.ContextFactory = context => scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-                    var inputDataPath = Path.Combine(AppContext.BaseDirectory, $"Input{Path.DirectorySeparatorChar}data.csv");
-                    await dbInitializer.InitializeAsync(inputDataPath);
-                }
-                timer.Stop();
-
-                Log.Information("Time spent: {time} ms", timer.ElapsedMilliseconds);
-
                 await webHost.RunAsync();
 
                 return 0;

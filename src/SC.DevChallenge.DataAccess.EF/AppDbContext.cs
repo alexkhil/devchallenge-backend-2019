@@ -1,26 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using SC.DevChallenge.Configuration.Abstractions;
 
 namespace SC.DevChallenge.DataAccess.EF
 {
     public partial class AppDbContext : DbContext
     {
-        private readonly IDbConfiguration configuration;
-
-        public AppDbContext(IDbConfiguration configuration)
+        public AppDbContext(DbContextOptions options)
+            : base(options)
         {
-            this.configuration = configuration;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (optionsBuilder.IsConfigured)
-            {
-                base.OnConfiguring(optionsBuilder);
-            }
-
-            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
-            optionsBuilder.UseSqlServer(configuration.ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

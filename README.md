@@ -8,7 +8,6 @@ C# task - Financial calculations
 - [Usage](#usage)
   - [Unit tests](#unit-tests)
   - [Integration tests](#integration-tests)
-- [Improvements](#improvemetns)
 
 ## Run
 
@@ -59,17 +58,3 @@ For **Unix**:
 # Go into the folder with solution and run:
 $ ./build/cake/build.sh -s build/cake/build.cake --target=Run-Integration-Tests
 ```
-
-### Improvements
-
-There are a lot points to improve:
-- DataAccess
-  - Simplify db seed(DbInitializer class)
-  - Use base repository class for all repositories
-  - Implement two types of repository: readonly and read/write repository
-- Unit tests
-  - Simplify unit tests(e.g. GetAveragePriceQueryHandlerTests can be much smaller)
-  - Cover more classes/cases with tests
-- Integration tests
-  - Add integration tests for endpoints(not only db)
-  - Can be simplified
