@@ -31,7 +31,7 @@ namespace SC.DevChallenge.DataAccess.EF.Seeder
             this.dateTimeConverter = dateTimeConverter;
             filePath = Path.Combine(AppContext.BaseDirectory, $"Input{Path.DirectorySeparatorChar}data.csv");
 
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 throw new InvalidOperationException("Input data file doesn't exists");
             }
