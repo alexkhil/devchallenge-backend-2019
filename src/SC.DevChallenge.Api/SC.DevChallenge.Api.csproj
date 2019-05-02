@@ -49,13 +49,7 @@
     <ProjectReference Include="..\Di\SC.DevChallenge.MediatR.Di\SC.DevChallenge.MediatR.Di.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Configuration\SC.DevChallenge.Configuration.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Dto\SC.DevChallenge.Dto.csproj" />
-    <ProjectReference Include="..\SC.DevChallenge.ExceptionHandler\SC.DevChallenge.ExceptionHandler.csproj" />
-    <ProjectReference Include="..\SC.DevChallenge.Mapping\SC.DevChallenge.Mapping.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.MediatR.Queries\SC.DevChallenge.MediatR.Queries.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Input\" />
   </ItemGroup>
 
   <ItemGroup>

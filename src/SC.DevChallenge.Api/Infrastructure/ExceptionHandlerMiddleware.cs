@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using SC.DevChallenge.ExceptionHandler;
+using SC.DevChallenge.ExceptionHandler.Abstractions;
 
 namespace SC.DevChallenge.Api.Infrastructure
 {

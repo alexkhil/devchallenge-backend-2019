@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using SC.DevChallenge.ExceptionHandler.Abstractions;
 
 namespace SC.DevChallenge.ExceptionHandler.ExceptionHandlers
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using SC.DevChallenge.ExceptionHandler.Abstractions;
 
 namespace SC.DevChallenge.ExceptionHandler.ExceptionHandlers
 {

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SC.DevChallenge.ExceptionHandler.Abstractions;
 
 namespace SC.DevChallenge.ExceptionHandler
 {
@@ -28,7 +29,7 @@ namespace SC.DevChallenge.ExceptionHandler
 
             if (handler == null)
             {
-                logger.LogError("Can't resolve exception handler for {0}", exception.GetType());
+                logger.LogError("Can't resolve exception handler for {type}", exception.GetType());
                 return;
             }
 
