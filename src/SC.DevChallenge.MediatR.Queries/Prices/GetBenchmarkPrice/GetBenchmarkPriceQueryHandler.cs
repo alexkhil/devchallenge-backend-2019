@@ -67,7 +67,12 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice
             var averagePrice = prices.Where(p => p.Value > lowerBound && p.Value < higherBound).Average(p => p.Value);
 
             var startDate = dateTimeConverter.GetTimeSlotStartDate(timeslot);
-            var benchmarkResult = BenchmarkPriceDto.Create(startDate, averagePrice);
+
+            var benchmarkResult = new BenchmarkPriceDto
+            {
+                Date = startDate,
+                Price = averagePrice
+            };
 
             return Data(benchmarkResult);
         }
