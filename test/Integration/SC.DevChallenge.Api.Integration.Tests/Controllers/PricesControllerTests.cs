@@ -21,17 +21,67 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         }
 
         [Fact]
+        public async Task GetAveragePrice_ValidRequest_HttpStatusCodeOK()
+        {
+            // Arrange
+            var client = factory.CreateClient();
+            var uriBuilder = new UriBuilder(client.BaseAddress);
+            uriBuilder.Query = "portfolio=Fannie Mae&owner=Microsoft&instrument=Deposit&date=15/03/2018 17:34:50";
+            uriBuilder.Path = "api/prices/average";
+
+            // Act
+            var response = await client.GetAsync(uriBuilder.Uri);
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public async Task GetAveragePrice_NotExistingPortfolio_HttpStatusCodeNotFound()
+        {
+            // Arrange
+            var client = factory.CreateClient();
+            var uriBuilder = new UriBuilder(client.BaseAddress);
+            uriBuilder.Query = "portfolio=qwerty&owner=Microsoft&instrument=Deposit&date=15/03/2018 17:34:50";
+            uriBuilder.Path = "api/prices/average";
+
+            // Act
+            var response = await client.GetAsync(uriBuilder.Uri);
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        }
+
+        [Fact]
         public async Task GetBenchmark_ValidRequest_HttpStatusCodeOK()
         {
             // Arrange
             var client = factory.CreateClient();
-            var uri = new Uri("/api/prices/benchmark?portfolio=Fannie Mae&date=15/03/2018 17:34:50", UriKind.Relative);
+            var uriBuilder = new UriBuilder(client.BaseAddress);
+            uriBuilder.Query = "portfolio=Fannie Mae&date=15/03/2018 17:34:50";
+            uriBuilder.Path = "api/prices/benchmark";
 
             // Act
-            var response = await client.GetAsync(uri);
+            var response = await client.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public async Task GetBenchmark_NotExistingPortfolio_HttpStatusCodeNotFound()
+        {
+            // Arrange
+            var client = factory.CreateClient();
+            var uriBuilder = new UriBuilder(client.BaseAddress);
+            uriBuilder.Query = "portfolio=qwerty&date=15/03/2018 17:34:50";
+            uriBuilder.Path = "api/prices/benchmark";
+
+            // Act
+            var response = await client.GetAsync(uriBuilder.Uri);
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
 
         [Fact]
@@ -45,10 +95,12 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
             };
 
             var client = factory.CreateClient();
-            var uri = new Uri("/api/prices/benchmark?portfolio=Fannie Mae&date=15/03/2018 17:34:50", UriKind.Relative);
+            var uriBuilder = new UriBuilder(client.BaseAddress);
+            uriBuilder.Query = "portfolio=Fannie Mae&date=15/03/2018 17:34:50";
+            uriBuilder.Path = "api/prices/benchmark";
 
             // Act
-            var response = await client.GetAsync(uri);
+            var response = await client.GetAsync(uriBuilder.Uri);
             var jsonContent = await response.Content.ReadAsStringAsync();
             var actual = JsonConvert.DeserializeObject<BenchmarkPriceDto>(jsonContent, new IsoDateTimeConverter() { DateTimeFormat = DateTimeFormat.Default });
 
