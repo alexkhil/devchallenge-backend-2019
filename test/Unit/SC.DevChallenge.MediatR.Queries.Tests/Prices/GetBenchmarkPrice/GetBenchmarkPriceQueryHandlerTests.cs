@@ -7,7 +7,7 @@ using Moq;
 using Photostudios.Tests;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
 using SC.DevChallenge.DataAccess.Abstractions.Repositories;
-using SC.DevChallenge.Domain.Date.DateTimeConverter;
+using SC.DevChallenge.Domain.DateTimeConverter;
 using SC.DevChallenge.Domain.Quarter;
 using SC.DevChallenge.Domain.Timeslot;
 using SC.DevChallenge.Dto;

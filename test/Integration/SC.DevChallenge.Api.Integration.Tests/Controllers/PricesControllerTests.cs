@@ -5,7 +5,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using SC.DevChallenge.Domain.Date;
+using SC.DevChallenge.Domain.Constants;
 using SC.DevChallenge.Dto;
 using Xunit;
 
@@ -25,9 +25,11 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         {
             // Arrange
             var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress);
-            uriBuilder.Query = "portfolio=Fannie Mae&owner=Microsoft&instrument=Deposit&date=15/03/2018 17:34:50";
-            uriBuilder.Path = "api/prices/average";
+            var uriBuilder = new UriBuilder(client.BaseAddress)
+            {
+                Query = "portfolio=Fannie Mae&owner=Microsoft&instrument=Deposit&date=15/03/2018 17:34:50",
+                Path = "api/prices/average"
+            };
 
             // Act
             var response = await client.GetAsync(uriBuilder.Uri);
@@ -41,9 +43,11 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         {
             // Arrange
             var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress);
-            uriBuilder.Query = "portfolio=qwerty&owner=Microsoft&instrument=Deposit&date=15/03/2018 17:34:50";
-            uriBuilder.Path = "api/prices/average";
+            var uriBuilder = new UriBuilder(client.BaseAddress)
+            {
+                Query = "portfolio=qwerty&owner=Microsoft&instrument=Deposit&date=15/03/2018 17:34:50",
+                Path = "api/prices/average"
+            };
 
             // Act
             var response = await client.GetAsync(uriBuilder.Uri);
@@ -57,9 +61,11 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         {
             // Arrange
             var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress);
-            uriBuilder.Query = "portfolio=Fannie Mae&date=15/03/2018 17:34:50";
-            uriBuilder.Path = "api/prices/benchmark";
+            var uriBuilder = new UriBuilder(client.BaseAddress)
+            {
+                Query = "portfolio=Fannie Mae&date=15/03/2018 17:34:50",
+                Path = "api/prices/benchmark"
+            };
 
             // Act
             var response = await client.GetAsync(uriBuilder.Uri);
@@ -73,9 +79,11 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         {
             // Arrange
             var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress);
-            uriBuilder.Query = "portfolio=qwerty&date=15/03/2018 17:34:50";
-            uriBuilder.Path = "api/prices/benchmark";
+            var uriBuilder = new UriBuilder(client.BaseAddress)
+            {
+                Query = "portfolio=qwerty&date=15/03/2018 17:34:50",
+                Path = "api/prices/benchmark"
+            };
 
             // Act
             var response = await client.GetAsync(uriBuilder.Uri);
@@ -95,9 +103,11 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
             };
 
             var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress);
-            uriBuilder.Query = "portfolio=Fannie Mae&date=15/03/2018 17:34:50";
-            uriBuilder.Path = "api/prices/benchmark";
+            var uriBuilder = new UriBuilder(client.BaseAddress)
+            {
+                Query = "portfolio=Fannie Mae&date=15/03/2018 17:34:50",
+                Path = "api/prices/benchmark"
+            };
 
             // Act
             var response = await client.GetAsync(uriBuilder.Uri);

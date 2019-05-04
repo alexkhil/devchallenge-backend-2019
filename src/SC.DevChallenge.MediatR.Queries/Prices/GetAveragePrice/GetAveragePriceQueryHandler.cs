@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using SC.DevChallenge.DataAccess.Abstractions.Repositories;
-using SC.DevChallenge.Domain.Date.DateTimeConverter;
+using SC.DevChallenge.Domain.DateTimeConverter;
 using SC.DevChallenge.Dto.Prices.GetAveragePrice;
 using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
 using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using SC.DevChallenge.Domain.Date;
+using SC.DevChallenge.Domain.Constants;
 
 namespace SC.DevChallenge.Api.Extensions.ServiceCollection
 {

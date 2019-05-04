@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
 using FluentAssertions;
-using SC.DevChallenge.Domain.Date;
-using SC.DevChallenge.Domain.Date.DateTimeConverter;
+using SC.DevChallenge.Domain.Constants;
+using SC.DevChallenge.Domain.DateTimeConverter;
 using Xunit;
 
 namespace SC.DevChallenge.DataAccess.Abstractions.Tests.DateTimeHelpers

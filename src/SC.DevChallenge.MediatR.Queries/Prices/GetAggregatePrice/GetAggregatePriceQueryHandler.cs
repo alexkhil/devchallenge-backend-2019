@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using SC.DevChallenge.DataAccess.Abstractions.Repositories;
-using SC.DevChallenge.Domain.Date.DateTimeConverter;
+using SC.DevChallenge.Domain.DateTimeConverter;
 using SC.DevChallenge.Dto.Prices.GetAggregatePrice;
 using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
 

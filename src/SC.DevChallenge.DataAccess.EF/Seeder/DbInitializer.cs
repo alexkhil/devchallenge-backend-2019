@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
 using SC.DevChallenge.DataAccess.EF.Seeder.Abstractions;
-using SC.DevChallenge.Domain.Date;
-using SC.DevChallenge.Domain.Date.DateTimeConverter;
+using SC.DevChallenge.Domain.Constants;
+using SC.DevChallenge.Domain.DateTimeConverter;
 
 namespace SC.DevChallenge.DataAccess.EF.Seeder
 {

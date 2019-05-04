@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using SC.DevChallenge.Domain.Date;
+using SC.DevChallenge.Domain.Constants;
 
 namespace SC.DevChallenge.Api.Infrastructure.ModelBinders
 {

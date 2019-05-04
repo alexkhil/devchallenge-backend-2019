@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
-using SC.DevChallenge.Domain.Date.DateTimeConverter;
+using SC.DevChallenge.Domain.DateTimeConverter;
 using SC.DevChallenge.Specification;
 
 namespace SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice.Specifications

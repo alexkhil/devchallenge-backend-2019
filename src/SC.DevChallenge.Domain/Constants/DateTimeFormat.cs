@@ -1,4 +1,4 @@
-﻿namespace SC.DevChallenge.Domain.Date
+namespace SC.DevChallenge.Domain.Constants
 {
     public static class DateTimeFormat
     {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -9,8 +8,7 @@ using Moq;
 using Photostudios.Tests;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
 using SC.DevChallenge.DataAccess.Abstractions.Repositories;
-using SC.DevChallenge.Domain.Date.DateTimeConverter;
-using SC.DevChallenge.Dto;
+using SC.DevChallenge.Domain.DateTimeConverter;
 using SC.DevChallenge.Dto.Prices.GetAveragePrice;
 using SC.DevChallenge.MediatR.Core.HandlerResults;
 using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;

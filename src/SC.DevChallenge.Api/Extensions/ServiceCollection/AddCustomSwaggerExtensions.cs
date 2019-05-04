@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
-using SC.DevChallenge.Domain.Date;
+using SC.DevChallenge.Domain.Constants;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SC.DevChallenge.Api.Extensions.ServiceCollection

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using AutoMapper;
-using SC.DevChallenge.Domain.Date;
+﻿using AutoMapper;
 using SC.DevChallenge.Dto.Prices.GetAveragePrice;
 using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
 
@@ -11,8 +8,7 @@ namespace SC.DevChallenge.Mapping.MappingProfiles
     {
         public GetAveragePriceProfile()
         {
-            CreateMap<GetAveragePriceDto, GetAveragePriceQuery>()
-                .ForMember(query => query.Date, dto => dto.MapFrom(d => DateTime.ParseExact(d.Date, DateTimeFormat.Default, CultureInfo.InvariantCulture)));
+            CreateMap<GetAveragePriceDto, GetAveragePriceQuery>();
         }
     }
 }

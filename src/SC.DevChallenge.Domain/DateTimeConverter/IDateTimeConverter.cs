@@ -1,6 +1,6 @@
 using System;
 
-namespace SC.DevChallenge.Domain.Date.DateTimeConverter
+namespace SC.DevChallenge.Domain.DateTimeConverter
 {
     public interface IDateTimeConverter
     {
