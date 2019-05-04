@@ -93,10 +93,10 @@ namespace SC.DevChallenge.Api.Tests.Controllers
         public async Task GetAveragePrice_WhenExistsPrices_ShouldBeOkObjectResult(
             [Frozen] Mock<IMapper> mapperMock,
             [Frozen] Mock<IMediator> mediatorMock,
+            AveragePriceDto resultDto,
             GetAveragePriceDto dto)
         {
             // Arrange
-            var resultDto = AveragePriceDto.Create(DateTime.Now, 42);
             var result = new DataHandlerResult<AveragePriceDto>(resultDto);
 
             mediatorMock

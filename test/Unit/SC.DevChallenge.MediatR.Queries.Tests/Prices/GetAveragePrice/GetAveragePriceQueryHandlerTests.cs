@@ -187,7 +187,11 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
             double average)
         {
             // Arrange
-            var expected = AveragePriceDto.Create(timeslotDate, average);
+            var expected = new AveragePriceDto
+            {
+                Date = timeslotDate,
+                Price = average
+            };
 
             var request = CreateRequest();
 

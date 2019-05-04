@@ -37,7 +37,7 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetAveragePrice
 
             if (prices.Any())
             {
-                var result = AveragePriceDto.Create(startDate, prices.Average());
+                var result = new AveragePriceDto { Date = startDate, Price = prices.Average() };
                 return Data(result);
             }
 
