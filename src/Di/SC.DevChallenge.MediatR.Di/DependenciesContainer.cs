@@ -26,10 +26,6 @@ namespace SC.DevChallenge.MediatR.Di
                 .As(typeof(IPipelineBehavior<,>));
 
             builder
-                .RegisterGeneric(typeof(PerformanceBehaviour<,>))
-                .As(typeof(IPipelineBehavior<,>));
-
-            builder
                 .RegisterAssemblyTypes(typeof(GetAveragePriceQuery).Assembly)
                 .AsImplementedInterfaces();
 
