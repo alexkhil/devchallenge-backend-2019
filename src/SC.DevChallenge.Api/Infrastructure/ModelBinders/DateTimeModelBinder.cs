@@ -25,13 +25,13 @@ namespace SC.DevChallenge.Api.Infrastructure.ModelBinders
             bindingContext.ModelState.SetModelValue(modelName, valueProviderResult);
 
             var dateStr = valueProviderResult.FirstValue;
-            if (DateTime.TryParseExact(dateStr, DateTimeFormat.Default, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+            if (DateTime.TryParseExact(dateStr, DateFormat.Default, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
             {
                 bindingContext.Result = ModelBindingResult.Success(date);
                 return Task.CompletedTask;
             }
 
-            bindingContext.ModelState.TryAddModelError(bindingContext.ModelName, $"DateTime should be in format '{DateTimeFormat.Default}'");
+            bindingContext.ModelState.TryAddModelError(bindingContext.ModelName, $"DateTime should be in format '{DateFormat.Default}'");
             return Task.CompletedTask;
         }
     }

@@ -46,7 +46,7 @@ namespace SC.DevChallenge.Api.Controllers
         [HttpGet("benchmark", Name = "GetBenchmark")]
         [ProducesResponseType(typeof(BenchmarkPriceDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetBenchmark(
+        public async Task<IActionResult> GetBenchmarkPrice(
             [FromQuery] GetBenchmarkPriceDto data)
         {
             var query = Mapper.Map<GetBenchmarkPriceQuery>(data);
@@ -59,10 +59,10 @@ namespace SC.DevChallenge.Api.Controllers
         /// </summary>
         /// <response code="200"></response>
         /// <response code="404">Specified PIIT not found</response>
-        [HttpGet("aggregate", Name = "GetAggregate")]
+        [HttpGet("aggregate", Name = "GetAggregatePrice")]
         [ProducesResponseType(typeof(BenchmarkPriceDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAggregate(
+        public async Task<IActionResult> GetAggregatePrice(
             [FromQuery] GetAggregatePriceDto data)
         {
             var query = Mapper.Map<GetAggregatePriceQuery>(data);

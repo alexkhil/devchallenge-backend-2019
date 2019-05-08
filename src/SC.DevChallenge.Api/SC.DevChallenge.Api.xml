@@ -11,14 +11,14 @@
             <response code="200">Average price returned successfully</response>
             <response code="404">Specified PIIT not found</response>
         </member>
-        <member name="M:SC.DevChallenge.Api.Controllers.PricesController.GetBenchmark(SC.DevChallenge.Dto.Prices.GetBenchmarkPrice.GetBenchmarkPriceDto)">
+        <member name="M:SC.DevChallenge.Api.Controllers.PricesController.GetBenchmarkPrice(SC.DevChallenge.Dto.Prices.GetBenchmarkPrice.GetBenchmarkPriceDto)">
             <summary>
             Get Benchmark
             </summary>
             <response code="200"></response>
             <response code="404">Specified portfolio not found</response>
         </member>
-        <member name="M:SC.DevChallenge.Api.Controllers.PricesController.GetAggregate(SC.DevChallenge.Dto.Prices.GetAggregatePrice.GetAggregatePriceDto)">
+        <member name="M:SC.DevChallenge.Api.Controllers.PricesController.GetAggregatePrice(SC.DevChallenge.Dto.Prices.GetAggregatePrice.GetAggregatePriceDto)">
             <summary>
             Get Benchmark
             </summary>

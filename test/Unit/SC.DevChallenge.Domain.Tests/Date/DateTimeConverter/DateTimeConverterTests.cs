@@ -40,7 +40,7 @@ namespace SC.DevChallenge.DataAccess.Abstractions.Tests.DateTimeHelpers
             int expected)
         {
             // Arrange
-            var dateTime = DateTime.ParseExact(date, DateTimeFormat.Default, CultureInfo.InvariantCulture);
+            var dateTime = DateTime.ParseExact(date, DateFormat.Default, CultureInfo.InvariantCulture);
 
             // Act
             var actual = sut.DateTimeToTimeSlot(dateTime);
@@ -57,7 +57,7 @@ namespace SC.DevChallenge.DataAccess.Abstractions.Tests.DateTimeHelpers
             string date)
         {
             // Arrange
-            var expected = DateTime.ParseExact(date, DateTimeFormat.Default, CultureInfo.InvariantCulture);
+            var expected = DateTime.ParseExact(date, DateFormat.Default, CultureInfo.InvariantCulture);
 
             // Act
             var actual = sut.GetTimeSlotStartDate(timeslot);

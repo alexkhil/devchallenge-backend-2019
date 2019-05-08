@@ -9,12 +9,12 @@ namespace SC.DevChallenge.Dto.Prices.GetAggregatePrice
         public string Portfolio { get; set; }
 
         [Required]
-        public DateTime StartDateTime { get; set; }
+        public DateTime StartDate { get; set; }
 
         [Required]
-        public DateTime EndDateTime { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Required]
-        public int NumberOfAggregatedPrices { get; set; }
+        public int ResultPoints { get; set; }
     }
 }

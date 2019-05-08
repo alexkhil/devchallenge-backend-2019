@@ -16,9 +16,9 @@ namespace SC.DevChallenge.Api.Controllers.Base
             Mediator = mediator;
         }
 
-        public IMapper Mapper { get; }
+        protected IMapper Mapper { get; }
 
-        public IMediator Mediator { get; }
+        protected IMediator Mediator { get; }
 
         protected IActionResult Send<T>(IHandlerResult<T> result)
             where T : class

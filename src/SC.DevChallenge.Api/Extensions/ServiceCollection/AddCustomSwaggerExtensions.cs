@@ -24,7 +24,7 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
                 options.DescribeAllEnumsAsStrings();
                 options.DescribeAllParametersInCamelCase();
                 options.DescribeStringEnumsInCamelCase();
-                options.MapType<DateTime>(() => new Schema { Type = "string", Pattern = DateTimeFormat.Pattern });
+                options.MapType<DateTime>(() => new Schema { Type = "string", Pattern = DateFormat.Pattern });
 
                 options.SwaggerDoc(Version, new Info
                 {

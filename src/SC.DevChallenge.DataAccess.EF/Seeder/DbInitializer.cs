@@ -92,7 +92,7 @@ namespace SC.DevChallenge.DataAccess.EF.Seeder
                             InstrumentId = instrumentsMap[r.Instrument]
                         });
 
-                        var date = DateTime.ParseExact(r.Date, DateTimeFormat.Default, CultureInfo.InvariantCulture);
+                        var date = DateTime.ParseExact(r.Date, DateFormat.Default, CultureInfo.InvariantCulture);
 
                         instrumentPrices.Add(new Price
                         {
