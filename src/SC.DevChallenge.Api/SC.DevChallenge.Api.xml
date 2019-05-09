@@ -8,6 +8,7 @@
             <summary>
             Get Average Price fro specified PIIT
             </summary>
+            <param name="data"></param>
             <response code="200">Average price returned successfully</response>
             <response code="404">Specified PIIT not found</response>
         </member>
@@ -15,6 +16,7 @@
             <summary>
             Get Benchmark
             </summary>
+            <param name="data"></param>
             <response code="200"></response>
             <response code="404">Specified portfolio not found</response>
         </member>
@@ -22,6 +24,7 @@
             <summary>
             Get Benchmark
             </summary>
+            <param name="data"></param>
             <response code="200"></response>
             <response code="404">Specified PIIT not found</response>
         </member>

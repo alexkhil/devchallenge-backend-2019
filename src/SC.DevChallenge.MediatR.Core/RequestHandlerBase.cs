@@ -11,17 +11,17 @@ namespace SC.DevChallenge.MediatR.Queries
     {
         public abstract Task<IHandlerResult<TResponse>> Handle(TRequest request, CancellationToken cancellationToken);
 
-        protected IHandlerResult<TResponse> NotFound()
+        protected static IHandlerResult<TResponse> NotFound()
         {
             return new NotFoundHandlerResult<TResponse>();
         }
 
-        protected IHandlerResult<TResponse> Data(TResponse data)
+        protected static IHandlerResult<TResponse> Data(TResponse data)
         {
             return new DataHandlerResult<TResponse>(data);
         }
 
-        protected IHandlerResult<TResponse> ValidationFailed(string message)
+        protected static IHandlerResult<TResponse> ValidationFailed(string message)
         {
             return new ValidationFailedHandlerResult<TResponse>(message);
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using FluentAssertions;
@@ -8,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Photostudios.Tests;
 using SC.DevChallenge.Api.Controllers;
-using SC.DevChallenge.Dto;
 using SC.DevChallenge.Dto.Prices.GetAveragePrice;
 using SC.DevChallenge.Mapping.Abstractions;
 using SC.DevChallenge.MediatR.Core.HandlerResults;

@@ -17,7 +17,7 @@ namespace SC.DevChallenge.Domain.DateTimeConverter
         public DateTime GetTimeSlotStartDate(int timeslot) =>
             startDate.AddSeconds(timeslot * TimeslotSize);
 
-        public DateTime GetTimeSlotStartDate(DateTime dateTime)=>
+        public DateTime GetTimeSlotStartDate(DateTime dateTime) =>
             GetTimeSlotStartDate(DateTimeToTimeSlot(dateTime));
     }
 }

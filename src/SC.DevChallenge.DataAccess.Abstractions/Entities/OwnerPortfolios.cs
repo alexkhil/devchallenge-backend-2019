@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace SC.DevChallenge.DataAccess.Abstractions.Entities

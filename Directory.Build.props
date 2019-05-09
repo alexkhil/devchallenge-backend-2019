@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup Label="Projects metadata">
+    <Authors>Alex Khil</Authors>
+    <Company>Alex khil</Company>
+    <Copyright>Copyright © Alex Khil 2019</Copyright>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+  <PropertyGroup Label="Common properties">
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <LangVersion>latest</LangVersion>
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
+  <ItemGroup Label="Common packages">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.2"/>
+  </ItemGroup>
+</Project>

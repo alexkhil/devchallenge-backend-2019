@@ -13,9 +13,6 @@ namespace SC.DevChallenge.Mapping.Tests
 
         protected IMapper Mapper { get; }
 
-        protected static AutoMapper.MapperConfiguration MapperConfig { get; } = new AutoMapper.MapperConfiguration(cfg =>
-        {
-            cfg.AddProfile<GetAveragePriceProfile>();
-        });
+        protected static AutoMapper.MapperConfiguration MapperConfig { get; } = new AutoMapper.MapperConfiguration(cfg => cfg.AddProfile<GetAveragePriceProfile>());
     }
 }

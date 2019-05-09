@@ -73,7 +73,7 @@ namespace SC.DevChallenge.DataAccess.EF.Seeder
                     var instrumentsMap = await dbContext.Instruments.AsNoTracking().ToDictionaryAsync(p => p.Name, v => v.Id);
 
                     dbContext.ChangeTracker.AutoDetectChangesEnabled = false;
-                    
+
                     var ownerPortfolios = new HashSet<OwnerPortfolio>(new OwnerPortfoliosComparer());
                     var ownerInstruments = new HashSet<OwnerInstrument>(new OwnerInstrumentComparer());
                     var instrumentPrices = new HashSet<Price>();

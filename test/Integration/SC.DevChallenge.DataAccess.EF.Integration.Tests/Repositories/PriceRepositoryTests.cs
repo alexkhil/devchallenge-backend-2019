@@ -37,9 +37,9 @@ namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
             converterMock.Setup(x => x.DateTimeToTimeSlot(It.IsAny<DateTime>())).Returns(1);
             var request = new GetAveragePriceQuery
             {
-                Portfolio = "Portfolio",
-                Owner = "Owner",
-                Instrument = "Instrument"
+                Portfolio = nameof(Portfolio),
+                Owner = nameof(Owner),
+                Instrument = nameof(Instrument)
             };
             var filter = specification.ToExpression(request);
             var sut = new PriceRepository(dbContext);
@@ -101,9 +101,9 @@ namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
                 Date = new DateTime(2018, 1, 1),
                 Timeslot = 1,
                 Value = 42,
-                Portfolio = new Portfolio { Name = "Portfolio" },
-                Owner = new Owner { Name = "Owner" },
-                Instrument = new Instrument { Name = "Instrument" }
+                Portfolio = new Portfolio { Name = nameof(Portfolio) },
+                Owner = new Owner { Name = nameof(Owner) },
+                Instrument = new Instrument { Name = nameof(Instrument) }
             });
             await dbContext.SaveChangesAsync();
         }

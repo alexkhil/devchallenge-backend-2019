@@ -2,7 +2,6 @@
 using System.Globalization;
 using FluentAssertions;
 using Photostudios.Tests;
-using SC.DevChallenge.Dto;
 using SC.DevChallenge.Dto.Prices.GetAveragePrice;
 using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
 using Xunit;

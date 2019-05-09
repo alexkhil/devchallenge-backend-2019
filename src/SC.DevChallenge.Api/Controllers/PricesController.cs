@@ -25,9 +25,10 @@ namespace SC.DevChallenge.Api.Controllers
         /// <summary>
         /// Get Average Price fro specified PIIT
         /// </summary>
+        /// <param name="data"></param>
         /// <response code="200">Average price returned successfully</response>
         /// <response code="404">Specified PIIT not found</response>
-        [HttpGet("average", Name = "GetAveragePrice")]
+        [HttpGet("average", Name = nameof(GetAveragePrice))]
         [ProducesResponseType(typeof(AveragePriceDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAveragePrice(
@@ -41,9 +42,10 @@ namespace SC.DevChallenge.Api.Controllers
         /// <summary>
         /// Get Benchmark
         /// </summary>
+        /// <param name="data"></param>
         /// <response code="200"></response>
         /// <response code="404">Specified portfolio not found</response>
-        [HttpGet("benchmark", Name = "GetBenchmark")]
+        [HttpGet("benchmark", Name = nameof(GetBenchmarkPrice))]
         [ProducesResponseType(typeof(BenchmarkPriceDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetBenchmarkPrice(
@@ -57,9 +59,10 @@ namespace SC.DevChallenge.Api.Controllers
         /// <summary>
         /// Get Benchmark
         /// </summary>
+        /// <param name="data"></param>
         /// <response code="200"></response>
         /// <response code="404">Specified PIIT not found</response>
-        [HttpGet("aggregate", Name = "GetAggregatePrice")]
+        [HttpGet("aggregate", Name = nameof(GetAggregatePrice))]
         [ProducesResponseType(typeof(BenchmarkPriceDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAggregatePrice(

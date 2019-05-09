@@ -8,8 +8,7 @@ namespace SC.DevChallenge.Specification
     {
         public bool IsSatisfiedBy(TEntity entity, TParam request)
         {
-            Func<TEntity, bool> predicate = ToExpression(request).Compile(preferInterpretation: true);
-
+            var predicate = ToExpression(request).Compile(preferInterpretation: true);
             return predicate.Invoke(entity);
         }
 

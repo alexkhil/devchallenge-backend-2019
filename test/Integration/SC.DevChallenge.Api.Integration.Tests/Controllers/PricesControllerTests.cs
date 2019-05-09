@@ -79,7 +79,7 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
             // Act
             var response = await client.GetAsync(uriBuilder.Uri);
             var jsonContent = await response.Content.ReadAsStringAsync();
-            var actual = JsonConvert.DeserializeObject<AveragePriceDto>(jsonContent, new IsoDateTimeConverter() { DateTimeFormat = DateFormat.Default });
+            var actual = JsonConvert.DeserializeObject<AveragePriceDto>(jsonContent, new IsoDateTimeConverter { DateTimeFormat = DateFormat.Default });
 
             // Assert
             actual.Should().BeEquivalentTo(expected);
@@ -141,7 +141,7 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
             // Act
             var response = await client.GetAsync(uriBuilder.Uri);
             var jsonContent = await response.Content.ReadAsStringAsync();
-            var actual = JsonConvert.DeserializeObject<BenchmarkPriceDto>(jsonContent, new IsoDateTimeConverter() { DateTimeFormat = DateFormat.Default });
+            var actual = JsonConvert.DeserializeObject<BenchmarkPriceDto>(jsonContent, new IsoDateTimeConverter { DateTimeFormat = DateFormat.Default });
 
             // Assert
             actual.Should().BeEquivalentTo(expected);
@@ -208,7 +208,7 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
             // Act
             var response = await client.GetAsync(uriBuilder.Uri);
             var jsonContent = await response.Content.ReadAsStringAsync();
-            var actual = JsonConvert.DeserializeObject<IEnumerable<AggregatePriceDto>>(jsonContent, new IsoDateTimeConverter() { DateTimeFormat = DateFormat.Default });
+            var actual = JsonConvert.DeserializeObject<IEnumerable<AggregatePriceDto>>(jsonContent, new IsoDateTimeConverter { DateTimeFormat = DateFormat.Default });
 
             // Assert
             actual.Should().BeEquivalentTo(expected);

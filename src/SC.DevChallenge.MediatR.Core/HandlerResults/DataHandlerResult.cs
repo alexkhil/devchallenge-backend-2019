@@ -1,5 +1,4 @@
-﻿using System;
-using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
+﻿using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
 
 namespace SC.DevChallenge.MediatR.Core.HandlerResults
 {
