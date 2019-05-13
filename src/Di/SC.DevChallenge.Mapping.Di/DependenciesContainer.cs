@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Autofac;
+﻿using Autofac;
 using AutoMapper;
 
 namespace SC.DevChallenge.Mapping.Di
@@ -9,24 +8,19 @@ namespace SC.DevChallenge.Mapping.Di
         protected override void Load(ContainerBuilder builder)
         {
             builder
-                .RegisterAssemblyTypes(typeof(Mapper).Assembly)
-                .AsImplementedInterfaces();
-
-            builder
-                .Register(ctx =>
-                {
-                    var profiles = ctx.Resolve<IEnumerable<Profile>>();
-                    return new MapperConfiguration(x => x.AddProfiles(profiles));
-                })
+                .RegisterType<Mapper>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
             builder
-                .Register(ctx => new AutoMapper.Mapper(
-                    ctx.Resolve<IConfigurationProvider>(),
-                    ctx.Resolve<ILifetimeScope>().Resolve))
+                .Register(ctx => new MapperConfiguration(x => x.AddMaps(typeof(Mapper).Assembly)))
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder
+                .Register(ctx => new AutoMapper.Mapper(ctx.Resolve<IConfigurationProvider>()))
                 .As<IMapper>()
-                .InstancePerLifetimeScope();
+                .SingleInstance();
 
             base.Load(builder);
         }

@@ -28,7 +28,7 @@ namespace SC.DevChallenge.MediatR.Behaviors
                 var response = await next();
                 timer.Stop();
 
-                logger.LogInformation("Response {Response} is obtained in {Time} ms.", typeof(TRequest).Name, timer.ElapsedMilliseconds);
+                logger.LogInformation("Response {Response} is obtained in {Time}ms.", typeof(TRequest).Name, timer.ElapsedMilliseconds);
 
                 return response;
             }

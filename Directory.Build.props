@@ -1,9 +1,13 @@
 <Project>
-  <PropertyGroup Label="Projects metadata">
+  <PropertyGroup>
     <Authors>Alex Khil</Authors>
-    <Company>Alex khil</Company>
+    <Product>DEV Challenge 2019 Final</Product>
     <Copyright>Copyright © Alex Khil 2019</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageProjectUrl>https://github.com/alexkhil/devchallenge-csharp-2019</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/alexkhil/devchallenge-csharp-2019</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>Financial calculations</Description>
   </PropertyGroup>
   <PropertyGroup Label="Common properties">
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
