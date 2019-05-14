@@ -10,7 +10,7 @@ namespace SC.DevChallenge.DataAccess.Abstractions.Repositories
     {
         Task<List<double>> GetAveragePricesAsync();
 
-        Task<Dictionary<int, double>> GetAveragePricesAsync(int startTimeslot, int endTimeslot);
+        Task<Dictionary<int, double>> GetAveragePricesAsync(string portfolio, int startTimeslot, int endTimeslot);
 
         Task<int> GetPricesCount(int timeslot);
 

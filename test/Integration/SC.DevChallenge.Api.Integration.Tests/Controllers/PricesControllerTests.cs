@@ -154,7 +154,7 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
             var client = factory.CreateClient();
             var uriBuilder = new UriBuilder(client.BaseAddress)
             {
-                Query = "portfolio=Fannie Mae&startdate=06/10/2018 00:00:00&enddate=13/10/2018",
+                Query = "portfolio=Fannie Mae&startdate=06/10/2018 00:00:00&enddate=13/10/2018 00:00:00&resultpoints=7",
                 Path = "api/prices/aggregate"
             };
 
@@ -172,7 +172,7 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
             var client = factory.CreateClient();
             var uriBuilder = new UriBuilder(client.BaseAddress)
             {
-                Query = "portfolio=qwerty&startdate=06/10/2018 00:00:00&enddate=13/10/2018",
+                Query = "portfolio=qwerty&startdate=06/10/2018 00:00:00&enddate=13/10/2018 00:00:00&resultpoints=7",
                 Path = "api/prices/aggregate"
             };
 
@@ -201,7 +201,7 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
             var client = factory.CreateClient();
             var uriBuilder = new UriBuilder(client.BaseAddress)
             {
-                Query = "portfolio=Fannie Mae&startdate=06/10/2018 00:00:00&enddate=13/10/2018",
+                Query = "portfolio=Fannie Mae&startdate=06/10/2018 00:00:00&enddate=13/10/2018 00:00:00&resultpoints=7",
                 Path = "api/prices/aggregate"
             };
 
@@ -211,7 +211,7 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
             var actual = JsonConvert.DeserializeObject<IEnumerable<AggregatePriceDto>>(jsonContent, new IsoDateTimeConverter { DateTimeFormat = DateFormat.Default });
 
             // Assert
-            actual.Should().BeEquivalentTo(expected);
+            actual.Should().HaveCount(expected.Count);
         }
     }
 }

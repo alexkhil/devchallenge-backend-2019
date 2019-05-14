@@ -30,14 +30,15 @@ namespace SC.DevChallenge.MediatR.Queries.Prices.GetAggregatePrice
             var startTimeSlot = dateTimeConverter.DateTimeToTimeSlot(request.StartDate);
             var endTimeSlot = dateTimeConverter.DateTimeToTimeSlot(request.EndDate);
 
-            var avgPriceByTimeslot = await priceRepository.GetAveragePricesAsync(startTimeSlot, endTimeSlot);
+            var avgPriceByTimeslot = await priceRepository.GetAveragePricesAsync(request.Portfolio, startTimeSlot, endTimeSlot);
             if (!avgPriceByTimeslot.Any())
             {
                 return NotFound();
             }
 
-            var elementsInGroup = (avgPriceByTimeslot.Count / request.ResultPoints);
-            var remainder = avgPriceByTimeslot.Count % request.ResultPoints;
+            var timeslots = endTimeSlot - startTimeSlot;
+            var elementsInGroup = (timeslots / request.ResultPoints);
+            var remainder = timeslots % request.ResultPoints;
             var groupCounts = Enumerable.Range(1, request.ResultPoints).Select((x, i) => i + 1 <= remainder ? elementsInGroup + 1 : elementsInGroup).ToList();
 
             var result = new List<AggregatePriceDto>(request.ResultPoints);
