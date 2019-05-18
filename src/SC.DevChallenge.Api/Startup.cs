@@ -8,6 +8,7 @@ using SC.DevChallenge.Api.Extensions.AppBuilder;
 using SC.DevChallenge.Api.Extensions.ServiceCollection;
 using SC.DevChallenge.Configuration;
 
+[assembly: ApiController]
 [assembly: ApiConventionType(typeof(DefaultApiConventions))]
 
 namespace SC.DevChallenge.Api

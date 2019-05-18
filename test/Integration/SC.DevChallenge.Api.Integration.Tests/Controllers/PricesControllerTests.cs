@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using SC.DevChallenge.Domain.Constants;
@@ -14,28 +13,20 @@ using Xunit;
 
 namespace SC.DevChallenge.Api.Integration.Tests.Controllers
 {
-    public class PricesControllerTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class PricesControllerTests : BaseControllerTest
     {
-        private readonly WebApplicationFactory<Startup> factory;
-
-        public PricesControllerTests(WebApplicationFactory<Startup> factory)
-        {
-            this.factory = factory;
-        }
-
         [Fact]
         public async Task GetAveragePrice_ValidRequest_HttpStatusCodeOK()
         {
             // Arrange
-            var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress)
+            var uriBuilder = new UriBuilder(Client.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&owner=Google&instrument=CDS&date=15/03/2018 17:34:50",
                 Path = "api/prices/average"
             };
 
             // Act
-            var response = await client.GetAsync(uriBuilder.Uri);
+            var response = await Client.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -45,15 +36,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         public async Task GetAveragePrice_NotExistingPortfolio_HttpStatusCodeNotFound()
         {
             // Arrange
-            var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress)
+            var uriBuilder = new UriBuilder(Client.BaseAddress)
             {
                 Query = "portfolio=qwerty&owner=Microsoft&instrument=Deposit&date=15/03/2018 17:34:50",
                 Path = "api/prices/average"
             };
 
             // Act
-            var response = await client.GetAsync(uriBuilder.Uri);
+            var response = await Client.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -69,15 +59,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
                 Price = 133.71
             };
 
-            var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress)
+            var uriBuilder = new UriBuilder(Client.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&owner=Google&instrument=CDS&date=15/03/2018 17:34:50",
                 Path = "api/prices/average"
             };
 
             // Act
-            var response = await client.GetAsync(uriBuilder.Uri);
+            var response = await Client.GetAsync(uriBuilder.Uri);
             var jsonContent = await response.Content.ReadAsStringAsync();
             var actual = JsonConvert.DeserializeObject<AveragePriceDto>(jsonContent, new IsoDateTimeConverter { DateTimeFormat = DateFormat.Default });
 
@@ -89,15 +78,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         public async Task GetBenchmarkPrice_ValidRequest_HttpStatusCodeOK()
         {
             // Arrange
-            var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress)
+            var uriBuilder = new UriBuilder(Client.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&date=15/03/2018 17:34:50",
                 Path = "api/prices/benchmark"
             };
 
             // Act
-            var response = await client.GetAsync(uriBuilder.Uri);
+            var response = await Client.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -107,15 +95,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         public async Task GetBenchmarkPrice_NotExistingPortfolio_HttpStatusCodeNotFound()
         {
             // Arrange
-            var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress)
+            var uriBuilder = new UriBuilder(Client.BaseAddress)
             {
                 Query = "portfolio=qwerty&date=15/03/2018 17:34:50",
                 Path = "api/prices/benchmark"
             };
 
             // Act
-            var response = await client.GetAsync(uriBuilder.Uri);
+            var response = await Client.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -131,15 +118,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
                 Price = 133.71
             };
 
-            var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress)
+            var uriBuilder = new UriBuilder(Client.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&date=15/03/2018 17:34:50",
                 Path = "api/prices/benchmark"
             };
 
             // Act
-            var response = await client.GetAsync(uriBuilder.Uri);
+            var response = await Client.GetAsync(uriBuilder.Uri);
             var jsonContent = await response.Content.ReadAsStringAsync();
             var actual = JsonConvert.DeserializeObject<BenchmarkPriceDto>(jsonContent, new IsoDateTimeConverter { DateTimeFormat = DateFormat.Default });
 
@@ -151,15 +137,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         public async Task GetAggregatePrice_ValidRequest_HttpStatusCodeOK()
         {
             // Arrange
-            var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress)
+            var uriBuilder = new UriBuilder(Client.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&startdate=06/10/2018 00:00:00&enddate=13/10/2018 00:00:00&resultpoints=7",
                 Path = "api/prices/aggregate"
             };
 
             // Act
-            var response = await client.GetAsync(uriBuilder.Uri);
+            var response = await Client.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -169,15 +154,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         public async Task GetAggregatePrice_NotExistingPortfolio_HttpStatusCodeNotFound()
         {
             // Arrange
-            var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress)
+            var uriBuilder = new UriBuilder(Client.BaseAddress)
             {
                 Query = "portfolio=qwerty&startdate=06/10/2018 00:00:00&enddate=13/10/2018 00:00:00&resultpoints=7",
                 Path = "api/prices/aggregate"
             };
 
             // Act
-            var response = await client.GetAsync(uriBuilder.Uri);
+            var response = await Client.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -198,15 +182,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
                 new AggregatePriceDto { Date = new DateTime(2018, 10, 12, 22, 53, 20), Price = 187.77 }
             };
 
-            var client = factory.CreateClient();
-            var uriBuilder = new UriBuilder(client.BaseAddress)
+            var uriBuilder = new UriBuilder(Client.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&startdate=06/10/2018 00:00:00&enddate=13/10/2018 00:00:00&resultpoints=7",
                 Path = "api/prices/aggregate"
             };
 
             // Act
-            var response = await client.GetAsync(uriBuilder.Uri);
+            var response = await Client.GetAsync(uriBuilder.Uri);
             var jsonContent = await response.Content.ReadAsStringAsync();
             var actual = JsonConvert.DeserializeObject<IEnumerable<AggregatePriceDto>>(jsonContent, new IsoDateTimeConverter { DateTimeFormat = DateFormat.Default });
 

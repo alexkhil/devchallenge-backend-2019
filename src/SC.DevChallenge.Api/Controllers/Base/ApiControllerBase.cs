@@ -6,7 +6,6 @@ using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
 
 namespace SC.DevChallenge.Api.Controllers.Base
 {
-    [ApiController]
     [Produces("application/json")]
     public abstract class ApiControllerBase : ControllerBase
     {

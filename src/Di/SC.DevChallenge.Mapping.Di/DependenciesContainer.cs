@@ -18,7 +18,9 @@ namespace SC.DevChallenge.Mapping.Di
                 .SingleInstance();
 
             builder
-                .Register(ctx => new AutoMapper.Mapper(ctx.Resolve<IConfigurationProvider>()))
+                .Register(ctx => new AutoMapper.Mapper(
+                        ctx.Resolve<IConfigurationProvider>(),
+                        ctx.Resolve<ILifetimeScope>().Resolve))
                 .As<IMapper>()
                 .SingleInstance();
 

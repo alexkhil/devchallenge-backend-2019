@@ -11,14 +11,13 @@ namespace SC.DevChallenge.Mapping
             this.mapper = mapper;
         }
 
-        public TDestination Map<TDestination>(object source)
-        {
-            return mapper.Map<TDestination>(source);
-        }
+        public TDestination Map<TDestination>(object source) =>
+            mapper.Map<TDestination>(source);
 
-        public TDestination Map<TSource, TDestination>(TSource source)
-        {
-            return mapper.Map<TSource, TDestination>(source);
-        }
+        public TDestination Map<TSource, TDestination>(TSource source) =>
+            mapper.Map<TSource, TDestination>(source);
+
+        public TDestination Map<TSource, TDestination>(TSource source, TDestination destination) =>
+            mapper.Map(source, destination);
     }
 }
