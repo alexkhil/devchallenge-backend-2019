@@ -1,15 +1,24 @@
-version: '3.4'
+version: '3.7'
 
 services:
   api:
-    image: api
+    image: devchallenge.api
+    container_name: devchallenge.api
+    networks:
+      - devchallenge
     depends_on:
       - db
     build:
       context: .
       dockerfile: src/SC.DevChallenge.Api/Dockerfile
   db:
-    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: devchallenge.db
+    networks:
+      - devchallenge
     environment:
         SA_PASSWORD: "Your_password123"
         ACCEPT_EULA: "Y"
+networks:
+  devchallenge:
+    name: devchallenge.network

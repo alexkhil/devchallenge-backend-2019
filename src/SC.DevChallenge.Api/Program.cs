@@ -5,6 +5,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SC.DevChallenge.Api.Extensions.WebHost;
 using Serilog;
 
 namespace SC.DevChallenge.Api
@@ -20,8 +21,8 @@ namespace SC.DevChallenge.Api
 
             try
             {
-                //Log.Information("Initing db");
-                //await webHost.InitDbAsync();
+                Log.Information("Initing db");
+                await webHost.InitDbAsync();
 
                 Log.Information("Starting web host");
                 await webHost.RunAsync();

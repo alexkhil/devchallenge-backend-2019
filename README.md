@@ -16,12 +16,12 @@ C# task - Financial calculations
 docker-compose up
 ```
 
-Service will be available on port 8080.
+Service will be available on port 8888.
 
 
 ## Usage
 
-When docker runs open http://localhost:8080 on your browser to see swagger docs and try api.
+When docker runs open http://localhost:8888 on your browser to see swagger docs and try api.
 
 ### Unit Tests
 

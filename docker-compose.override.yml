@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.7'
 
 services:
   api:
@@ -6,7 +6,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8080
     ports:
-      - "8080:8080"
+      - "8888:8080"
 #    volumes:
 #      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 #      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
