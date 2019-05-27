@@ -1,36 +1,43 @@
-using System.Diagnostics;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
 
 namespace SC.DevChallenge.MediatR.Behaviors
 {
-    public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, IHandlerResult<TResponse>>
     {
         private readonly ILogger<TRequest> logger;
-        private readonly Stopwatch timer;
 
         public LoggingBehavior(ILogger<TRequest> logger)
         {
             this.logger = logger;
-            timer = new Stopwatch();
         }
 
-        public async Task<TResponse> Handle(
+        public async Task<IHandlerResult<TResponse>> Handle(
             TRequest request,
             CancellationToken cancellationToken,
-            RequestHandlerDelegate<TResponse> next)
+            RequestHandlerDelegate<IHandlerResult<TResponse>> next)
         {
-            using (logger.BeginScope("Handling {Request} request.", request))
+            using (logger.BeginScope("Handling {Request} request.", typeof(TRequest).Name))
             {
-                timer.Restart();
-                var response = await next();
-                timer.Stop();
+                try
+                {
+                    logger.LogInformation("Request {Request} is obtained.", typeof(TRequest).Name);
 
-                logger.LogInformation("Response {Response} is obtained in {Time}ms.", typeof(TRequest).Name, timer.ElapsedMilliseconds);
+                    var response = await next();
 
-                return response;
+                    logger.LogInformation("Response {Response} is obtained.", typeof(TResponse).Name);
+
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, ex.Message);
+                    throw;
+                }
             }
         }
     }

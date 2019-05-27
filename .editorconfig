@@ -185,6 +185,10 @@ dotnet_naming_symbols.parameters.applicable_kinds = parameter
 dotnet_naming_symbols.non_interface_types.applicable_kinds = class, struct, enum, delegate
 # interface_types - Defines interfaces
 dotnet_naming_symbols.interface_types.applicable_kinds = interface
+# any_async_methods - Defines async methods
+dotnet_naming_symbols.any_async_methods.applicable_kinds = method
+dotnet_naming_symbols.any_async_methods.applicable_accessibilities = *
+dotnet_naming_symbols.any_async_methods.required_modifiers = async
 
 # Naming Styles
 # camel_case - Define the camelCase style
@@ -196,8 +200,15 @@ dotnet_naming_style.first_upper.capitalization = first_word_upper
 # prefix_interface_interface_with_i - Interfaces must be PascalCase and the first character of an interface must be an 'I'
 dotnet_naming_style.prefix_interface_interface_with_i.capitalization = pascal_case
 dotnet_naming_style.prefix_interface_interface_with_i.required_prefix = I
+# end_in_async - Async methods must be PascalCase and with 'Async' suffix
+dotnet_naming_style.end_in_async.required_suffix = Async
+dotnet_naming_style.end_in_async.capitalization = pascal_case
 
 # Naming Rules
+# Async methods should have "Async" suffix
+dotnet_naming_rule.async_methods_end_in_async.symbols = any_async_methods
+dotnet_naming_rule.async_methods_end_in_async.style = end_in_async
+dotnet_naming_rule.async_methods_end_in_async.severity = warning
 # Constant fields must be PascalCase
 dotnet_naming_rule.constant_fields_must_be_pascal_case.severity = warning
 dotnet_naming_rule.constant_fields_must_be_pascal_case.symbols = constant_fields

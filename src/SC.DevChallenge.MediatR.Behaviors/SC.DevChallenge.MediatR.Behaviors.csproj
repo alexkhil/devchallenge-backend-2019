@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SC.DevChallenge.MediatR.Core\SC.DevChallenge.MediatR.Core.csproj" />
+  </ItemGroup>
+
 </Project>
