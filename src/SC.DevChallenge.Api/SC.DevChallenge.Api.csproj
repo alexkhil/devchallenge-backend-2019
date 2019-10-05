@@ -29,15 +29,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Di\SC.DevChallenge.Configuration.Di\SC.DevChallenge.Configuration.Di.csproj" />
-    <ProjectReference Include="..\Di\SC.DevChallenge.DataAccess.Di\SC.DevChallenge.DataAccess.Di.csproj" />
-    <ProjectReference Include="..\Di\SC.DevChallenge.Domain.Di\SC.DevChallenge.Domain.Di.csproj" />
-    <ProjectReference Include="..\Di\SC.DevChallenge.ExceptionHandler.Di\SC.DevChallenge.ExceptionHandler.Di.csproj" />
-    <ProjectReference Include="..\Di\SC.DevChallenge.Mapping.Di\SC.DevChallenge.Mapping.Di.csproj" />
-    <ProjectReference Include="..\Di\SC.DevChallenge.MediatR.Di\SC.DevChallenge.MediatR.Di.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Configuration\SC.DevChallenge.Configuration.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.DataAccess.EF\SC.DevChallenge.DataAccess.EF.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.Domain\SC.DevChallenge.Domain.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.Dto\SC.DevChallenge.Dto.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.ExceptionHandler\SC.DevChallenge.ExceptionHandler.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.Mapping\SC.DevChallenge.Mapping.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.MediatR.Behaviors\SC.DevChallenge.MediatR.Behaviors.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.MediatR.Core\SC.DevChallenge.MediatR.Core.csproj" />
     <ProjectReference Include="..\SC.DevChallenge.MediatR.Queries\SC.DevChallenge.MediatR.Queries.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.Specification\SC.DevChallenge.Specification.csproj" />
   </ItemGroup>
 
   <ItemGroup>

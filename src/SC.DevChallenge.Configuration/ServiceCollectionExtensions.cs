@@ -23,6 +23,7 @@ namespace SC.DevChallenge.Configuration
 
             return services;
         }
+
         private static IServiceCollection ConfigureExplicit<TOption>(
             this IServiceCollection services,
             IConfigurationSection section)

@@ -1,17 +1,17 @@
-﻿using Autofac;
+﻿using System.Diagnostics.CodeAnalysis;
+using Autofac;
 using SC.DevChallenge.Domain.Quarter;
 
-namespace SC.DevChallenge.Domain.Di
+namespace SC.DevChallenge.Api.IoC
 {
-    public class DependenciesContainer : Module
+    [ExcludeFromCodeCoverage]
+    public class DomainModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             builder
                 .RegisterAssemblyTypes(typeof(QuarterCalculator).Assembly)
                 .AsImplementedInterfaces();
-
-            base.Load(builder);
         }
     }
 }

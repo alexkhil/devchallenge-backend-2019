@@ -1,13 +1,15 @@
-﻿using Autofac;
+﻿using System.Diagnostics.CodeAnalysis;
+using Autofac;
 using Microsoft.EntityFrameworkCore;
 using SC.DevChallenge.Configuration.Abstractions;
 using SC.DevChallenge.DataAccess.EF;
 using SC.DevChallenge.DataAccess.EF.Repositories;
 using SC.DevChallenge.DataAccess.EF.Seeder;
 
-namespace SC.DevChallenge.DataAccess.Di
+namespace SC.DevChallenge.Api.IoC
 {
-    public class DependenciesContainer : Module
+    [ExcludeFromCodeCoverage]
+    public class DataAccessModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -35,8 +37,6 @@ namespace SC.DevChallenge.DataAccess.Di
             builder
                 .RegisterType<PriceRepository>()
                 .AsImplementedInterfaces();
-
-            base.Load(builder);
         }
     }
 }

@@ -27,13 +27,13 @@ namespace SC.DevChallenge.Api
         public void ConfigureServices(IServiceCollection services) =>
             services.AddConfiguration(configuration)
                     .AddResponceCompression()
-                    .AddCustomCors()
+                    .AddDevChallengeCors()
                     .AddRouteOptions()
-                    .AddCustomMvc()
-                    .AddCustomSwagger();
+                    .AddDevChallengeMvc()
+                    .AddDevChallengeSwagger();
 
         public static void ConfigureContainer(ContainerBuilder builder) =>
-            builder.RegisterModule(new AutofacModule());
+            builder.RegisterAssemblyModules(typeof(Startup).Assembly);
 
         public void Configure(IApplicationBuilder app) =>
             app.UseResponseCompression()
@@ -41,7 +41,7 @@ namespace SC.DevChallenge.Api
                .UseCors(CorsPolicyName.AllowAny)
                .UseStaticFiles()
                .UseSwagger()
-               .UseCustomSwaggerUi()
+               .UseDevChallengeSwaggerUi()
                .UseAuthentication()
                .UseMvc();
     }

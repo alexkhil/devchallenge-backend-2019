@@ -14,7 +14,7 @@ using SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice;
 
 namespace SC.DevChallenge.Api.Controllers
 {
-    [Route("api/prices")]
+    [Route("api/[controller]")]
     public class PricesController : ApiControllerBase
     {
         public PricesController(IMapper mapper, IMediator mediator)

@@ -1,18 +1,18 @@
-﻿using Autofac;
+﻿using System.Diagnostics.CodeAnalysis;
+using Autofac;
 using SC.DevChallenge.Configuration.Abstractions;
 using SC.DevChallenge.Configuration.DataAccess;
 
-namespace SC.DevChallenge.Configuration.Di
+namespace SC.DevChallenge.Api.IoC
 {
-    public class DependenciesContainer : Module
+    [ExcludeFromCodeCoverage]
+    public class ConfigurationModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             builder
                 .Register<IDbConfiguration>(c => c.Resolve<DbConfiguration>())
                 .SingleInstance();
-
-            base.Load(builder);
         }
     }
 }

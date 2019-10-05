@@ -12,11 +12,13 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
         public static IServiceCollection AddResponceCompression(this IServiceCollection services) =>
             services.Configure<BrotliCompressionProviderOptions>(options => options.Level = compressionLevel)
                     .Configure<GzipCompressionProviderOptions>(options => options.Level = compressionLevel)
-                    .AddResponseCompression(options =>
-                    {
-                        options.EnableForHttps = true;
-                        options.Providers.Add<BrotliCompressionProvider>();
-                        options.Providers.Add<GzipCompressionProvider>();
-                    });
+                    .AddResponseCompression(SetupResponseCompressionOptions);
+
+        private static void SetupResponseCompressionOptions(ResponseCompressionOptions options)
+        {
+            options.EnableForHttps = true;
+            options.Providers.Add<BrotliCompressionProvider>();
+            options.Providers.Add<GzipCompressionProvider>();
+        }
     }
 }

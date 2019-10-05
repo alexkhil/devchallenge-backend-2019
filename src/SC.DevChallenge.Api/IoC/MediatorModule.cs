@@ -1,11 +1,13 @@
-﻿using Autofac;
+﻿using System.Diagnostics.CodeAnalysis;
+using Autofac;
 using MediatR;
 using SC.DevChallenge.MediatR.Behaviors;
 using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
 
-namespace SC.DevChallenge.MediatR.Di
+namespace SC.DevChallenge.Api.IoC
 {
-    public class DependenciesContainer : Module
+    [ExcludeFromCodeCoverage]
+    public class MediatorModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -28,8 +30,6 @@ namespace SC.DevChallenge.MediatR.Di
             builder
                 .RegisterAssemblyTypes(typeof(GetAveragePriceQuery).Assembly)
                 .AsImplementedInterfaces();
-
-            base.Load(builder);
         }
     }
 }

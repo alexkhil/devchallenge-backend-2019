@@ -1,17 +1,17 @@
-﻿using Autofac;
+﻿using System.Diagnostics.CodeAnalysis;
+using Autofac;
 using SC.DevChallenge.ExceptionHandler.ExceptionHandlers;
 
-namespace SC.DevChallenge.ExceptionHandler.Di
+namespace SC.DevChallenge.Api.IoC
 {
-    public class DependenciesContainer : Module
+    [ExcludeFromCodeCoverage]
+    public class ExceptionHandlerModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             builder
                 .RegisterAssemblyTypes(typeof(DefaultExceptionHandler).Assembly)
                 .AsImplementedInterfaces();
-
-            base.Load(builder);
         }
     }
 }

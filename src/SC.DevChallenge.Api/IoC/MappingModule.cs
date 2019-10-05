@@ -1,19 +1,21 @@
-﻿using Autofac;
+﻿using System.Diagnostics.CodeAnalysis;
+using Autofac;
 using AutoMapper;
 
-namespace SC.DevChallenge.Mapping.Di
+namespace SC.DevChallenge.Api.IoC
 {
-    public class DependenciesContainer : Module
+    [ExcludeFromCodeCoverage]
+    public class MappingModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             builder
-                .RegisterType<Mapper>()
+                .RegisterType<Mapping.Mapper>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
             builder
-                .Register(ctx => new MapperConfiguration(x => x.AddMaps(typeof(Mapper).Assembly)))
+                .Register(ctx => new MapperConfiguration(x => x.AddMaps(typeof(Mapping.Mapper).Assembly)))
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
@@ -23,8 +25,6 @@ namespace SC.DevChallenge.Mapping.Di
                         ctx.Resolve<ILifetimeScope>().Resolve))
                 .As<IMapper>()
                 .SingleInstance();
-
-            base.Load(builder);
         }
     }
 }

@@ -98,7 +98,7 @@ csharp_style_var_elsewhere = true:suggestion
 csharp_style_var_for_built_in_types = true:error
 csharp_style_var_when_type_is_apparent = true:error
 
-# Organize usings
+# Organize using items
 dotnet_separate_import_directive_groups = false
 dotnet_sort_system_directives_first = true
 csharp_using_directive_placement = outside_namespace:error
@@ -159,14 +159,14 @@ dotnet_style_parentheses_in_other_operators = never_if_unnecessary:silent
 # constant_fields - Define constant fields
 dotnet_naming_symbols.constant_fields.applicable_kinds = field
 dotnet_naming_symbols.constant_fields.required_modifiers = const
-# non_private_readonly_fields - Define public, internal and protected readonly fields
+# non_private_readonly_fields - Define public, internal and protected read-only fields
 dotnet_naming_symbols.non_private_readonly_fields.applicable_accessibilities = public, internal, protected
 dotnet_naming_symbols.non_private_readonly_fields.applicable_kinds = field
 dotnet_naming_symbols.non_private_readonly_fields.required_modifiers = readonly
-# static_readonly_fields - Define static and readonly fields
+# static_readonly_fields - Define static and read-only fields
 dotnet_naming_symbols.static_readonly_fields.applicable_kinds = field
 dotnet_naming_symbols.static_readonly_fields.required_modifiers = static, readonly
-# private_readonly_fields - Define private readonly fields
+# private_readonly_fields - Define private read-only fields
 dotnet_naming_symbols.private_readonly_fields.applicable_accessibilities = private
 dotnet_naming_symbols.private_readonly_fields.applicable_kinds = field
 dotnet_naming_symbols.private_readonly_fields.required_modifiers = readonly
@@ -213,15 +213,15 @@ dotnet_naming_rule.async_methods_end_in_async.severity = warning
 dotnet_naming_rule.constant_fields_must_be_pascal_case.severity = warning
 dotnet_naming_rule.constant_fields_must_be_pascal_case.symbols = constant_fields
 dotnet_naming_rule.constant_fields_must_be_pascal_case.style = pascal_case
-# Public, internal and protected readonly fields must be PascalCase
+# Public, internal and protected read-only fields must be PascalCase
 dotnet_naming_rule.non_private_readonly_fields_must_be_pascal_case.severity = warning
 dotnet_naming_rule.non_private_readonly_fields_must_be_pascal_case.symbols = non_private_readonly_fields
 dotnet_naming_rule.non_private_readonly_fields_must_be_pascal_case.style = pascal_case
-# Static readonly fields must be PascalCase
+# Static read-only fields must be PascalCase
 dotnet_naming_rule.static_readonly_fields_must_be_pascal_case.severity = warning
 dotnet_naming_rule.static_readonly_fields_must_be_pascal_case.symbols = static_readonly_fields
 dotnet_naming_rule.static_readonly_fields_must_be_pascal_case.style = pascal_case
-# Private readonly fields must be camelCase
+# Private read-only fields must be camelCase
 dotnet_naming_rule.private_readonly_fields_must_be_camel_case.severity = warning
 dotnet_naming_rule.private_readonly_fields_must_be_camel_case.symbols = private_readonly_fields
 dotnet_naming_rule.private_readonly_fields_must_be_camel_case.style = camel_case
