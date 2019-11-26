@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 
@@ -11,29 +11,32 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
 
         protected BaseControllerTest()
         {
-            webAppFactory = new WebApplicationFactory<Startup>();
-            Client = webAppFactory.CreateClient();
+            this.webAppFactory = new WebApplicationFactory<Startup>();
+            this.Client = this.webAppFactory.CreateClient();
         }
 
         public HttpClient Client { get; }
 
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (this.disposedValue)
             {
-                if (disposing)
-                {
-                    webAppFactory?.Dispose();
-                    Client?.Dispose();
-                }
-                disposedValue = true;
+                return;
             }
+
+            if (disposing)
+            {
+                this.webAppFactory?.Dispose();
+                this.Client?.Dispose();
+            }
+
+            this.disposedValue = true;
         }
     }
 }

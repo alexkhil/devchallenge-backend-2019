@@ -30,10 +30,10 @@ namespace SC.DevChallenge.Api.Tests.Controllers
                 .Setup(m => m.Map<GetAveragePriceQuery>(It.IsAny<GetAveragePriceDto>()))
                 .Returns(It.IsAny<GetAveragePriceQuery>());
 
-            var sut = new PricesController(mapperMock.Object, mediatorMock.Object);
+            var sut = new PricesController();
 
             // Act
-            await sut.GetAveragePrice(dto);
+            await sut.GetAverage(dto);
 
             // Assert
             mapperMock.Verify(m => m.Map<GetAveragePriceQuery>(dto), Times.Once);
@@ -56,10 +56,10 @@ namespace SC.DevChallenge.Api.Tests.Controllers
                 .Setup(m => m.Send(It.IsAny<GetAveragePriceQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(It.IsAny<IHandlerResult<AveragePriceDto>>());
 
-            var sut = new PricesController(mapperMock.Object, mediatorMock.Object);
+            var sut = new PricesController();
 
             // Act
-            await sut.GetAveragePrice(dto);
+            await sut.GetAverage(dto);
 
             // Assert
             mediatorMock.Verify(m => m.Send(query, default), Times.Once);
@@ -77,10 +77,10 @@ namespace SC.DevChallenge.Api.Tests.Controllers
                 .Setup(m => m.Send(It.IsAny<GetAveragePriceQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(It.IsAny<NotFoundHandlerResult<AveragePriceDto>>());
 
-            var sut = new PricesController(mapperMock.Object, mediatorMock.Object);
+            var sut = new PricesController();
 
             // Act
-            var actual = await sut.GetAveragePrice(dto);
+            var actual = await sut.GetAverage(dto);
 
             // Assert
             actual.Should().BeOfType<NotFoundResult>();
@@ -101,10 +101,10 @@ namespace SC.DevChallenge.Api.Tests.Controllers
                 .Setup(m => m.Send(It.IsAny<GetAveragePriceQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(result);
 
-            var sut = new PricesController(mapperMock.Object, mediatorMock.Object);
+            var sut = new PricesController();
 
             // Act
-            var actual = await sut.GetAveragePrice(dto);
+            var actual = await sut.GetAverage(dto);
 
             // Assert
             actual.Should().BeOfType<OkObjectResult>()

@@ -3,7 +3,7 @@ using System.Globalization;
 using FluentAssertions;
 using Photostudios.Tests;
 using SC.DevChallenge.Dto.Prices.GetAveragePrice;
-using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
+using SC.DevChallenge.MediatR.Queries.Prices.GetAveragePrice;
 using Xunit;
 
 namespace SC.DevChallenge.Mapping.Tests.MappingProfiles

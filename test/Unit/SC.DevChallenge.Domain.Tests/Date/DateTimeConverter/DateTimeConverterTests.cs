@@ -2,18 +2,17 @@ using System;
 using System.Globalization;
 using FluentAssertions;
 using SC.DevChallenge.Domain.Constants;
-using SC.DevChallenge.Domain.DateTimeConverter;
 using Xunit;
 
-namespace SC.DevChallenge.DataAccess.Abstractions.Tests.DateTimeHelpers
+namespace SC.DevChallenge.Domain.Tests.Date.DateTimeConverter
 {
     public class DateTimeConverterTests
     {
-        private readonly DateTimeConverter sut;
+        private readonly Domain.DateTimeConverter.DateTimeConverter sut;
 
         public DateTimeConverterTests()
         {
-            sut = new DateTimeConverter();
+            sut = new Domain.DateTimeConverter.DateTimeConverter();
         }
 
         [Fact]

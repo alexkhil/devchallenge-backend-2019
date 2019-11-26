@@ -4,7 +4,7 @@ using MediatR;
 using SC.DevChallenge.MediatR.Core.HandlerResults;
 using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
 
-namespace SC.DevChallenge.MediatR.Queries
+namespace SC.DevChallenge.MediatR.Core
 {
     public abstract class RequestHandlerBase<TRequest, TResponse> : IRequestHandler<TRequest, IHandlerResult<TResponse>>
         where TRequest : IRequest<IHandlerResult<TResponse>>

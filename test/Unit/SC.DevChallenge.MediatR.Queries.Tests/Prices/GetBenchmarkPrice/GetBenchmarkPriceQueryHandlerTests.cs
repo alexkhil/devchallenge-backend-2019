@@ -10,7 +10,7 @@ using SC.DevChallenge.DataAccess.Abstractions.Repositories;
 using SC.DevChallenge.Domain.DateTimeConverter;
 using SC.DevChallenge.Domain.Quarter;
 using SC.DevChallenge.Domain.Timeslot;
-using SC.DevChallenge.Dto;
+using SC.DevChallenge.Dto.Prices.GetBenchmarkPrice;
 using SC.DevChallenge.MediatR.Core.HandlerResults;
 using SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice;
 using SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice.Specifications;

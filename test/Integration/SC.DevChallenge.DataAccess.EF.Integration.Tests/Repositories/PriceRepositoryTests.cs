@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using FluentAssertions;
@@ -7,9 +7,6 @@ using Moq;
 using Photostudios.Tests;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
 using SC.DevChallenge.DataAccess.EF.Repositories;
-using SC.DevChallenge.Domain.DateTimeConverter;
-using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
-using SC.DevChallenge.MediatR.Queries.Prices.GetAveragePrice.Specifications;
 using Xunit;
 
 namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
@@ -17,7 +14,7 @@ namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
     public class PriceRepositoryTests : IDisposable
     {
         private readonly AppDbContext dbContext;
-        private bool disposedValue = false;
+        private bool disposedValue;
 
         public PriceRepositoryTests()
         {
@@ -83,15 +80,17 @@ namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (disposedValue)
             {
-                if (disposing)
-                {
-                    dbContext.Dispose();
-                }
-
-                disposedValue = true;
+                return;
             }
+
+            if (disposing)
+            {
+                dbContext.Dispose();
+            }
+
+            disposedValue = true;
         }
 
         private async Task SeedDb()

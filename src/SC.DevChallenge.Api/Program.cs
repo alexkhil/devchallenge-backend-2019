@@ -1,38 +1,34 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SC.DevChallenge.Api.Extensions.WebHost;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace SC.DevChallenge.Api
 {
     public static class Program
     {
-        public static Task<int> Main(string[] args) =>
-            LoadAndRun(CreateWebHostBuilder(args).Build());
+        public static Task Main(string[] args) =>
+            LoadAndRun(CreateHostBuilder(args).Build());
 
-        public static async Task<int> LoadAndRun(IWebHost webHost)
+        private static async Task<int> LoadAndRun(IHost host)
         {
-            Log.Logger = BuildLogger(webHost);
+            Log.Logger = BuildLogger(host);
 
             try
             {
-                Log.Information("Initing db");
-                await webHost.InitDbAsync();
-
                 Log.Information("Starting web host");
-                await webHost.RunAsync();
+                await host.RunAsync();
 
                 return 0;
             }
             catch (Exception ex)
             {
                 Log.Fatal(ex, "Host terminated unexpectedly");
-                return 1;
+                throw;
             }
             finally
             {
@@ -40,15 +36,15 @@ namespace SC.DevChallenge.Api
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                   .UseSerilog()
-                   .ConfigureServices(services => services.AddAutofac())
-                   .UseStartup<Startup>();
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .UseSerilog()
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
 
-        private static ILogger BuildLogger(IWebHost webHost) =>
+        private static ILogger BuildLogger(IHost host) =>
             new LoggerConfiguration()
-                .ReadFrom.Configuration(webHost.Services.GetRequiredService<IConfiguration>())
+                .ReadFrom.Configuration(host.Services.GetRequiredService<IConfiguration>())
                 .CreateLogger();
     }
 }

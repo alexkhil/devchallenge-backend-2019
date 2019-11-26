@@ -1,5 +1,6 @@
-﻿using SC.DevChallenge.Mapping.Abstractions;
+﻿using AutoMapper;
 using SC.DevChallenge.Mapping.MappingProfiles;
+using IMapper = SC.DevChallenge.Mapping.Abstractions.IMapper;
 
 namespace SC.DevChallenge.Mapping.Tests
 {
@@ -13,6 +14,6 @@ namespace SC.DevChallenge.Mapping.Tests
 
         protected IMapper Mapper { get; }
 
-        protected static AutoMapper.MapperConfiguration MapperConfig { get; } = new AutoMapper.MapperConfiguration(cfg => cfg.AddProfile<GetAveragePriceProfile>());
+        protected static MapperConfiguration MapperConfig { get; } = new MapperConfiguration(cfg => cfg.AddProfile<GetAveragePriceProfile>());
     }
 }

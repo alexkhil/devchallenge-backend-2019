@@ -4,7 +4,7 @@ namespace SC.DevChallenge.DataAccess.EF
 {
     public partial class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions options)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }

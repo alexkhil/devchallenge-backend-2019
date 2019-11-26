@@ -15,14 +15,10 @@ namespace SC.DevChallenge.DataAccess.Abstractions.Entities
 
     public class OwnerPortfoliosComparer : IEqualityComparer<OwnerPortfolio>
     {
-        public bool Equals(OwnerPortfolio x, OwnerPortfolio y)
-        {
-            return x.OwnerId == y.OwnerId && x.PortfolioId == y.PortfolioId;
-        }
+        public bool Equals(OwnerPortfolio x, OwnerPortfolio y) =>
+            x.OwnerId == y.OwnerId && x.PortfolioId == y.PortfolioId;
 
-        public int GetHashCode(OwnerPortfolio obj)
-        {
-            return obj.OwnerId.GetHashCode() ^ obj.PortfolioId.GetHashCode();
-        }
+        public int GetHashCode(OwnerPortfolio obj) =>
+            obj.OwnerId.GetHashCode() ^ obj.PortfolioId.GetHashCode();
     }
 }

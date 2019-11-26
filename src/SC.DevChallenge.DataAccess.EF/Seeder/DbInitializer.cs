@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
 using SC.DevChallenge.DataAccess.EF.Seeder.Abstractions;
+using SC.DevChallenge.Domain.Abstractions;
 using SC.DevChallenge.Domain.Constants;
-using SC.DevChallenge.Domain.DateTimeConverter;
 
 namespace SC.DevChallenge.DataAccess.EF.Seeder
 {
@@ -48,29 +48,33 @@ namespace SC.DevChallenge.DataAccess.EF.Seeder
             return InitializeInternalAsync(filePath);
         }
 
-        public async Task InitializeInternalAsync(string filePath)
+        private async Task InitializeInternalAsync(string csvFilePath)
         {
-            using (var reader = new StreamReader(filePath))
+            using (var reader = new StreamReader(csvFilePath))
             {
                 using (var csv = new CsvReader(reader))
                 {
                     var rows = csv.GetRecords<DataRow>().ToList();
 
-                    var portfolios = rows.Select(r => r.Portfolio).Distinct().Select(p => new Portfolio { Name = p }).ToList();
+                    var portfolios = rows.Select(r => r.Portfolio).Distinct().Select(p => new Portfolio {Name = p})
+                        .ToList();
                     await dbContext.BulkInsertAsync(portfolios);
                     logger.LogInformation("{Count} portfolios created", portfolios.Count);
 
-                    var owners = rows.Select(r => r.Owner).Distinct().Select(p => new Owner { Name = p }).ToList();
+                    var owners = rows.Select(r => r.Owner).Distinct().Select(p => new Owner {Name = p}).ToList();
                     await dbContext.BulkInsertAsync(owners);
                     logger.LogInformation("{Count} owners created", owners.Count);
 
-                    var instruments = rows.Select(r => r.Instrument).Distinct().Select(p => new Instrument { Name = p }).ToList();
+                    var instruments = rows.Select(r => r.Instrument).Distinct().Select(p => new Instrument {Name = p})
+                        .ToList();
                     await dbContext.BulkInsertAsync(instruments);
                     logger.LogInformation("{Count} instruments created", instruments.Count);
 
-                    var portfoliosMap = await dbContext.Portfolios.AsNoTracking().ToDictionaryAsync(p => p.Name, v => v.Id);
+                    var portfoliosMap =
+                        await dbContext.Portfolios.AsNoTracking().ToDictionaryAsync(p => p.Name, v => v.Id);
                     var ownersMap = await dbContext.Owners.AsNoTracking().ToDictionaryAsync(p => p.Name, v => v.Id);
-                    var instrumentsMap = await dbContext.Instruments.AsNoTracking().ToDictionaryAsync(p => p.Name, v => v.Id);
+                    var instrumentsMap =
+                        await dbContext.Instruments.AsNoTracking().ToDictionaryAsync(p => p.Name, v => v.Id);
 
                     dbContext.ChangeTracker.AutoDetectChangesEnabled = false;
 

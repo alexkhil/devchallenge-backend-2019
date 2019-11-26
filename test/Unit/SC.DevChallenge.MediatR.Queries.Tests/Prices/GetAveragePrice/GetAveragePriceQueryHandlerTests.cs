@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using AutoFixture.Xunit2;
 using FluentAssertions;
 using Moq;
 using Photostudios.Tests;
@@ -11,7 +10,6 @@ using SC.DevChallenge.DataAccess.Abstractions.Repositories;
 using SC.DevChallenge.Domain.DateTimeConverter;
 using SC.DevChallenge.Dto.Prices.GetAveragePrice;
 using SC.DevChallenge.MediatR.Core.HandlerResults;
-using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
 using SC.DevChallenge.MediatR.Queries.Prices.GetAveragePrice;
 using SC.DevChallenge.MediatR.Queries.Prices.GetAveragePrice.Specifications;
 using Xunit;
@@ -20,17 +18,28 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
 {
     public class GetAveragePriceQueryHandlerTests
     {
-        [Theory]
-        [AutoMoqData]
+        private readonly Mock<IPriceRepository> priceRepositoryMock;
+        private readonly Mock<IGetAveragePriceSpecification> specificationMock;
+        private readonly Mock<IDateTimeConverter> dateTimeConverterMock;
+        private readonly GetAveragePriceQueryHandler sut;
+
+        public GetAveragePriceQueryHandlerTests()
+        {
+            priceRepositoryMock = new Mock<IPriceRepository>();
+            specificationMock = new Mock<IGetAveragePriceSpecification>();
+            dateTimeConverterMock = new Mock<IDateTimeConverter>();
+
+            sut = new GetAveragePriceQueryHandler(
+                priceRepositoryMock.Object,
+                specificationMock.Object,
+                dateTimeConverterMock.Object);
+        }
+        
+        [Theory, AutoMoqData]
         public async Task Handle_WhenCalled_ShouldCallGetTimeSlotStartDate(
-            [Frozen] Mock<IPriceRepository> priceRepositoryMock,
-            [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
-            [Frozen] Mock<IGetAveragePriceSpecification> specificationMock,
             Expression<Func<Price, bool>> expression)
         {
             // Arrange
-            var request = CreateRequest();
-
             specificationMock
                 .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
                 .Returns(expression);
@@ -39,11 +48,8 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
                 .Setup(d => d.GetTimeSlotStartDate(It.IsAny<DateTime>()))
                 .Returns(It.IsAny<DateTime>());
 
-            var sut = new GetAveragePriceQueryHandler(
-                priceRepositoryMock.Object,
-                specificationMock.Object,
-                dateTimeConverterMock.Object);
-
+            var request = CreateRequest();
+            
             // Act
             await sut.Handle(request, default);
 
@@ -51,18 +57,12 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
             dateTimeConverterMock.Verify(d => d.GetTimeSlotStartDate(request.Date), Times.Once);
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public async Task Handle_WhenCalled_ShouldCallToExpression(
-            [Frozen] Mock<IPriceRepository> priceRepositoryMock,
-            [Frozen] Mock<IGetAveragePriceSpecification> specificationMock,
-            [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
             Expression<Func<Price, bool>> expression,
             int timeslot)
         {
             // Arrange
-            var request = CreateRequest();
-
             dateTimeConverterMock
                 .Setup(d => d.DateTimeToTimeSlot(It.IsAny<DateTime>()))
                 .Returns(timeslot);
@@ -71,11 +71,8 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
                 .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
                 .Returns(expression);
 
-            var sut = new GetAveragePriceQueryHandler(
-                priceRepositoryMock.Object,
-                specificationMock.Object,
-                dateTimeConverterMock.Object);
-
+            var request = CreateRequest();
+            
             // Act
             await sut.Handle(request, default);
 
@@ -83,105 +80,52 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
             specificationMock.Verify(s => s.ToExpression(request), Times.Once);
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public async Task Handle_WhenCalled_ShouldCallGetAllAsync(
-            [Frozen] Mock<IPriceRepository> priceRepositoryMock,
-            [Frozen] Mock<IGetAveragePriceSpecification> specificationMock,
-            [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
             Expression<Func<Price, bool>> expression)
         {
             // Arrange
-            var request = CreateRequest();
-
             specificationMock
                 .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
                 .Returns(expression);
 
             priceRepositoryMock
-                .Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>(), It.IsAny<Expression<Func<Price, double>>>()))
-                .ReturnsAsync(Enumerable.Empty<double>());
-
-            var sut = new GetAveragePriceQueryHandler(
-                priceRepositoryMock.Object,
-                specificationMock.Object,
-                dateTimeConverterMock.Object);
+                .Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>(),
+                    It.IsAny<Expression<Func<Price, double>>>()))
+                .ReturnsAsync(new List<double>());
 
             // Act
-            await sut.Handle(request, default);
+            await sut.Handle(CreateRequest(), default);
 
             // Assert
-            priceRepositoryMock.Verify(r => r.GetAllAsync(expression, It.IsAny<Expression<Func<Price, double>>>()), Times.Once);
+            priceRepositoryMock.Verify(
+                r => r.GetAllAsync(expression, It.IsAny<Expression<Func<Price, double>>>()),
+                Times.Once);
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public async Task Handle_WhenNoPrice_ShouldBeNotFound(
-            [Frozen] Mock<IPriceRepository> priceRepositoryMock,
-            [Frozen] Mock<IGetAveragePriceSpecification> specificationMock,
-            [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
             Expression<Func<Price, bool>> expression)
         {
             // Arrange
-            var request = CreateRequest();
-
             specificationMock
                 .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
                 .Returns(expression);
 
             priceRepositoryMock
-                .Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>(), It.IsAny<Expression<Func<Price, double>>>()))
-                .ReturnsAsync(Enumerable.Empty<double>());
-
-            var sut = new GetAveragePriceQueryHandler(
-                priceRepositoryMock.Object,
-                specificationMock.Object,
-                dateTimeConverterMock.Object);
+                .Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>(),
+                    It.IsAny<Expression<Func<Price, double>>>()))
+                .ReturnsAsync(new List<double>());
 
             // Act
-            var actual = await sut.Handle(request, default);
+            var actual = await sut.Handle(CreateRequest(), default);
 
             // Assert
             actual.Should().BeOfType<NotFoundHandlerResult<AveragePriceDto>>();
         }
 
-        [Theory]
-        [AutoMoqData]
-        public async Task Handle_WhenPriceExists_ShouldBeData(
-            [Frozen] Mock<IPriceRepository> priceRepositoryMock,
-            [Frozen] Mock<IGetAveragePriceSpecification> specificationMock,
-            [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
-            Expression<Func<Price, bool>> expression)
-        {
-            // Arrange
-            var request = CreateRequest();
-
-            specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
-                .Returns(expression);
-
-            priceRepositoryMock
-                .Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>(), It.IsAny<Expression<Func<Price, double>>>()))
-                .ReturnsAsync(new double[] { 42 });
-
-            var sut = new GetAveragePriceQueryHandler(
-                priceRepositoryMock.Object,
-                specificationMock.Object,
-                dateTimeConverterMock.Object);
-
-            // Act
-            var actual = await sut.Handle(request, default);
-
-            // Assert
-            actual.Should().BeOfType<DataHandlerResult<AveragePriceDto>>();
-        }
-
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public async Task Handle_WhenPriceExists_ShouldReturnCorrectAverage(
-            [Frozen] Mock<IPriceRepository> priceRepositoryMock,
-            [Frozen] Mock<IGetAveragePriceSpecification> specificationMock,
-            [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
             Expression<Func<Price, bool>> expression,
             DateTime timeslotDate,
             double average)
@@ -204,30 +148,25 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetAveragePrice
                 .Returns(expression);
 
             priceRepositoryMock
-                .Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>(), It.IsAny<Expression<Func<Price, double>>>()))
-                .ReturnsAsync(new double[] { average });
-
-            var sut = new GetAveragePriceQueryHandler(
-                priceRepositoryMock.Object,
-                specificationMock.Object,
-                dateTimeConverterMock.Object);
+                .Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>(),
+                    It.IsAny<Expression<Func<Price, double>>>()))
+                .ReturnsAsync(new List<double> { average });
 
             // Act
-            var actual = await sut.Handle(request, default) as DataHandlerResult<AveragePriceDto>;
+            var actual = await sut.Handle(request, default);
 
             // Assert
-            actual.Data.Should().BeEquivalentTo(expected);
+            actual.Should().BeAssignableTo<DataHandlerResult<AveragePriceDto>>()
+                .Which.Data.Should().BeEquivalentTo(expected);
         }
 
-        private static GetAveragePriceQuery CreateRequest()
-        {
-            return new GetAveragePriceQuery
+        private static GetAveragePriceQuery CreateRequest() =>
+            new GetAveragePriceQuery
             {
                 Date = new DateTime(2018, 1, 1),
                 Instrument = "instrument",
                 Owner = "owner",
                 Portfolio = "portfolio"
             };
-        }
     }
 }
