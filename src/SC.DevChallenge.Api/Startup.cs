@@ -30,6 +30,7 @@ namespace SC.DevChallenge.Api
                     .AddAutoMapper(typeof(Startup).Assembly)
                     .AddDevChallengeCompression()
                     .AddDevChallengeMvc()
+                    .AddDevChallengeProfiler()
                     .AddDevChallengeDb(this.config)
                     .AddMemoryCache()
                     .AddDevChallengeCors()
@@ -39,10 +40,10 @@ namespace SC.DevChallenge.Api
         public static void ConfigureContainer(ContainerBuilder builder) =>
             builder.RegisterAssemblyModules(typeof(Startup).Assembly);
 
-
         [SuppressMessage("Performance", "CA1822:Mark members as static")]
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) =>
             app.UseExceptionHandler(env)
+               .UseHttpsRedirection()
                .UseStaticFiles()
                .UseSerilogRequestLogging()
                .UseRouting()

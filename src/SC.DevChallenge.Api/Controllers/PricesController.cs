@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SC.DevChallenge.Api.Requests.Prices;
 using SC.DevChallenge.Queries.Prices.GetAggregate;
 using SC.DevChallenge.Queries.Prices.GetAverage;
