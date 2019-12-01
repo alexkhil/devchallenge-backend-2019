@@ -35,6 +35,7 @@ namespace SC.DevChallenge.Api
                     .AddMemoryCache()
                     .AddDevChallengeCors()
                     .AddRouteOptions()
+                    .AddDevChallengeHealthChecks()
                     .AddDevChallengeSwagger();
 
         public static void ConfigureContainer(ContainerBuilder builder) =>
@@ -49,6 +50,10 @@ namespace SC.DevChallenge.Api
                .UseRouting()
                .UseCors()
                .UseAuthentication()
-               .UseEndpoints(e => e.MapControllers());
+               .UseEndpoints(e =>
+               {
+                   e.MapControllers();
+                   e.MapHealthChecks("/health");
+               });
     }
 }
