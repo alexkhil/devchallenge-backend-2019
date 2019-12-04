@@ -46,10 +46,11 @@ namespace SC.DevChallenge.Api
             app.UseExceptionHandler(env)
                .UseHttpsRedirection()
                .UseStaticFiles()
+               .UseDevChallengeSwaggerUi()
                .UseSerilogRequestLogging()
-               .UseRouting()
                .UseCors()
                .UseAuthentication()
+               .UseRouting()
                .UseEndpoints(e =>
                {
                    e.MapControllers();

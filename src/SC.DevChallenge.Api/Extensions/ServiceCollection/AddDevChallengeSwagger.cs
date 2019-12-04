@@ -5,9 +5,9 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
+using Microsoft.OpenApi.Models;
 using SC.DevChallenge.Api.Constants;
 using SC.DevChallenge.Domain.Constants;
-using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SC.DevChallenge.Api.Extensions.ServiceCollection
@@ -24,12 +24,10 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
                 var assemblyProduct = assembly.GetCustomAttribute<AssemblyProductAttribute>().Product;
                 var assemblyDescription = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
 
-                options.DescribeAllEnumsAsStrings();
                 options.DescribeAllParametersInCamelCase();
-                options.DescribeStringEnumsInCamelCase();
-                options.MapType<DateTime>(() => new Schema { Type = "string", Pattern = DateFormat.Pattern });
+                options.MapType<DateTime>(() => new OpenApiSchema { Type = "string", Pattern = DateFormat.Pattern });
 
-                options.SwaggerDoc(ApiVersions.V1, new Info
+                options.SwaggerDoc(ApiVersions.V1, new OpenApiInfo
                 {
                     Version = ApiVersions.V1,
                     Title = assemblyProduct,

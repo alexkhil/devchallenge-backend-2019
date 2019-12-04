@@ -9,7 +9,7 @@ namespace SC.DevChallenge.Api.Extensions.ApplicationBuilder
     {
         public static IApplicationBuilder UseDevChallengeSwaggerUi(this IApplicationBuilder appBuilder)
         {
-            return appBuilder.UseSwaggerUI(SetupSwaggerUiOptions);
+            return appBuilder.UseSwagger().UseSwaggerUI(SetupSwaggerUiOptions);
 
             static void SetupSwaggerUiOptions(SwaggerUIOptions options)
             {
