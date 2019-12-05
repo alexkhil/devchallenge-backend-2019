@@ -50,7 +50,7 @@ For **Windows**
 # Open PowerShell
 
 # Go into the folder with solution and run:
-./build/cake/build.ps1 -Script build/cake/build.cake -Target Run-Integration-Tests
+./build/cake/build.ps1 -Script build/cake/build.cake -Target=Run-Integration-Tests
 ```
 
 For **Unix**:
