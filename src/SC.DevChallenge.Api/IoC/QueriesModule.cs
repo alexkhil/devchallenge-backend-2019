@@ -11,9 +11,15 @@ namespace SC.DevChallenge.Api.IoC
     {
         protected override Assembly ThisAssembly => typeof(QueryHandlerBase<,>).Assembly;
 
-        protected override void Load(ContainerBuilder builder) =>
+        protected override void Load(ContainerBuilder builder)
+        {
             builder.RegisterAssemblyTypes(this.ThisAssembly)
                    .AsClosedTypesOf(typeof(IRequestHandler<,>))
                    .AsImplementedInterfaces();
+
+            builder.RegisterAssemblyTypes(this.ThisAssembly)
+                   .AsClosedTypesOf(typeof(ISpecification<,>))
+                   .AsImplementedInterfaces();
+        }
     }
 }

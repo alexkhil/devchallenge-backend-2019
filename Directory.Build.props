@@ -13,6 +13,7 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
     <DebugType>Full</DebugType>
   </PropertyGroup>
 </Project>

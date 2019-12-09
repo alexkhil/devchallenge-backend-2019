@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SC.DevChallenge.Api.Extensions.Host;
+using SC.DevChallenge.DataAccess.EF;
 using Serilog;
 
 namespace SC.DevChallenge.Api
@@ -21,6 +23,7 @@ namespace SC.DevChallenge.Api
             try
             {
                 Log.Information("Starting web host");
+                await host.MigrateDatabaseAsync<AppDbContext>();
                 await host.RunAsync();
 
                 return 0;

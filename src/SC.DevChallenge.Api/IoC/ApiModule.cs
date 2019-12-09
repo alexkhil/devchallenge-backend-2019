@@ -13,7 +13,7 @@ namespace SC.DevChallenge.Api.IoC
         protected override void Load(ContainerBuilder builder)
         {
             this.RegisterExceptionHandling(builder);
-            this.RedisterControllers(builder);
+            this.RegisterControllers(builder);
             this.RegisterMediator(builder);
         }
 
@@ -40,7 +40,7 @@ namespace SC.DevChallenge.Api.IoC
             });
         }
 
-        private void RedisterControllers(ContainerBuilder builder) =>
+        private void RegisterControllers(ContainerBuilder builder) =>
             builder.RegisterAssemblyTypes(this.ThisAssembly)
                    .Where(x => x.IsAssignableTo<ControllerBase>())
                    .PropertiesAutowired();

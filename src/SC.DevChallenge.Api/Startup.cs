@@ -26,7 +26,6 @@ namespace SC.DevChallenge.Api
 
         public void ConfigureServices(IServiceCollection services) =>
             services.AddOptions()
-                    .AddDevChallengeHostedServices()
                     .AddAutoMapper(typeof(Startup).Assembly)
                     .AddDevChallengeCompression()
                     .AddDevChallengeMvc()

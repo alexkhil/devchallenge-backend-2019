@@ -5,14 +5,21 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using SC.DevChallenge.Api.Integration.Tests.Fixtures;
 using SC.DevChallenge.Domain.Constants;
 using SC.DevChallenge.Queries.ViewModels;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace SC.DevChallenge.Api.Integration.Tests.Controllers
 {
     public class PricesControllerTests : BaseControllerTest
     {
+        public PricesControllerTests(AppTestFixture appTestFixture, ITestOutputHelper output)
+            :base(appTestFixture, output)
+        {
+        }
+
         [Fact]
         public async Task GetAveragePrice_ValidRequest_HttpStatusCodeOK()
         {
