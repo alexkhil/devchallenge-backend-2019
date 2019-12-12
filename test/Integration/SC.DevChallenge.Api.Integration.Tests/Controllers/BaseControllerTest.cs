@@ -1,6 +1,5 @@
 using System;
 using System.Net.Http;
-using Microsoft.AspNetCore.Mvc.Testing;
 using SC.DevChallenge.Api.Integration.Tests.Fixtures;
 using SC.DevChallenge.Api.Integration.Tests.Fixtures.Collections;
 using Xunit;

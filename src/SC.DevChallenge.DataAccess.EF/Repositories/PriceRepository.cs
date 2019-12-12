@@ -41,10 +41,17 @@ namespace SC.DevChallenge.DataAccess.EF.Repositories
         public async Task<int> GetPricesCount(int timeslot) =>
             await this.dbContext.Prices.CountAsync(p => p.Timeslot == timeslot);
 
-        public async Task<Dictionary<int, double>> GetAveragePricesAsync(string portfolio, int startTimeslot, int endTimeslot) =>
-            await this.dbContext.Prices
-            .Where(x => x.Portfolio.Name == portfolio && x.Timeslot >= startTimeslot && x.Timeslot <= endTimeslot)
-            .GroupBy(x => x.Timeslot, x => x.Value)
-            .ToDictionaryAsync(x => x.Key, x => x.Average());
+        public async Task<Dictionary<int, double>> GetAveragePricesAsync(
+            string portfolio,
+            int startTimeslot,
+            int endTimeslot)
+        {
+            var timeslots = await this.dbContext.Prices
+                .Where(x => x.Portfolio.Name == portfolio && x.Timeslot >= startTimeslot && x.Timeslot <= endTimeslot)
+                .Select(x => new {x.Timeslot, x.Value})
+                .ToListAsync();
+
+            return timeslots.GroupBy(x => x.Timeslot, x => x.Value).ToDictionary(x => x.Key, x => x.Average());
+        }
     }
 }

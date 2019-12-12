@@ -9,7 +9,7 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
     {
         public static IServiceCollection AddDevChallengeCompression(this IServiceCollection services)
         {
-            var compressionLevel = CompressionLevel.Optimal;
+            const CompressionLevel compressionLevel = CompressionLevel.Optimal;
 
             return services.Configure<BrotliCompressionProviderOptions>(options => options.Level = compressionLevel)
                 .Configure<GzipCompressionProviderOptions>(options => options.Level = compressionLevel)

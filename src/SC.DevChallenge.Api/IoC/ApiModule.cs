@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using SC.DevChallenge.Api.ExceptionHandling;
 using SC.DevChallenge.Api.ExceptionHandling.Abstractions;
 
@@ -13,7 +12,6 @@ namespace SC.DevChallenge.Api.IoC
         protected override void Load(ContainerBuilder builder)
         {
             this.RegisterExceptionHandling(builder);
-            this.RegisterControllers(builder);
             this.RegisterMediator(builder);
         }
 
@@ -39,10 +37,5 @@ namespace SC.DevChallenge.Api.IoC
                 return t => c.Resolve(t);
             });
         }
-
-        private void RegisterControllers(ContainerBuilder builder) =>
-            builder.RegisterAssemblyTypes(this.ThisAssembly)
-                   .Where(x => x.IsAssignableTo<ControllerBase>())
-                   .PropertiesAutowired();
     }
 }

@@ -15,7 +15,9 @@ namespace SC.DevChallenge.Api.Integration.Tests.Fixtures
             return hostBuilder.UseSerilog(ConfigureSerilog);
 
             void ConfigureSerilog(HostBuilderContext hostBuilderContext, LoggerConfiguration configuration) =>
-                configuration.WriteTo.TestOutput(this.Output);
+                configuration
+                    .WriteTo.TestOutput(this.Output)
+                    .MinimumLevel.Error();
         }
     }
 }

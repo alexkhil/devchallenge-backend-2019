@@ -44,7 +44,7 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
                 DependencyContext.Default.GetDefaultAssemblyNames()
                     .Where(assembly => assembly.FullName.StartsWith("SC.DevChallenge", StringComparison.InvariantCulture))
                     .Select(p => Path.Combine(AppContext.BaseDirectory, $"{p.Name}.xml"))
-                    .Where(p => File.Exists(p));
+                    .Where(File.Exists);
         }
     }
 }

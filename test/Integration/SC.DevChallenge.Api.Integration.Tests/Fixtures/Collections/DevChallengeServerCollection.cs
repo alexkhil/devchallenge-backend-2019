@@ -3,7 +3,7 @@
 namespace SC.DevChallenge.Api.Integration.Tests.Fixtures.Collections
 {
     [CollectionDefinition(nameof(DevChallengeServerCollection))]
-    public class DevChallengeServerCollection : IClassFixture<AppTestFixture>
+    public class DevChallengeServerCollection : ICollectionFixture<AppTestFixture>
     {
     }
 }

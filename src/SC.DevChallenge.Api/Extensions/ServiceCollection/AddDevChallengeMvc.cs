@@ -12,7 +12,6 @@ namespace SC.DevChallenge.Api.Extensions.ServiceCollection
         {
             return services.AddControllers(SetupMvcOptions)
                 .AddJsonOptions(SetupJsonOptions)
-                .AddControllersAsServices()
                 .SetCompatibilityVersion(CompatibilityVersion.Latest)
                 .Services;
 

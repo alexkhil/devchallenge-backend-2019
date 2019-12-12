@@ -14,9 +14,9 @@ namespace SC.DevChallenge.Api
     public static class Program
     {
         public static Task Main(string[] args) =>
-            LoadAndRun(CreateHostBuilder(args).Build());
+            RunAsync(CreateHostBuilder(args).Build());
 
-        private static async Task<int> LoadAndRun(IHost host)
+        private static async Task RunAsync(IHost host)
         {
             Log.Logger = BuildLogger(host);
 
@@ -25,8 +25,6 @@ namespace SC.DevChallenge.Api
                 Log.Information("Starting web host");
                 await host.MigrateDatabaseAsync<AppDbContext>();
                 await host.RunAsync();
-
-                return 0;
             }
             catch (Exception ex)
             {
@@ -43,7 +41,7 @@ namespace SC.DevChallenge.Api
             Host.CreateDefaultBuilder(args)
                 .UseSerilog()
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+                .ConfigureWebHostDefaults(hostBuilder => hostBuilder.UseStartup<Startup>());
 
         private static ILogger BuildLogger(IHost host) =>
             new LoggerConfiguration()
