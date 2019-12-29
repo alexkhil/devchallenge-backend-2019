@@ -20,7 +20,7 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
             this.Client = this.webAppFactory.CreateClient();
         }
 
-        public HttpClient Client { get; }
+        protected HttpClient Client { get; }
 
         public void Dispose()
         {

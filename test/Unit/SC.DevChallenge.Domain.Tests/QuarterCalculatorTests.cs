@@ -1,8 +1,7 @@
 ﻿using FluentAssertions;
-using SC.DevChallenge.Domain.Quarter;
 using Xunit;
 
-namespace SC.DevChallenge.Domain.Tests.Quarter
+namespace SC.DevChallenge.Domain.Tests
 {
     public class QuarterCalculatorTests
     {

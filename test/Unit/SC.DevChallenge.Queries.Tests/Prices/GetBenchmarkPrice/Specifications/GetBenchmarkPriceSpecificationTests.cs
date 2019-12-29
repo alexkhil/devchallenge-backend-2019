@@ -2,19 +2,18 @@
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using Moq;
-using Photostudios.Tests;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
-using SC.DevChallenge.Domain.DateTimeConverter;
-using SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice;
-using SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice.Specifications;
+using SC.DevChallenge.Domain.Abstractions;
+using SC.DevChallenge.Queries.Prices.GetBenchmark;
+using SC.DevChallenge.Queries.Prices.GetBenchmark.Specifications;
+using SC.DevChallenge.Tests;
 using Xunit;
 
-namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetBenchmarkPrice.Specifications
+namespace SC.DevChallenge.Queries.Tests.Prices.GetBenchmarkPrice.Specifications
 {
     public class GetBenchmarkPriceSpecificationTests
     {
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public void IsSatisfyBy_PortfolioNameInvalid_ReturnFalse(
             [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
             GetBenchmarkPriceQuery request,
@@ -37,8 +36,7 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetBenchmarkPrice.Specifi
             actual.Should().BeFalse();
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public void IsSatisfyBy_TimeslotInvalid_ReturnFalse(
             [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
             GetBenchmarkPriceQuery request,
@@ -62,8 +60,7 @@ namespace SC.DevChallenge.MediatR.Queries.Tests.Prices.GetBenchmarkPrice.Specifi
             actual.Should().BeFalse();
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public void IsSatisfyBy_Valid_ReturnTrue(
             [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
             GetBenchmarkPriceQuery request,

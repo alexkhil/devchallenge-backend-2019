@@ -1,114 +1,102 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AutoFixture.Xunit2;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Photostudios.Tests;
 using SC.DevChallenge.Api.Controllers;
-using SC.DevChallenge.Dto.Prices.GetAveragePrice;
-using SC.DevChallenge.Mapping.Abstractions;
+using SC.DevChallenge.Api.Requests.Prices;
 using SC.DevChallenge.MediatR.Core.HandlerResults;
 using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
-using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
+using SC.DevChallenge.Queries.Prices.GetAverage;
+using SC.DevChallenge.Queries.ViewModels;
+using SC.DevChallenge.Tests;
 using Xunit;
 
 namespace SC.DevChallenge.Api.Tests.Controllers
 {
     public class PricesControllerTests
     {
-        [Theory]
-        [AutoMoqData]
-        public async Task GetAveragePrice_WhenCalled_ShouldMapDto(
-            [Frozen] Mock<IMapper> mapperMock,
-            [Frozen] Mock<IMediator> mediatorMock,
-            GetAveragePriceDto dto)
+        private readonly Mock<IMapper> mapperMock;
+        private readonly Mock<IMediator> mediatorMock;
+        private readonly PricesController sut;
+
+        public PricesControllerTests()
         {
-            // Arrange
-            mapperMock
-                .Setup(m => m.Map<GetAveragePriceQuery>(It.IsAny<GetAveragePriceDto>()))
-                .Returns(It.IsAny<GetAveragePriceQuery>());
-
-            var sut = new PricesController();
-
-            // Act
-            await sut.GetAverage(dto);
-
-            // Assert
-            mapperMock.Verify(m => m.Map<GetAveragePriceQuery>(dto), Times.Once);
+            this.mapperMock = new Mock<IMapper>();
+            this.mediatorMock = new Mock<IMediator>();
+            this.sut = new PricesController(
+                this.mapperMock.Object,
+                this.mediatorMock.Object);
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
+        public async Task GetAveragePrice_WhenCalled_ShouldMapDto(GetAveragePriceDto dto)
+        {
+            // Arrange
+            this.mapperMock
+                .Setup(m => m.Map<GetAveragePriceQuery>(dto))
+                .Returns(It.IsAny<GetAveragePriceQuery>());
+
+            // Act
+            await this.sut.GetAverage(dto);
+
+            // Assert
+            this.mapperMock.VerifyAll();
+        }
+
+        [Theory, AutoMoqData]
         public async Task GetAveragePrice_WhenCalled_ShouldSendQuery(
-            [Frozen] Mock<IMapper> mapperMock,
-            [Frozen] Mock<IMediator> mediatorMock,
             GetAveragePriceDto dto,
             GetAveragePriceQuery query)
         {
             // Arrange
-            mapperMock
-                .Setup(m => m.Map<GetAveragePriceQuery>(It.IsAny<GetAveragePriceDto>()))
+            this.mapperMock
+                .Setup(m => m.Map<GetAveragePriceQuery>(dto))
                 .Returns(query);
 
-            mediatorMock
-                .Setup(m => m.Send(It.IsAny<GetAveragePriceQuery>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(It.IsAny<IHandlerResult<AveragePriceDto>>());
-
-            var sut = new PricesController();
+            this.mediatorMock
+                .Setup(m => m.Send(query, default))
+                .ReturnsAsync(It.IsAny<IHandlerResult<AveragePriceViewModel>>());
 
             // Act
-            await sut.GetAverage(dto);
+            await this.sut.GetAverage(dto);
 
             // Assert
-            mediatorMock.Verify(m => m.Send(query, default), Times.Once);
+            this.mediatorMock.VerifyAll();
         }
 
-        [Theory]
-        [AutoMoqData]
-        public async Task GetAveragePrice_WhenNoPrices_ShouldBeNotFound(
-            [Frozen] Mock<IMapper> mapperMock,
-            [Frozen] Mock<IMediator> mediatorMock,
-            GetAveragePriceDto dto)
+        [Theory, AutoMoqData]
+        public async Task GetAveragePrice_WhenNoPrices_ShouldBeNotFound(GetAveragePriceDto dto)
         {
             // Arrange
-            mediatorMock
-                .Setup(m => m.Send(It.IsAny<GetAveragePriceQuery>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(It.IsAny<NotFoundHandlerResult<AveragePriceDto>>());
-
-            var sut = new PricesController();
+            this.mediatorMock
+                .Setup(m => m.Send(It.IsAny<GetAveragePriceQuery>(), default))
+                .ReturnsAsync(It.IsAny<NotFoundHandlerResult<AveragePriceViewModel>>());
 
             // Act
-            var actual = await sut.GetAverage(dto);
+            var actual = await this.sut.GetAverage(dto);
 
             // Assert
             actual.Should().BeOfType<NotFoundResult>();
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public async Task GetAveragePrice_WhenExistsPrices_ShouldBeOkObjectResult(
-            [Frozen] Mock<IMapper> mapperMock,
-            [Frozen] Mock<IMediator> mediatorMock,
-            AveragePriceDto resultDto,
+            AveragePriceViewModel resultDto,
             GetAveragePriceDto dto)
         {
             // Arrange
-            var result = new DataHandlerResult<AveragePriceDto>(resultDto);
-
-            mediatorMock
-                .Setup(m => m.Send(It.IsAny<GetAveragePriceQuery>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(result);
-
-            var sut = new PricesController();
+            this.mediatorMock
+                .Setup(m => m.Send(It.IsAny<GetAveragePriceQuery>(), default))
+                .ReturnsAsync(new DataHandlerResult<AveragePriceViewModel>(resultDto));
 
             // Act
-            var actual = await sut.GetAverage(dto);
+            var actual = await this.sut.GetAverage(dto);
 
             // Assert
             actual.Should().BeOfType<OkObjectResult>()
-                .Which.Value.Should().BeOfType<AveragePriceDto>().And.BeEquivalentTo(resultDto);
+                .Which.Value.Should().BeEquivalentTo(resultDto);
         }
     }
 }

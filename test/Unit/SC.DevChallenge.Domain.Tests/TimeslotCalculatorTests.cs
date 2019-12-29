@@ -1,11 +1,17 @@
 ﻿using FluentAssertions;
-using SC.DevChallenge.Domain.Timeslot;
 using Xunit;
 
-namespace SC.DevChallenge.Domain.Tests.Timeslot
+namespace SC.DevChallenge.Domain.Tests
 {
     public class TimeslotCalculatorTests
     {
+        private readonly TimeslotCalculator sut;
+
+        public TimeslotCalculatorTests()
+        {
+            this.sut = new TimeslotCalculator();
+        }
+
         [Theory]
         [InlineData(0.75, 0.5, 0)]
         public void GetLowerBound_WhenCalled_ReturnCorrect(
@@ -13,11 +19,8 @@ namespace SC.DevChallenge.Domain.Tests.Timeslot
             double interQuartileRange,
             double expected)
         {
-            // Arrange
-            var sut = new TimeslotCalculator();
-
             // Act
-            var actual = sut.GetLowerBound(averagePriceOfQuarter, interQuartileRange);
+            var actual = this.sut.GetLowerBound(averagePriceOfQuarter, interQuartileRange);
 
             // Assert
             actual.Should().Be(expected);
@@ -30,11 +33,8 @@ namespace SC.DevChallenge.Domain.Tests.Timeslot
             double interQuartileRange,
             double expected)
         {
-            // Arrange
-            var sut = new TimeslotCalculator();
-
             // Act
-            var actual = sut.GetHigherBound(averagePriceOfQuarter, interQuartileRange);
+            var actual = this.sut.GetHigherBound(averagePriceOfQuarter, interQuartileRange);
 
             // Assert
             actual.Should().Be(expected);

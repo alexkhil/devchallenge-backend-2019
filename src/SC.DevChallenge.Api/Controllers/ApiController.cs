@@ -7,12 +7,12 @@ using SC.DevChallenge.MediatR.Core.HandlerResults.Abstractions;
 namespace SC.DevChallenge.Api.Controllers
 {
     [Produces("application/json")]
-    public abstract class ApiControllerBase : ControllerBase
+    public abstract class ApiController : ControllerBase
     {
         protected readonly IMapper mapper;
         protected readonly IMediator mediator;
 
-        protected ApiControllerBase(IMapper mapper, IMediator mediator)
+        protected ApiController(IMapper mapper, IMediator mediator)
         {
             this.mapper = mapper;
             this.mediator = mediator;

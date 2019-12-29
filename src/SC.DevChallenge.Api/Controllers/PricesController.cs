@@ -12,7 +12,7 @@ using SC.DevChallenge.Queries.ViewModels;
 namespace SC.DevChallenge.Api.Controllers
 {
     [Route("api/[controller]")]
-    public class PricesController : ApiControllerBase
+    public class PricesController : ApiController
     {
         public PricesController(IMapper mapper, IMediator mediator)
             : base(mapper, mediator)
