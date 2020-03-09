@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -30,31 +31,25 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetBenchmarkPrice
             this.sut = new GetBenchmarkPriceQueryHandler(
                 this.specification.Object,
                 this.priceRepository.Object,
-                new Mock<IDateTimeConverter>().Object,
-                new Mock<IQuarterCalculator>().Object,
-                new Mock<ITimeslotCalculator>().Object);
+                Mock.Of<IDateTimeConverter>(),
+                Mock.Of<IQuarterCalculator>(),
+                Mock.Of<ITimeslotCalculator>());
         }
 
         [Theory, AutoMoqData]
-        public async Task Handle_WhenCalled_ShouldCallSpecification(
-            Expression<Func<Price, bool>> filter,
-            GetBenchmarkPriceQuery request)
+        public async Task Handle_WhenCalled_ShouldCallSpecification(GetBenchmarkPriceQuery request)
         {
             // Arrange
             this.specification
-                .Setup(x => x.ToExpression(It.IsAny<GetBenchmarkPriceQuery>()))
-                .Returns(filter);
-
-            this.priceRepository
-                .Setup(x => x.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>()))
-                .ReturnsAsync(new List<Price>());
+                .Setup(x => x.ToExpression(request))
+                .Returns(It.IsAny<Expression<Func<Price, bool>>>());
 
             // Act
 
             await this.sut.Handle(request, default);
 
             // Assert
-            this.specification.Verify(x => x.ToExpression(request), Times.Once);
+            this.specification.VerifyAll();
         }
 
         [Theory, AutoMoqData]
@@ -64,34 +59,32 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetBenchmarkPrice
         {
             // Arrange
             this.specification
-                .Setup(x => x.ToExpression(It.IsAny<GetBenchmarkPriceQuery>()))
+                .Setup(x => x.ToExpression(request))
                 .Returns(filter);
 
             this.priceRepository
-                .Setup(x => x.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>()))
-                .ReturnsAsync(new List<Price>());
+                .Setup(x => x.GetAllAsync(filter))
+                .ReturnsAsync(Array.Empty<Price>().ToList());
 
             // Act
 
             await this.sut.Handle(request, default);
 
             // Assert
-            this.priceRepository.Verify(x => x.GetAllAsync(filter), Times.Once);
+            this.priceRepository.VerifyAll();
         }
 
         [Theory, AutoMoqData]
-        public async Task Handle_WhenNoPrices_ReturnNotFound(
-            Expression<Func<Price, bool>> filter,
-            GetBenchmarkPriceQuery request)
+        public async Task Handle_WhenNoPrices_ReturnNotFound(GetBenchmarkPriceQuery request)
         {
             // Arrange
             this.specification
-                .Setup(x => x.ToExpression(It.IsAny<GetBenchmarkPriceQuery>()))
-                .Returns(filter);
-
+                .Setup(x => x.ToExpression(request))
+                .Returns(It.IsAny<Expression<Func<Price, bool>>>());
+            
             this.priceRepository
                 .Setup(x => x.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>()))
-                .ReturnsAsync(new List<Price>());
+                .ReturnsAsync(Array.Empty<Price>().ToList());
 
             // Act
             var actual = await this.sut.Handle(request, default);

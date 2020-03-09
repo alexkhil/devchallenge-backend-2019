@@ -13,14 +13,20 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetAveragePrice.Specifications
 {
     public class GetAveragePriceSpecificationTests
     {
+        private readonly Mock<IDateTimeConverter> dateTimeConverterMock;
+        private readonly GetAveragePriceSpecification sut;
+
+        public GetAveragePriceSpecificationTests()
+        {
+            this.dateTimeConverterMock = new Mock<IDateTimeConverter>();
+            this.sut = new GetAveragePriceSpecification(this.dateTimeConverterMock.Object);
+        }
+        
         [Theory, AutoMoqData]
-        public void IsSatisfiedBy_WhenSatisfied_ShouldReturnTrue(
-            [Frozen] Mock<IDateTimeConverter> converterMock,
-            Price price,
-            GetAveragePriceSpecification sut)
+        public void IsSatisfiedBy_WhenSatisfied_ShouldReturnTrue(Price price)
         {
             // Arrange
-            converterMock
+            this.dateTimeConverterMock
                 .Setup(x => x.DateTimeToTimeSlot(It.IsAny<DateTime>()))
                 .Returns(price.Timeslot);
 
@@ -32,16 +38,14 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetAveragePrice.Specifications
             };
 
             // Act
-            var actual = sut.IsSatisfiedBy(price, request);
+            var actual = this.sut.IsSatisfiedBy(price, request);
 
             // Assert
             actual.Should().BeTrue();
         }
 
         [Theory, AutoMoqData]
-        public void IsSatisfiedBy_WhenNotSatisfied_ShouldReturnFalse(
-            Price price,
-            GetAveragePriceSpecification sut)
+        public void IsSatisfiedBy_WhenNotSatisfied_ShouldReturnFalse(Price price)
         {
             // Arrange
             var request = new GetAveragePriceQuery
@@ -52,7 +56,7 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetAveragePrice.Specifications
             };
 
             // Act
-            var actual = sut.IsSatisfiedBy(price, request);
+            var actual = this.sut.IsSatisfiedBy(price, request);
 
             // Assert
             actual.Should().BeFalse();

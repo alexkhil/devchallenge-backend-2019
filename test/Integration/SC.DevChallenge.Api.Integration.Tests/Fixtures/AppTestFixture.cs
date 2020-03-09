@@ -7,8 +7,10 @@ namespace SC.DevChallenge.Api.Integration.Tests.Fixtures
 {
     public class AppTestFixture : WebApplicationFactory<Startup>
     {
-        public ITestOutputHelper? Output { get; set; }
+        public ITestOutputHelper Output { get; set; }
 
+        
+        
         protected override IHostBuilder CreateHostBuilder()
         {
             var hostBuilder = base.CreateHostBuilder();

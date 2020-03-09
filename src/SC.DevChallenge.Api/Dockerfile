@@ -20,11 +20,17 @@ COPY . ./
 RUN dotnet publish ./src/SC.DevChallenge.Api/SC.DevChallenge.Api.csproj -c Release --no-restore -o /app/out
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/core/runtime:$DotnetVersion-alpine AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:$DotnetVersion-alpine AS base
+
+RUN apk add icu-libs
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT false
+
 WORKDIR /app
 COPY --from=build /app/out .
 
-ENV ASPNETCORE_URLS=http://+:8080
-EXPOSE 8080/tcp
+# Container healthcheck
+HEALTHCHECK --interval=30s --timeout=30s --retries=3 \
+   CMD curl --silent --fail http://localhost:80/_health || exit 1
 
+EXPOSE 80/tcp
 ENTRYPOINT ["dotnet", "SC.DevChallenge.Api.dll"]

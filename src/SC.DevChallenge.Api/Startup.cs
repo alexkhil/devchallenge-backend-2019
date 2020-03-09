@@ -40,7 +40,6 @@ namespace SC.DevChallenge.Api
         public static void ConfigureContainer(ContainerBuilder builder) =>
             builder.RegisterAssemblyModules(typeof(Startup).Assembly);
 
-        [SuppressMessage("Performance", "CA1822:Mark members as static")]
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) =>
             app.UseExceptionHandler(env)
                .UseHttpsRedirection()
@@ -53,7 +52,7 @@ namespace SC.DevChallenge.Api
                .UseEndpoints(e =>
                {
                    e.MapControllers();
-                   e.MapHealthChecks("/health");
+                   e.MapHealthChecks("/_health");
                });
     }
 }

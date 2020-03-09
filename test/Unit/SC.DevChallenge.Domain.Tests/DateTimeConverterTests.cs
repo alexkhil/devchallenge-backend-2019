@@ -8,12 +8,7 @@ namespace SC.DevChallenge.Domain.Tests
 {
     public class DateTimeConverterTests
     {
-        private readonly DateTimeConverter sut;
-
-        public DateTimeConverterTests()
-        {
-            this.sut = new DateTimeConverter();
-        }
+        private readonly DateTimeConverter sut = new DateTimeConverter();
 
         [Theory]
         [InlineData("01/01/2018 00:00:00", 0)]

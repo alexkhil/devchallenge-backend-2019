@@ -13,15 +13,22 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetBenchmarkPrice.Specifications
 {
     public class GetBenchmarkPriceSpecificationTests
     {
+        private readonly Mock<IDateTimeConverter> dateTimeConverterMock;
+        private readonly GetBenchmarkPriceSpecification sut;
+
+        public GetBenchmarkPriceSpecificationTests()
+        {
+            this.dateTimeConverterMock = new Mock<IDateTimeConverter>();
+            
+            this.sut = new GetBenchmarkPriceSpecification(this.dateTimeConverterMock.Object);
+        }
+        
         [Theory, AutoMoqData]
-        public void IsSatisfyBy_PortfolioNameInvalid_ReturnFalse(
-            [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
-            GetBenchmarkPriceQuery request,
-            GetBenchmarkPriceSpecification sut)
+        public void IsSatisfyBy_PortfolioNameInvalid_ReturnFalse(GetBenchmarkPriceQuery request)
         {
             // Arrange
-            dateTimeConverterMock
-                .Setup(c => c.DateTimeToTimeSlot(It.IsAny<DateTime>()))
+            this.dateTimeConverterMock
+                .Setup(c => c.DateTimeToTimeSlot(request.Date))
                 .Returns(It.IsAny<int>());
 
             var price = new Price
@@ -30,21 +37,18 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetBenchmarkPrice.Specifications
             };
 
             // Act
-            var actual = sut.IsSatisfiedBy(price, request);
+            var actual = this.sut.IsSatisfiedBy(price, request);
 
             //Assert
             actual.Should().BeFalse();
         }
 
         [Theory, AutoMoqData]
-        public void IsSatisfyBy_TimeslotInvalid_ReturnFalse(
-            [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
-            GetBenchmarkPriceQuery request,
-            GetBenchmarkPriceSpecification sut)
+        public void IsSatisfyBy_TimeslotInvalid_ReturnFalse(GetBenchmarkPriceQuery request)
         {
             // Arrange
-            dateTimeConverterMock
-                .Setup(c => c.DateTimeToTimeSlot(It.IsAny<DateTime>()))
+            this.dateTimeConverterMock
+                .Setup(c => c.DateTimeToTimeSlot(request.Date))
                 .Returns(1);
 
             var price = new Price
@@ -54,22 +58,18 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetBenchmarkPrice.Specifications
             };
 
             // Act
-            var actual = sut.IsSatisfiedBy(price, request);
+            var actual = this.sut.IsSatisfiedBy(price, request);
 
             //Assert
             actual.Should().BeFalse();
         }
 
         [Theory, AutoMoqData]
-        public void IsSatisfyBy_Valid_ReturnTrue(
-            [Frozen] Mock<IDateTimeConverter> dateTimeConverterMock,
-            GetBenchmarkPriceQuery request,
-            int timeslot,
-            GetBenchmarkPriceSpecification sut)
+        public void IsSatisfyBy_Valid_ReturnTrue(GetBenchmarkPriceQuery request, int timeslot)
         {
             // Arrange
-            dateTimeConverterMock
-                .Setup(c => c.DateTimeToTimeSlot(It.IsAny<DateTime>()))
+            this.dateTimeConverterMock
+                .Setup(c => c.DateTimeToTimeSlot(request.Date))
                 .Returns(timeslot);
 
             var price = new Price
@@ -79,7 +79,7 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetBenchmarkPrice.Specifications
             };
 
             // Act
-            var actual = sut.IsSatisfiedBy(price, request);
+            var actual = this.sut.IsSatisfiedBy(price, request);
 
             //Assert
             actual.Should().BeTrue();

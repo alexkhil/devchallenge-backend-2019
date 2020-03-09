@@ -34,9 +34,9 @@ namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Fixtures
                 Date = new DateTime(2018, 1, 1),
                 Timeslot = 1,
                 Value = 42,
-                Portfolio = new Portfolio {Name = nameof(Portfolio)},
-                Owner = new Owner {Name = nameof(Owner)},
-                Instrument = new Instrument {Name = nameof(Instrument)}
+                Portfolio = new Portfolio { Name = nameof(Portfolio) },
+                Owner = new Owner { Name = nameof(Owner) },
+                Instrument = new Instrument { Name = nameof(Instrument) }
             });
             await this.AppDbContext.SaveChangesAsync();
         }

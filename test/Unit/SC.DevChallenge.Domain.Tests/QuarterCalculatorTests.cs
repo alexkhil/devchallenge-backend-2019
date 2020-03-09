@@ -10,10 +10,7 @@ namespace SC.DevChallenge.Domain.Tests
         [InlineData(3, 1, 0)]
         [InlineData(1, 5, 1)]
         [InlineData(3, 5, 3)]
-        public void GetQuarter_WhenCalled_ReturnCorrect(
-            int quarterNumber,
-            int timeslotElemCount,
-            int expected)
+        public void GetQuarter_WhenCalled_ReturnCorrect(int quarterNumber, int timeslotElemCount, int expected)
         {
             // Arrange
             var sut = new QuarterCalculator();

@@ -31,8 +31,8 @@ namespace SC.DevChallenge.Api.Controllers
         public async Task<IActionResult> GetAverage(
             [FromQuery] GetAveragePriceDto data)
         {
-            var query = this.mapper.Map<GetAveragePriceQuery>(data);
-            var result = await this.mediator.Send(query);
+            var query = this.Mapper.Map<GetAveragePriceQuery>(data);
+            var result = await this.Mediator.Send(query);
             return this.FromResult(result);
         }
 
@@ -48,8 +48,8 @@ namespace SC.DevChallenge.Api.Controllers
         public async Task<IActionResult> GetBenchmark(
             [FromQuery] GetBenchmarkPriceDto data)
         {
-            var query = this.mapper.Map<GetBenchmarkPriceQuery>(data);
-            var result = await this.mediator.Send(query);
+            var query = this.Mapper.Map<GetBenchmarkPriceQuery>(data);
+            var result = await this.Mediator.Send(query);
             return this.FromResult(result);
         }
 
@@ -65,8 +65,8 @@ namespace SC.DevChallenge.Api.Controllers
         public async Task<IActionResult> GetAggregate(
             [FromQuery] GetAggregatePriceDto data)
         {
-            var query = this.mapper.Map<GetAggregatePriceQuery>(data);
-            var result = await this.mediator.Send(query);
+            var query = this.Mapper.Map<GetAggregatePriceQuery>(data);
+            var result = await this.Mediator.Send(query);
             return this.FromResult(result);
         }
     }

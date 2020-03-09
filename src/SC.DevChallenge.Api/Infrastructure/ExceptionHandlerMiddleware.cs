@@ -5,7 +5,7 @@ using SC.DevChallenge.Api.ExceptionHandling.Abstractions;
 
 namespace SC.DevChallenge.Api.Infrastructure
 {
-    public class ExceptionHandlerMiddleware
+    public sealed class ExceptionHandlerMiddleware
     {
         private readonly RequestDelegate next;
         private readonly IExceptionRequestHandler exceptionRequestHandler;

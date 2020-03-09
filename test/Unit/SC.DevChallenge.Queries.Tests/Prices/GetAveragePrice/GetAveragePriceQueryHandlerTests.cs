@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -35,49 +36,46 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetAveragePrice
                 this.dateTimeConverterMock.Object);
         }
 
-        [Theory, AutoMoqData]
-        public async Task Handle_WhenCalled_ShouldCallGetTimeSlotStartDate(
-            Expression<Func<Price, bool>> expression)
+        [Fact]
+        public async Task Handle_WhenCalled_ShouldCallGetTimeSlotStartDate()
         {
             // Arrange
-            this.specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
-                .Returns(expression);
-
-            this.dateTimeConverterMock
-                .Setup(d => d.GetTimeSlotStartDate(It.IsAny<DateTime>()))
-                .Returns(It.IsAny<DateTime>());
-
             var request = CreateRequest();
+            
+            this.specificationMock
+                .Setup(s => s.ToExpression(request))
+                .Returns(It.IsAny<Expression<Func<Price, bool>>>());
+            
+            this.dateTimeConverterMock
+                .Setup(d => d.GetTimeSlotStartDate(request.Date))
+                .Returns(It.IsAny<DateTime>());
 
             // Act
             await this.sut.Handle(request, default);
 
             // Assert
-            this.dateTimeConverterMock.Verify(d => d.GetTimeSlotStartDate(request.Date), Times.Once);
+            this.dateTimeConverterMock.VerifyAll();
         }
 
         [Theory, AutoMoqData]
-        public async Task Handle_WhenCalled_ShouldCallToExpression(
-            Expression<Func<Price, bool>> expression,
-            int timeslot)
+        public async Task Handle_WhenCalled_ShouldCallToExpression(int timeslot)
         {
             // Arrange
-            this.dateTimeConverterMock
-                .Setup(d => d.DateTimeToTimeSlot(It.IsAny<DateTime>()))
-                .Returns(timeslot);
-
-            this.specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
-                .Returns(expression);
-
             var request = CreateRequest();
+            
+            this.specificationMock
+                .Setup(s => s.ToExpression(request))
+                .Returns(It.IsAny<Expression<Func<Price, bool>>>());
+            
+            this.dateTimeConverterMock
+                .Setup(d => d.DateTimeToTimeSlot(request.Date))
+                .Returns(timeslot);
 
             // Act
             await this.sut.Handle(request, default);
 
             // Assert
-            this.specificationMock.Verify(s => s.ToExpression(request), Times.Once);
+            this.specificationMock.VerifyAll();
         }
 
         [Theory, AutoMoqData]
@@ -85,22 +83,22 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetAveragePrice
             Expression<Func<Price, bool>> expression)
         {
             // Arrange
+            var request = CreateRequest();
+            
             this.specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
+                .Setup(s => s.ToExpression(request))
                 .Returns(expression);
 
             this.priceRepositoryMock
-                .Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>(),
+                .Setup(r => r.GetAllAsync(expression,
                     It.IsAny<Expression<Func<Price, double>>>()))
-                .ReturnsAsync(new List<double>());
+                .ReturnsAsync(It.IsAny<List<double>>());
 
             // Act
-            await this.sut.Handle(CreateRequest(), default);
+            await this.sut.Handle(request, default);
 
             // Assert
-            this.priceRepositoryMock.Verify(
-                r => r.GetAllAsync(expression, It.IsAny<Expression<Func<Price, double>>>()),
-                Times.Once);
+            this.priceRepositoryMock.VerifyAll();
         }
 
         [Theory, AutoMoqData]
@@ -108,17 +106,19 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetAveragePrice
             Expression<Func<Price, bool>> expression)
         {
             // Arrange
+            var request = CreateRequest();
+            
             this.specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
+                .Setup(s => s.ToExpression(request))
                 .Returns(expression);
 
             this.priceRepositoryMock
-                .Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>(),
+                .Setup(r => r.GetAllAsync(expression,
                     It.IsAny<Expression<Func<Price, double>>>()))
-                .ReturnsAsync(new List<double>());
+                .ReturnsAsync(Array.Empty<double>().ToList());
 
             // Act
-            var actual = await this.sut.Handle(CreateRequest(), default);
+            var actual = await this.sut.Handle(request, default);
 
             // Assert
             actual.Should().BeOfType<NotFoundHandlerResult<AveragePriceViewModel>>();
@@ -144,11 +144,11 @@ namespace SC.DevChallenge.Queries.Tests.Prices.GetAveragePrice
                 .Returns(timeslotDate);
 
             this.specificationMock
-                .Setup(s => s.ToExpression(It.IsAny<GetAveragePriceQuery>()))
+                .Setup(s => s.ToExpression(request))
                 .Returns(expression);
 
             this.priceRepositoryMock
-                .Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<Price, bool>>>(),
+                .Setup(r => r.GetAllAsync(expression,
                     It.IsAny<Expression<Func<Price, double>>>()))
                 .ReturnsAsync(new List<double> { average });
 

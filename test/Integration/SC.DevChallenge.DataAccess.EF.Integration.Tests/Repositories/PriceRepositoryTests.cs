@@ -1,7 +1,9 @@
 using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Moq;
 using SC.DevChallenge.Tests;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
@@ -23,18 +25,14 @@ namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
             this.sut = new PriceRepository(pricesDbFixture.AppDbContext);
         }
 
-        [Theory, AutoMoqData]
-        public async Task GetAllAsync_WhenCalledWithExistingPrice_ShouldReturnOneRecord(
-            [Frozen] Mock<IDateTimeConverter> converterMock,
-            GetAveragePriceSpecification specification)
+        [Fact]
+        public async Task GetAllAsync_WhenCalledWithExistingPrice_ShouldReturnOneRecord()
         {
             // Arrange
-            converterMock.Setup(x => x.DateTimeToTimeSlot(It.IsAny<DateTime>())).Returns(1);
-            var request = new GetAveragePriceQuery
-            {
-                Portfolio = nameof(Portfolio), Owner = nameof(Owner), Instrument = nameof(Instrument)
-            };
-            var filter = specification.ToExpression(request);
+            Expression<Func<Price, bool>> filter = x =>
+                x.Portfolio.Name == nameof(Portfolio) &&
+                x.Owner.Name == nameof(Owner) &&
+                x.Instrument.Name == nameof(Instrument);
 
             // Act
             var actual = await this.sut.GetAllAsync(filter, p => p.Value);
@@ -44,18 +42,14 @@ namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
                 .Which.Should().Be(42);
         }
 
-        [Theory, AutoMoqData]
-        public async Task GetAllAsync_WhenCalledWithNotExistingPrice_ShouldReturnEmptyResult(
-            [Frozen] Mock<IDateTimeConverter> converterMock,
-            GetAveragePriceSpecification specification)
+        [Fact]
+        public async Task GetAllAsync_WhenCalledWithNotExistingPrice_ShouldReturnEmptyResult()
         {
             // Arrange
-            converterMock.Setup(x => x.DateTimeToTimeSlot(It.IsAny<DateTime>())).Returns(2);
-            var request = new GetAveragePriceQuery
-            {
-                Portfolio = "Portfolio1", Owner = "Owner1", Instrument = "Instrument1"
-            };
-            var filter = specification.ToExpression(request);
+            Expression<Func<Price, bool>> filter = x =>
+                x.Portfolio.Name == "Portfolio1" &&
+                x.Owner.Name == "Owner1" &&
+                x.Instrument.Name == "Instrument1";
 
             // Act
             var actual = await this.sut.GetAllAsync(filter, p => p.Value);

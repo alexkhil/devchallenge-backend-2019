@@ -5,12 +5,7 @@ namespace SC.DevChallenge.Domain.Tests
 {
     public class TimeslotCalculatorTests
     {
-        private readonly TimeslotCalculator sut;
-
-        public TimeslotCalculatorTests()
-        {
-            this.sut = new TimeslotCalculator();
-        }
+        private readonly TimeslotCalculator sut = new TimeslotCalculator();
 
         [Theory]
         [InlineData(0.75, 0.5, 0)]

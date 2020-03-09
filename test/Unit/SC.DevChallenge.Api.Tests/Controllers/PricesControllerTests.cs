@@ -42,7 +42,7 @@ namespace SC.DevChallenge.Api.Tests.Controllers
             await this.sut.GetAverage(dto);
 
             // Assert
-            this.mapperMock.VerifyAll();
+            this.mapperMock.Verify(x => x.Map<GetAveragePriceQuery>(dto), Times.Once);
         }
 
         [Theory, AutoMoqData]
