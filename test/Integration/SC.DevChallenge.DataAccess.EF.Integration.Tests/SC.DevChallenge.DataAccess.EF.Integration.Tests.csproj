@@ -4,11 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\AutoMoqDataAttribute.cs" Link="AutoMoqDataAttribute.cs" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>

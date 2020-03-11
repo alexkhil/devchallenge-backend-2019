@@ -1,28 +1,21 @@
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using AutoFixture.Xunit2;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Moq;
-using SC.DevChallenge.Tests;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
 using SC.DevChallenge.DataAccess.EF.Integration.Tests.Fixtures;
 using SC.DevChallenge.DataAccess.EF.Repositories;
-using SC.DevChallenge.Domain.Abstractions;
-using SC.DevChallenge.Queries.Prices.GetAverage;
-using SC.DevChallenge.Queries.Prices.GetAverage.Specifications;
 using Xunit;
 
 namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
 {
-    public class PriceRepositoryTests : IClassFixture<PricesDbFixture>
+    public class PriceRepositoryTests : IClassFixture<PriceRepositoryTests.DbFixture>
     {
         private readonly PriceRepository sut;
 
-        public PriceRepositoryTests(PricesDbFixture pricesDbFixture)
+        public PriceRepositoryTests(DbFixture dbFixture)
         {
-            this.sut = new PriceRepository(pricesDbFixture.AppDbContext);
+            this.sut = new PriceRepository(dbFixture.AppDbContext);
         }
 
         [Fact]
@@ -56,6 +49,23 @@ namespace SC.DevChallenge.DataAccess.EF.Integration.Tests.Repositories
 
             // Assert
             actual.Should().BeEmpty();
+        }
+
+        public class DbFixture : DbFixtureBase
+        {
+            protected override async Task SeedDbAsync()
+            {
+                await this.AppDbContext.Prices.AddAsync(new Price
+                {
+                    Date = new DateTime(2018, 1, 1),
+                    Timeslot = 1,
+                    Value = 42,
+                    Portfolio = new Portfolio { Name = nameof(Portfolio) },
+                    Owner = new Owner { Name = nameof(Owner) },
+                    Instrument = new Instrument { Name = nameof(Instrument) }
+                });
+                await this.AppDbContext.SaveChangesAsync();
+            }
         }
     }
 }
