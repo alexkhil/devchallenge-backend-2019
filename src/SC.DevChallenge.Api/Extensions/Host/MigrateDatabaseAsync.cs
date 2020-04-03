@@ -8,7 +8,7 @@ namespace SC.DevChallenge.Api.Extensions.Host
 {
     public static class HostExtensions
     {
-        public static async Task MigrateDatabaseAsync<T>(this IHost host) where T : DbContext
+        public static async Task<IHost> MigrateDatabaseAsync<T>(this IHost host) where T : DbContext
         {
             using var scope = host.Services.CreateScope();
             var appDbContext = scope.ServiceProvider.GetRequiredService<T>();
@@ -18,6 +18,7 @@ namespace SC.DevChallenge.Api.Extensions.Host
 
             var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
             await dbInitializer.InitializeAsync();
+            return host;
         }
     }
 }

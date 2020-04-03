@@ -6,32 +6,35 @@ using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using SC.DevChallenge.Api.Integration.Tests.Fixtures;
+using SC.DevChallenge.Api.Integration.Tests.Fixtures.Collections;
 using SC.DevChallenge.Domain.Constants;
 using SC.DevChallenge.Queries.ViewModels;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace SC.DevChallenge.Api.Integration.Tests.Controllers
 {
-    public class PricesControllerTests : BaseControllerTest
+    [Collection(nameof(DevChallengeServerCollection))]
+    public class PricesControllerTests
     {
-        public PricesControllerTests(AppTestFixture appTestFixture, ITestOutputHelper output)
-            :base(appTestFixture, output)
+        private readonly DevChallengeServerFixture fixture;
+
+        public PricesControllerTests(DevChallengeServerFixture devChallengeServerFixture)
         {
+            this.fixture = devChallengeServerFixture;
         }
 
         [Fact]
         public async Task GetAveragePrice_ValidRequest_HttpStatusCodeOK()
         {
             // Arrange
-            var uriBuilder = new UriBuilder(this.Client.BaseAddress)
+            var uriBuilder = new UriBuilder(this.fixture.HttpClient.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&owner=Google&instrument=CDS&date=15/03/2018 17:34:50",
                 Path = "api/prices/average"
             };
 
             // Act
-            var response = await this.Client.GetAsync(uriBuilder.Uri);
+            var response = await this.fixture.HttpClient.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -41,14 +44,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         public async Task GetAveragePrice_NotExistingPortfolio_HttpStatusCodeNotFound()
         {
             // Arrange
-            var uriBuilder = new UriBuilder(this.Client.BaseAddress)
+            var uriBuilder = new UriBuilder(this.fixture.HttpClient.BaseAddress)
             {
                 Query = "portfolio=qwerty&owner=Microsoft&instrument=Deposit&date=15/03/2018 17:34:50",
                 Path = "api/prices/average"
             };
 
             // Act
-            var response = await this.Client.GetAsync(uriBuilder.Uri);
+            var response = await this.fixture.HttpClient.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -64,14 +67,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
                 Price = 133.71
             };
 
-            var uriBuilder = new UriBuilder(this.Client.BaseAddress)
+            var uriBuilder = new UriBuilder(this.fixture.HttpClient.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&owner=Google&instrument=CDS&date=15/03/2018 17:34:50",
                 Path = "api/prices/average"
             };
 
             // Act
-            var response = await this.Client.GetAsync(uriBuilder.Uri);
+            var response = await this.fixture.HttpClient.GetAsync(uriBuilder.Uri);
             var jsonContent = await response.Content.ReadAsStringAsync();
             var actual = JsonConvert.DeserializeObject<AveragePriceViewModel>(jsonContent, new IsoDateTimeConverter { DateTimeFormat = DateFormat.Default });
 
@@ -83,14 +86,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         public async Task GetBenchmarkPrice_ValidRequest_HttpStatusCodeOK()
         {
             // Arrange
-            var uriBuilder = new UriBuilder(this.Client.BaseAddress)
+            var uriBuilder = new UriBuilder(this.fixture.HttpClient.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&date=15/03/2018 17:34:50",
                 Path = "api/prices/benchmark"
             };
 
             // Act
-            var response = await this.Client.GetAsync(uriBuilder.Uri);
+            var response = await this.fixture.HttpClient.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -100,14 +103,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         public async Task GetBenchmarkPrice_NotExistingPortfolio_HttpStatusCodeNotFound()
         {
             // Arrange
-            var uriBuilder = new UriBuilder(this.Client.BaseAddress)
+            var uriBuilder = new UriBuilder(this.fixture.HttpClient.BaseAddress)
             {
                 Query = "portfolio=qwerty&date=15/03/2018 17:34:50",
                 Path = "api/prices/benchmark"
             };
 
             // Act
-            var response = await this.Client.GetAsync(uriBuilder.Uri);
+            var response = await this.fixture.HttpClient.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -123,14 +126,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
                 Price = 133.71
             };
 
-            var uriBuilder = new UriBuilder(this.Client.BaseAddress)
+            var uriBuilder = new UriBuilder(this.fixture.HttpClient.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&date=15/03/2018 17:34:50",
                 Path = "api/prices/benchmark"
             };
 
             // Act
-            var response = await this.Client.GetAsync(uriBuilder.Uri);
+            var response = await this.fixture.HttpClient.GetAsync(uriBuilder.Uri);
             var jsonContent = await response.Content.ReadAsStringAsync();
             var actual = JsonConvert.DeserializeObject<BenchmarkPriceViewModel>(jsonContent, new IsoDateTimeConverter { DateTimeFormat = DateFormat.Default });
 
@@ -142,14 +145,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         public async Task GetAggregatePrice_ValidRequest_HttpStatusCodeOK()
         {
             // Arrange
-            var uriBuilder = new UriBuilder(this.Client.BaseAddress)
+            var uriBuilder = new UriBuilder(this.fixture.HttpClient.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&startdate=06/10/2018 00:00:00&enddate=13/10/2018 00:00:00&resultpoints=7",
                 Path = "api/prices/aggregate"
             };
 
             // Act
-            var response = await this.Client.GetAsync(uriBuilder.Uri);
+            var response = await this.fixture.HttpClient.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -159,14 +162,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
         public async Task GetAggregatePrice_NotExistingPortfolio_HttpStatusCodeNotFound()
         {
             // Arrange
-            var uriBuilder = new UriBuilder(this.Client.BaseAddress)
+            var uriBuilder = new UriBuilder(this.fixture.HttpClient.BaseAddress)
             {
                 Query = "portfolio=qwerty&startdate=06/10/2018 00:00:00&enddate=13/10/2018 00:00:00&resultpoints=7",
                 Path = "api/prices/aggregate"
             };
 
             // Act
-            var response = await this.Client.GetAsync(uriBuilder.Uri);
+            var response = await this.fixture.HttpClient.GetAsync(uriBuilder.Uri);
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -187,14 +190,14 @@ namespace SC.DevChallenge.Api.Integration.Tests.Controllers
                 new AggregatePriceViewModel { Date = new DateTime(2018, 10, 12, 22, 53, 20), Price = 187.77 }
             };
 
-            var uriBuilder = new UriBuilder(this.Client.BaseAddress)
+            var uriBuilder = new UriBuilder(this.fixture.HttpClient.BaseAddress)
             {
                 Query = "portfolio=Fannie Mae&startdate=06/10/2018 00:00:00&enddate=13/10/2018 00:00:00&resultpoints=7",
                 Path = "api/prices/aggregate"
             };
 
             // Act
-            var response = await this.Client.GetAsync(uriBuilder.Uri);
+            var response = await this.fixture.HttpClient.GetAsync(uriBuilder.Uri);
             var jsonContent = await response.Content.ReadAsStringAsync();
             var actual = JsonConvert.DeserializeObject<IEnumerable<AggregatePriceViewModel>>(jsonContent, new IsoDateTimeConverter { DateTimeFormat = DateFormat.Default });
 
