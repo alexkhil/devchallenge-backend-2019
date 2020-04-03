@@ -4,9 +4,9 @@ using AutoFixture;
 using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 
-namespace Photostudios.Tests
+namespace SC.DevChallenge.Tests
 {
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method)]
     public sealed class AutoMoqDataAttribute : AutoDataAttribute
     {
         public AutoMoqDataAttribute()
@@ -18,7 +18,11 @@ namespace Photostudios.Tests
         {
             var fixture = new Fixture();
 
-            fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList().ForEach(b => fixture.Behaviors.Remove(b));
+            fixture.Behaviors
+                .OfType<ThrowingRecursionBehavior>()
+                .ToList()
+                .ForEach(b => fixture.Behaviors.Remove(b));
+
             fixture.Behaviors.Add(new OmitOnRecursionBehavior(1));
 
             fixture.Customize(new AutoMoqCustomization());

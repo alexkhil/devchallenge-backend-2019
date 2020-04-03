@@ -25,7 +25,7 @@ namespace SC.DevChallenge.Api.Infrastructure.ModelBinders
             bindingContext.ModelState.SetModelValue(modelName, valueProviderResult);
 
             var dateStr = valueProviderResult.FirstValue;
-            if (DateTime.TryParseExact(dateStr, DateFormat.Default, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+            if (DateTime.TryParseExact(dateStr, DateFormat.Default, CultureInfo.InvariantCulture, DateTimeStyles.None, out var date))
             {
                 bindingContext.Result = ModelBindingResult.Success(date);
                 return Task.CompletedTask;

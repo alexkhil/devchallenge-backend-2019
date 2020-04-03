@@ -12,7 +12,7 @@ services:
       context: .
       dockerfile: src/SC.DevChallenge.Api/Dockerfile
   db:
-    image: mcr.microsoft.com/mssql/server:2017-latest
+    image: mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
     container_name: devchallenge.db
     networks:
       - devchallenge

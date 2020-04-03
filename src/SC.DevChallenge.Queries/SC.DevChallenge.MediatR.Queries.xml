@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SC.DevChallenge.Queries</name>
+    </assembly>
+    <members>
+        <member name="P:SC.DevChallenge.Queries.ViewModels.AggregatePriceViewModel.Date">
+            <summary>
+            The timeslot start date
+            </summary>
+            <example>01/01/2018 12:15:30</example>
+        </member>
+        <member name="P:SC.DevChallenge.Queries.ViewModels.AggregatePriceViewModel.Price">
+            <summary>
+            The average price
+            </summary>
+            <example>4.00</example>
+        </member>
+        <member name="P:SC.DevChallenge.Queries.ViewModels.AveragePriceViewModel.Date">
+            <summary>
+            The timeslot start date
+            </summary>
+            <example>01/01/2018 12:15:30</example>
+        </member>
+        <member name="P:SC.DevChallenge.Queries.ViewModels.AveragePriceViewModel.Price">
+            <summary>
+            The average price
+            </summary>
+            <example>4.00</example>
+        </member>
+        <member name="P:SC.DevChallenge.Queries.ViewModels.BenchmarkPriceViewModel.Date">
+            <summary>
+            The timeslot start date
+            </summary>
+            <example>01/01/2018 12:15:30</example>
+        </member>
+        <member name="P:SC.DevChallenge.Queries.ViewModels.BenchmarkPriceViewModel.Price">
+            <summary>
+            Benchmark price
+            </summary>
+            <example>4.00</example>
+        </member>
+    </members>
+</doc>

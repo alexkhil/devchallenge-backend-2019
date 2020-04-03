@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SC.DevChallenge.DataAccess.EF
 {
-    public partial class AppDbContext : DbContext
+    public sealed partial class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions options)
             : base(options)

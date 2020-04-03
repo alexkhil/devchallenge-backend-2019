@@ -6,7 +6,7 @@ namespace SC.DevChallenge.MediatR.Core.HandlerResults
     {
         public ValidationFailedHandlerResult(string message)
         {
-            Message = message;
+            this.Message = message;
         }
 
         public string Message { get; }

@@ -1,21 +1,18 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SC.DevChallenge.Api.Controllers.Base;
-using SC.DevChallenge.Dto;
-using SC.DevChallenge.Dto.Prices.GetAggregatePrice;
-using SC.DevChallenge.Dto.Prices.GetAveragePrice;
-using SC.DevChallenge.Dto.Prices.GetBenchmarkPrice;
-using SC.DevChallenge.Mapping.Abstractions;
-using SC.DevChallenge.MediatR.Queries.Prices.GetAggregatePrice;
-using SC.DevChallenge.MediatR.Queries.Prices.GetAverage;
-using SC.DevChallenge.MediatR.Queries.Prices.GetBenchmarkPrice;
+using SC.DevChallenge.Api.Requests.Prices;
+using SC.DevChallenge.Queries.Prices.GetAggregate;
+using SC.DevChallenge.Queries.Prices.GetAverage;
+using SC.DevChallenge.Queries.Prices.GetBenchmark;
+using SC.DevChallenge.Queries.ViewModels;
 
 namespace SC.DevChallenge.Api.Controllers
 {
     [Route("api/[controller]")]
-    public class PricesController : ApiControllerBase
+    public class PricesController : ApiController
     {
         public PricesController(IMapper mapper, IMediator mediator)
             : base(mapper, mediator)
@@ -28,15 +25,15 @@ namespace SC.DevChallenge.Api.Controllers
         /// <param name="data"></param>
         /// <response code="200">Average price returned successfully</response>
         /// <response code="404">Specified PIIT not found</response>
-        [HttpGet("average", Name = nameof(GetAveragePrice))]
-        [ProducesResponseType(typeof(AveragePriceDto), StatusCodes.Status200OK)]
+        [HttpGet("average", Name = nameof(GetAverage))]
+        [ProducesResponseType(typeof(AveragePriceViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAveragePrice(
+        public async Task<IActionResult> GetAverage(
             [FromQuery] GetAveragePriceDto data)
         {
-            var query = Mapper.Map<GetAveragePriceQuery>(data);
-            var result = await Mediator.Send(query);
-            return Send(result);
+            var query = this.Mapper.Map<GetAveragePriceQuery>(data);
+            var result = await this.Mediator.Send(query);
+            return this.FromResult(result);
         }
 
         /// <summary>
@@ -45,15 +42,15 @@ namespace SC.DevChallenge.Api.Controllers
         /// <param name="data"></param>
         /// <response code="200"></response>
         /// <response code="404">Specified portfolio not found</response>
-        [HttpGet("benchmark", Name = nameof(GetBenchmarkPrice))]
-        [ProducesResponseType(typeof(BenchmarkPriceDto), StatusCodes.Status200OK)]
+        [HttpGet("benchmark", Name = nameof(GetBenchmark))]
+        [ProducesResponseType(typeof(BenchmarkPriceViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetBenchmarkPrice(
+        public async Task<IActionResult> GetBenchmark(
             [FromQuery] GetBenchmarkPriceDto data)
         {
-            var query = Mapper.Map<GetBenchmarkPriceQuery>(data);
-            var result = await Mediator.Send(query);
-            return Send(result);
+            var query = this.Mapper.Map<GetBenchmarkPriceQuery>(data);
+            var result = await this.Mediator.Send(query);
+            return this.FromResult(result);
         }
 
         /// <summary>
@@ -62,15 +59,15 @@ namespace SC.DevChallenge.Api.Controllers
         /// <param name="data"></param>
         /// <response code="200"></response>
         /// <response code="404">Specified PIIT not found</response>
-        [HttpGet("aggregate", Name = nameof(GetAggregatePrice))]
-        [ProducesResponseType(typeof(BenchmarkPriceDto), StatusCodes.Status200OK)]
+        [HttpGet("aggregate", Name = nameof(GetAggregate))]
+        [ProducesResponseType(typeof(BenchmarkPriceViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAggregatePrice(
+        public async Task<IActionResult> GetAggregate(
             [FromQuery] GetAggregatePriceDto data)
         {
-            var query = Mapper.Map<GetAggregatePriceQuery>(data);
-            var result = await Mediator.Send(query);
-            return Send(result);
+            var query = this.Mapper.Map<GetAggregatePriceQuery>(data);
+            var result = await this.Mediator.Send(query);
+            return this.FromResult(result);
         }
     }
 }

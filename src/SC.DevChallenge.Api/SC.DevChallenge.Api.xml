@@ -4,7 +4,7 @@
         <name>SC.DevChallenge.Api</name>
     </assembly>
     <members>
-        <member name="M:SC.DevChallenge.Api.Controllers.PricesController.GetAveragePrice(SC.DevChallenge.Dto.Prices.GetAveragePrice.GetAveragePriceDto)">
+        <member name="M:SC.DevChallenge.Api.Controllers.PricesController.GetAverage(SC.DevChallenge.Api.Requests.Prices.GetAveragePriceDto)">
             <summary>
             Get Average Price fro specified PIIT
             </summary>
@@ -12,7 +12,7 @@
             <response code="200">Average price returned successfully</response>
             <response code="404">Specified PIIT not found</response>
         </member>
-        <member name="M:SC.DevChallenge.Api.Controllers.PricesController.GetBenchmarkPrice(SC.DevChallenge.Dto.Prices.GetBenchmarkPrice.GetBenchmarkPriceDto)">
+        <member name="M:SC.DevChallenge.Api.Controllers.PricesController.GetBenchmark(SC.DevChallenge.Api.Requests.Prices.GetBenchmarkPriceDto)">
             <summary>
             Get Benchmark
             </summary>
@@ -20,13 +20,54 @@
             <response code="200"></response>
             <response code="404">Specified portfolio not found</response>
         </member>
-        <member name="M:SC.DevChallenge.Api.Controllers.PricesController.GetAggregatePrice(SC.DevChallenge.Dto.Prices.GetAggregatePrice.GetAggregatePriceDto)">
+        <member name="M:SC.DevChallenge.Api.Controllers.PricesController.GetAggregate(SC.DevChallenge.Api.Requests.Prices.GetAggregatePriceDto)">
             <summary>
             Get Benchmark
             </summary>
             <param name="data"></param>
             <response code="200"></response>
             <response code="404">Specified PIIT not found</response>
+        </member>
+        <member name="T:SC.DevChallenge.Api.Requests.Prices.GetAveragePriceDto">
+            <summary>
+            Response of GetAveragePrice
+            </summary>
+        </member>
+        <member name="P:SC.DevChallenge.Api.Requests.Prices.GetAveragePriceDto.Portfolio">
+            <summary>
+            The name of Portfolio
+            </summary>
+            <example>Fannie Mae</example>
+        </member>
+        <member name="P:SC.DevChallenge.Api.Requests.Prices.GetAveragePriceDto.Owner">
+            <summary>
+            The name of Owner
+            </summary>
+            <example>SimCorp</example>
+        </member>
+        <member name="P:SC.DevChallenge.Api.Requests.Prices.GetAveragePriceDto.Instrument">
+            <summary>
+            The name of Instrument
+            </summary>
+            <example>Equity</example>
+        </member>
+        <member name="P:SC.DevChallenge.Api.Requests.Prices.GetAveragePriceDto.Date">
+            <summary>
+            The date of time-slot
+            </summary>
+            <example>15/03/2018 17:26:40</example>
+        </member>
+        <member name="P:SC.DevChallenge.Api.Requests.Prices.GetBenchmarkPriceDto.Date">
+            <summary>
+            The time-slot start date
+            </summary>
+            <example>01/01/2018 12:15:30</example>
+        </member>
+        <member name="P:SC.DevChallenge.Api.Requests.Prices.GetBenchmarkPriceDto.Portfolio">
+            <summary>
+            The portfolio
+            </summary>
+            <example>Fannie Mae</example>
         </member>
     </members>
 </doc>

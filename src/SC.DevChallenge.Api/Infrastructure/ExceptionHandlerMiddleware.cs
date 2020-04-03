@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using SC.DevChallenge.ExceptionHandler.Abstractions;
+using SC.DevChallenge.Api.ExceptionHandling.Abstractions;
 
 namespace SC.DevChallenge.Api.Infrastructure
 {
-    public class ExceptionHandlerMiddleware
+    public sealed class ExceptionHandlerMiddleware
     {
         private readonly RequestDelegate next;
         private readonly IExceptionRequestHandler exceptionRequestHandler;
@@ -22,11 +22,11 @@ namespace SC.DevChallenge.Api.Infrastructure
         {
             try
             {
-                await next(httpContext);
+                await this.next(httpContext);
             }
-            catch (Exception ex)
+            catch (Exception ex) when (!(ex is StackOverflowException))
             {
-                await exceptionRequestHandler.Handle(httpContext, ex);
+                await this.exceptionRequestHandler.Handle(httpContext, ex);
             }
         }
     }

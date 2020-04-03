@@ -3,14 +3,14 @@ using SC.DevChallenge.DataAccess.Abstractions.Entities;
 
 namespace SC.DevChallenge.DataAccess.EF
 {
-    public partial class AppDbContext
+    public sealed partial class AppDbContext
     {
-        public virtual DbSet<Instrument> Instruments { get; set; }
+        public DbSet<Instrument> Instruments { get; set; }
 
-        public virtual DbSet<Owner> Owners { get; set; }
+        public DbSet<Owner> Owners { get; set; }
 
-        public virtual DbSet<Portfolio> Portfolios { get; set; }
+        public DbSet<Portfolio> Portfolios { get; set; }
 
-        public virtual DbSet<Price> Prices { get; set; }
+        public DbSet<Price> Prices { get; set; }
     }
 }

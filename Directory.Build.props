@@ -15,7 +15,4 @@
     <LangVersion>latest</LangVersion>
     <DebugType>Full</DebugType>
   </PropertyGroup>
-  <ItemGroup Label="Common packages">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.2"/>
-  </ItemGroup>
 </Project>

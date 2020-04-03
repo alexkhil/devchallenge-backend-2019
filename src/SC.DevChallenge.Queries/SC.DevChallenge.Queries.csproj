@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>SC.DevChallenge.MediatR.Queries.xml</DocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SC.DevChallenge.DataAccess.Abstractions\SC.DevChallenge.DataAccess.Abstractions.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.DataAccess.EF\SC.DevChallenge.DataAccess.EF.csproj" />
+    <ProjectReference Include="..\SC.DevChallenge.MediatR.Core\SC.DevChallenge.MediatR.Core.csproj" />
+  </ItemGroup>
+
+</Project>

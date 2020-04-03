@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SC.DevChallenge.DataAccess.Abstractions.Entities;
 using SC.DevChallenge.DataAccess.EF.Metadata;
@@ -9,7 +9,6 @@ namespace SC.DevChallenge.DataAccess.EF.Configurations
     {
         public void Configure(EntityTypeBuilder<Instrument> builder)
         {
-
             builder.ToTable(Tables.Instruments, Schemas.Dbo);
 
             builder.HasKey(i => i.Id);

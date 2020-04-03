@@ -4,9 +4,8 @@ services:
   api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://+:8080
     ports:
-      - "8888:8080"
-#    volumes:
-#      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-#      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - "8888:80/tcp"
+  db:
+    ports:
+    - "1433:1433/tcp"

@@ -15,14 +15,10 @@ namespace SC.DevChallenge.DataAccess.Abstractions.Entities
 
     public class OwnerInstrumentComparer : IEqualityComparer<OwnerInstrument>
     {
-        public bool Equals(OwnerInstrument x, OwnerInstrument y)
-        {
-            return x.InstrumentId == y.InstrumentId && x.OwnerId == y.OwnerId;
-        }
+        public bool Equals(OwnerInstrument x, OwnerInstrument y) =>
+            x.InstrumentId == y.InstrumentId && x.OwnerId == y.OwnerId;
 
-        public int GetHashCode(OwnerInstrument obj)
-        {
-            return obj.InstrumentId.GetHashCode() ^ obj.OwnerId.GetHashCode();
-        }
+        public int GetHashCode(OwnerInstrument obj) =>
+            obj.InstrumentId.GetHashCode() ^ obj.OwnerId.GetHashCode();
     }
 }

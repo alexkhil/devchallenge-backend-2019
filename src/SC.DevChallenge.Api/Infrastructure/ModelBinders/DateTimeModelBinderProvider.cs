@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace SC.DevChallenge.Api.Infrastructure.ModelBinders

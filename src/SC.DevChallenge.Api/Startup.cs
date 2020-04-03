@@ -1,12 +1,14 @@
-﻿using Autofac;
+using System.Diagnostics.CodeAnalysis;
+using Autofac;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SC.DevChallenge.Api.Extensions.AppBuilder;
+using SC.DevChallenge.Api.Extensions.ApplicationBuilder;
 using SC.DevChallenge.Api.Extensions.ServiceCollection;
-using SC.DevChallenge.Configuration;
+using Serilog;
 
 [assembly: ApiController]
 [assembly: ApiConventionType(typeof(DefaultApiConventions))]
@@ -15,34 +17,42 @@ namespace SC.DevChallenge.Api
 {
     public class Startup
     {
-        private readonly IConfiguration configuration;
-        private readonly IHostingEnvironment environment;
+        private readonly IConfiguration config;
 
-        public Startup(IConfiguration configuration, IHostingEnvironment environment)
+        public Startup(IConfiguration config)
         {
-            this.configuration = configuration;
-            this.environment = environment;
+            this.config = config;
         }
 
         public void ConfigureServices(IServiceCollection services) =>
-            services.AddConfiguration(configuration)
-                    .AddResponceCompression()
+            services.AddOptions()
+                    .AddAutoMapper(typeof(Startup).Assembly)
+                    .AddDevChallengeCompression()
+                    .AddDevChallengeMvc()
+                    .AddDevChallengeProfiler()
+                    .AddDevChallengeDb(this.config)
+                    .AddMemoryCache()
                     .AddDevChallengeCors()
                     .AddRouteOptions()
-                    .AddDevChallengeMvc()
+                    .AddDevChallengeHealthChecks()
                     .AddDevChallengeSwagger();
 
         public static void ConfigureContainer(ContainerBuilder builder) =>
             builder.RegisterAssemblyModules(typeof(Startup).Assembly);
 
-        public void Configure(IApplicationBuilder app) =>
-            app.UseResponseCompression()
-               .UseExceptionHandler(environment)
-               .UseCors(CorsPolicyName.AllowAny)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) =>
+            app.UseExceptionHandler(env)
+               .UseHttpsRedirection()
                .UseStaticFiles()
-               .UseSwagger()
                .UseDevChallengeSwaggerUi()
+               .UseSerilogRequestLogging()
+               .UseCors()
                .UseAuthentication()
-               .UseMvc();
+               .UseRouting()
+               .UseEndpoints(e =>
+               {
+                   e.MapControllers();
+                   e.MapHealthChecks("/_health");
+               });
     }
 }
